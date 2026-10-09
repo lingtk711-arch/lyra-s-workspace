@@ -1,0 +1,468 @@
+import { 
+  TEM8ListeningLecture, 
+  TEM8ReadingPassage, 
+  TEM8ProofreadingPassage, 
+  TEM8WritingPrompt, 
+  TEM8OralTask 
+} from '../types';
+
+// ==================== 1. 专八听力 (Listening Comprehension) ====================
+export const TEM8_LISTENING_DATA: TEM8ListeningLecture[] = [
+  {
+    id: 'tem8_lis_1',
+    type: 'mini_lecture',
+    title: 'Cognitive Load Theory and Instructional Design in Digital Learning',
+    sourceExam: 'TEM-8 专八真题标准 Mini-lecture 学术讲座',
+    audioDuration: '08:45',
+    speaker: 'Prof. Evelyn Vance, Department of Cognitive Psychology',
+    topicBackground: '本讲座围绕认知负荷理论（Cognitive Load Theory）展开，深入探讨了内在负荷（Intrinsic Load）、外在负荷（Extraneous Load）与关联负荷（Germane Load）对长短期工作记忆的影响，是专八高频考察的教育心理学核心题材。',
+    fullTranscript: `Good morning, everyone. Today, we shall embark on an in-depth examination of Cognitive Load Theory—originally pioneered by John Sweller in the late 1980s—and scrutinize its pedagogical ramifications for instructional design in digital environments.
+
+To begin with, we must appreciate the fundamental architecture of human cognitive architecture. The human mind operates with two distinctly disparate memory structures: working memory and long-term memory. Working memory is notoriously constrained, both in terms of capacity and duration. Classical cognitive psychological experiments suggest that an average adult can concurrently process no more than four to seven discrete chunks of information. Long-term memory, conversely, possesses virtually boundless capacity and organizes information into intricate cognitive structures known as schemas.
+
+Now, according to Sweller, cognitive load can be partitioned into three distinct typologies.
+First is intrinsic cognitive load. This load is inherently dictated by the intrinsic complexity of the instructional material itself and the degree of element interactivity. For instance, learning isolated vocabulary items exerts minimal element interactivity, whereas parsing a complex syntactical transformation demands the simultaneous coordination of multiple interrelated rules, thereby dramatically amplifying intrinsic load.
+
+The second typology is extraneous cognitive load. Unlike intrinsic load, extraneous load is entirely artifactual—it is spawned by suboptimal instructional techniques or poorly designed pedagogical presentations. For example, presenting split-source information where learners must mentally integrate disparate textual explanations and graphical diagrams imposes severe extraneous strain on working memory. In instructional design, our foremost imperative is to systematically minimize extraneous load.
+
+The third typology is germane cognitive load. Germane load refers to the cognitive processing dedicated to the construction, refinement, and automation of mental schemas. While extraneous load impairs comprehension, germane load actively facilitates meaningful schema acquisition and enhances problem-solving transfer.
+
+In modern multimodal pedagogical environments, three empirical effects derived from Cognitive Load Theory are of paramount importance.
+The first is the Split-Attention Effect. When diagrams and explanatory texts are physically segregated, learners squander cognitive resources on extraneous visual scanning. The instructional remedy is spatial integration.
+The second is the Redundancy Effect, which occurs when identical information is simultaneously delivered through both narration and on-screen text, creating cognitive interference.
+Lastly, the Expertise Reversal Effect demonstrates that instructional interventions highly effective for novices can actually impede advanced learners, because redundant scaffolding interferes with their already automated schemas.
+
+In conclusion, effective pedagogy is an art of equilibrium: managing intrinsic load, eradicating extraneous load, and optimizing germane load to foster long-term mastery. Thank you.`,
+    outlineNotes: [
+      {
+        heading: 'I. Basic Architecture of Human Memory',
+        gapNumber: 1,
+        textWithGap: 'Working memory is severely [GAP 1] in both capacity and duration.',
+        correctAnswer: 'constrained / limited',
+        notesHint: '注意原文中 "Working memory is notoriously constrained..."'
+      },
+      {
+        heading: 'I. Basic Architecture of Human Memory',
+        gapNumber: 2,
+        textWithGap: 'Long-term memory stores complex information in the form of mental [GAP 2].',
+        correctAnswer: 'schemas',
+        notesHint: '认知心理学专有名词 "schemas (图式)"'
+      },
+      {
+        heading: 'II. Three Typologies of Cognitive Load',
+        gapNumber: 3,
+        textWithGap: '1. Intrinsic Load is governed by instructional complexity and element [GAP 3].',
+        correctAnswer: 'interactivity',
+        notesHint: '原文提到 "degree of element interactivity"'
+      },
+      {
+        heading: 'II. Three Typologies of Cognitive Load',
+        gapNumber: 4,
+        textWithGap: '2. Extraneous Load is generated by [GAP 4] pedagogical designs.',
+        correctAnswer: 'suboptimal / poor',
+        notesHint: '原文 "spawned by suboptimal instructional techniques"'
+      },
+      {
+        heading: 'II. Three Typologies of Cognitive Load',
+        gapNumber: 5,
+        textWithGap: '3. Germane Load is beneficial because it promotes schema [GAP 5].',
+        correctAnswer: 'construction / acquisition',
+        notesHint: '积极促进图式构建与自动化'
+      },
+      {
+        heading: 'III. Three Key Empirical Effects',
+        gapNumber: 6,
+        textWithGap: '1. Split-Attention Effect is mitigated through spatial [GAP 6].',
+        correctAnswer: 'integration',
+        notesHint: '将图文物理整合：spatial integration'
+      },
+      {
+        heading: 'III. Three Key Empirical Effects',
+        gapNumber: 7,
+        textWithGap: '2. Redundancy Effect happens when identical info appears in text and [GAP 7].',
+        correctAnswer: 'narration / speech',
+        notesHint: '听觉旁白与屏幕文字重复造成干扰'
+      },
+      {
+        heading: 'III. Three Key Empirical Effects',
+        gapNumber: 8,
+        textWithGap: '3. Expertise Reversal Effect: instructional scaffolding can impede [GAP 8] learners.',
+        correctAnswer: 'advanced / expert',
+        notesHint: '对新手有效的手脚架反而会阻碍高水平学习者'
+      }
+    ],
+    keyVocabulary: [
+      { word: 'pedagogical', phonetic: '/ˌpɛdəˈɡɒdʒɪkəl/', meaning: '教学法的，教育学的' },
+      { word: 'ramification', phonetic: '/ˌræmɪfɪˈkeɪʃən/', meaning: '后果，衍生影响，分枝' },
+      { word: 'schema', phonetic: '/ˈskiːmə/', meaning: '认知图式，知识结构框架' },
+      { word: 'artifactual', phonetic: '/ˌɑːrtɪˈfæktʃuəl/', meaning: '人为造作的，人为产生的' },
+      { word: 'segregate', phonetic: '/ˈsɛɡrɪɡeɪt/', meaning: '隔离，拆分开' },
+      { word: 'scaffolding', phonetic: '/ˈskæfəldɪŋ/', meaning: '（教育学）脚手架支架教学法' }
+    ]
+  },
+  {
+    id: 'tem8_lis_2',
+    type: 'interview',
+    title: 'The Humanities in the Age of Generative AI: Critical Inquiry and Ethical Agency',
+    sourceExam: 'TEM-8 专八深度学术访谈 Interview 专题',
+    audioDuration: '07:20',
+    speaker: 'Dr. Alistair Finch (Host) & Prof. Clara Morrison (Philosopher of Technology)',
+    topicBackground: '访谈围绕生成式 AI 对大学人文教育的冲击展开，探讨了批判性思维、伦理主体性（Ethical Agency）以及技术对人文学术写作的重塑。',
+    fullTranscript: `Host: Welcome to Oxford Colloquium. Today, we are joined by Professor Clara Morrison to discuss whether generative artificial intelligence poses an existential threat to the humanities, or rather, a renaissance of critical dialectics. Professor Morrison, welcome.
+
+Prof. Morrison: Thank you, Alistair. It is a genuine pleasure.
+
+Host: Let us plunge right into the crux of the debate. Many educators fear that large language models are rendering traditional humanistic essays obsolete. Students can now fabricate syntactically impeccable arguments in seconds. How do you assess this anxiety?
+
+Prof. Morrison: I believe the panic stems from a profound conflation between linguistic fluency and authentic intellectual inquiry. What AI produces is probabilistic mimicry—it stitches together normative associations culled from preexisting corpora. True humanistic scholarship, however, begins precisely where probabilistic certainty breaks down: in paradox, in moral ambivalence, and in existential vulnerability. When we reduce essay writing merely to formulaic synthesis, yes, AI will supersede us. But if writing is conceived as the arduous crucible of forging one's own voice, AI remains nothing more than an elaborate mirror.
+
+Host: That brings us to the question of pedagogical adaptation. If you were redesigning the literature and philosophy curriculum for undergraduates today, what would be the centerpiece?
+
+Prof. Morrison: The centerpiece must shift from output evaluation to epistemic interrogation. We should invite students to run texts through LLMs and subsequently dissect the invisible biases, rhetorical elisions, and hallucinated sources. We must cultivate what I term "hermeneutic suspicion"—the capacity to interrogate who spoke, what silence is being enforced, and what value judgments are baked into the statistical average.
+
+Host: A compelling paradigm shift indeed. Thank you, Professor Morrison.`,
+    outlineNotes: [
+      {
+        heading: 'I. Nature of AI Output',
+        gapNumber: 1,
+        textWithGap: 'AI generates probabilistic [GAP 1], not genuine intellectual inquiry.',
+        correctAnswer: 'mimicry',
+        notesHint: '原文 "What AI produces is probabilistic mimicry"'
+      },
+      {
+        heading: 'II. Redesigning Humanities Curriculum',
+        gapNumber: 2,
+        textWithGap: 'Shift assessment from output evaluation to epistemic [GAP 2].',
+        correctAnswer: 'interrogation',
+        notesHint: '从考察产出转向认知审问'
+      },
+      {
+        heading: 'III. Core Competency to Cultivate',
+        gapNumber: 3,
+        textWithGap: 'Cultivate "hermeneutic [GAP 3]" to detect hidden biases and omissions.',
+        correctAnswer: 'suspicion',
+        notesHint: '关键术语 "hermeneutic suspicion (诠释学怀疑)"'
+      }
+    ],
+    keyVocabulary: [
+      { word: 'crux', phonetic: '/krʌks/', meaning: '关键，症结所在' },
+      { word: 'conflation', phonetic: '/kənˈfleɪʃən/', meaning: '混淆，将两物合并为一' },
+      { word: 'epistemic', phonetic: '/ˌɛpɪˈstiːmɪk/', meaning: '认识论的，知识上的' },
+      { word: 'hermeneutic', phonetic: '/ˌhɜːrməˈnjuːtɪk/', meaning: '诠释学的，解释学的' }
+    ]
+  }
+];
+
+// ==================== 2. 专八阅读 (Reading Comprehension) ====================
+export const TEM8_READING_DATA: TEM8ReadingPassage[] = [
+  {
+    id: 'tem8_rd_1',
+    source: 'The Economist',
+    title: 'The Great Decoupling: Technological Sovereignty and the Fragmentation of Global Standards',
+    sourceIssue: '《The Economist》专八真题原版题源选篇 · 深度社论',
+    wordCount: 840,
+    chineseSummary: '文章深刻分析了全球化在半导体、通信协议和AI规则领域的“技术脱钩”现象。指出了技术民族主义对国际标准一致性的冲击，并警告碎片化的技术巴尔干化（Technological Balkanization）可能引发的全球创新成本飙升。',
+    articlePassage: `For nearly three decades following the dissolution of the Soviet bloc, the global architecture of technology rested upon an unstated premise: efficiency transcended ideology. Cross-border supply chains were spun across hemispheres with single-minded devotion to comparative advantage. A microchip conceived in California might be fabricated in Hsinchu with Dutch lithography, tested in Penang, and assembled in Shenzhen, bound together by universally harmonized interoperability standards.
+
+That golden epoch of frictionless techno-globalism is now definitively unraveling. In its stead emerges a recalcitrant doctrine of technological sovereignty—a worldview wherein microprocessors, cloud infrastructures, and generative algorithmic frameworks are no longer evaluated as benign commodities, but as geopolitical armaments of paramount strategic deterrence.
+
+The ramifications of this tectonic shift extend far beyond tariff schedules and export control lists. What is profoundly at stake is the very coherence of the global technical standard. When international standards bodies—once quiet bastions of technocratic consensus—devolve into ideological battlegrounds over telecommunication protocols and encryption algorithms, the inevitable outcome is fragmentation. Scholars have begun to resurrect the ominous phrase "the Balkanization of the internet," yet the contemporary fracturing is far more pervasive, cleaving not merely software, but the foundational silicon and energy substrates that underpin modern computational life.
+
+Proponents of domestic reshoring argue that national security imperatives justify the immense capital subsidies and logistical redundancies required to domesticate advanced manufacturing. Yet this calculations routinely overlooks the chilling effect on global scientific collaboration. Innovation thrives not in hermetically sealed autarkies, but in porous, friction-rich cross-pollination. When researchers are prohibited from exchanging datasets or co-authoring code due to ambiguous national security pretexts, humanity collectively forfeits the compounding serendipity that sparked the modern computing revolution.
+
+Ultimately, technological mercantilism promises autonomy but delivers stagnation. The fragmentation of standards creates walled gardens that impose friction taxes upon every multinational enterprise. If the trajectory persists, the twenty-first century will not witness a unified digital frontier, but an archipelago of mutually unintelligible technological fiefdoms, each guarding its own brittle dominance while global progress grinds to an agonizing crawl.`,
+    questions: [
+      {
+        id: 'q1',
+        question: 'According to paragraph 1, the pre-existing global technological architecture was primarily underpinned by ____.',
+        options: [
+          'A. unilateral military dominance across hemispheres',
+          'B. a pragmatic prioritization of economic efficiency over ideological divergence',
+          'C. absolute self-sufficiency in regional microchip manufacturing',
+          'D. strict protectionist tariffs that preserved technological consensus'
+        ],
+        correctIndex: 1,
+        explanation: '解析：第一段首句明确指出 "efficiency transcended ideology"，即效率超越了意识形态考量，全球供应链基于比较优势紧密相连。因此选项 B 正确。'
+      },
+      {
+        id: 'q2',
+        question: 'The author uses the phrase "the Balkanization of the internet" (Para. 3) to emphasize that ____.',
+        options: [
+          'A. regional conflicts in Eastern Europe have disrupted telecommunication routes',
+          'B. technology has fostered peaceful cooperation among peripheral nations',
+          'C. global digital infrastructure is devolving into deeply fragmented, incompatible sectors',
+          'D. encryption protocols are being perfected by international consensus'
+        ],
+        correctIndex: 2,
+        explanation: '解析：Balkanization（巴尔干化）在政治与科技哲学中指“分裂成彼此隔绝、敌对的碎片化小实体”。结合下文 "cleaving not merely software, but the foundational silicon..." 可知其强调技术体系走向分裂互不兼容。因此选 C。'
+      },
+      {
+        id: 'q3',
+        question: 'What is the author’s primary critique of techno-mercantilism in the concluding paragraph?',
+        options: [
+          'A. It guarantees military invulnerability at minimal economic cost.',
+          'B. It creates dynamic incentives for domestic startup incubators.',
+          'C. It promises illusory self-reliance while imposing stagnation and inefficiency.',
+          'D. It unites emerging economies against established multinational monopolies.'
+        ],
+        correctIndex: 2,
+        explanation: '解析：末段首句明确点题："technological mercantilism promises autonomy but delivers stagnation"（技术重商主义许诺了自主，交付的却是停滞与壁垒）。因此选项 C 为正确答案。'
+      }
+    ],
+    shortAnswer: {
+      prompt: 'Section B 简答题 (不超过10个词)：What does the author believe is indispensable for scientific innovation to flourish (Para. 4)?',
+      referenceAnswer: 'Porous cross-pollination across borders / Open global scientific collaboration.',
+      scoringKey: '得分点：需答出 porous cross-pollination（开放跨国交流）或 open collaboration（开放协作），不能超过10个词。'
+    },
+    criticalVocab: [
+      { word: 'recalcitrant', phonetic: '/rɪˈkælsɪtrənt/', meaning: '顽固抗拒的，难以驯服的' },
+      { word: 'cleave', phonetic: '/kliːv/', meaning: '劈开，分裂，劈成两半' },
+      { word: 'autarky', phonetic: '/ˈɔːtɑːrki/', meaning: '自给自足经济，封闭自守' },
+      { word: 'serendipity', phonetic: '/ˌsɛrənˈdɪpɪti/', meaning: '意外发现珍宝的运气，偶然机缘' },
+      { word: 'fiefdom', phonetic: '/ˈfiːfdəm/', meaning: '封地，势力范围，排他领地' }
+    ]
+  }
+];
+
+// ==================== 3. 专八改错 (Language Usage / Proofreading) ====================
+export const TEM8_PROOFREADING_DATA: TEM8ProofreadingPassage[] = [
+  {
+    id: 'tem8_pr_1',
+    title: 'The Psychological Paradox of Choice in Consumer Societies',
+    sourceExam: 'TEM-8 专八真题短文改错标准模考题',
+    summary: '文章讨论现代丰裕社会中“选择的悖论”（Paradox of Choice）：过量选择并未带来自由，反而引发决策瘫痪与预期虚高。全文包含 10 处典型专八语法、逻辑与固定搭配考点。',
+    lines: [
+      {
+        lineNo: 1,
+        text: 'In contemporary affluent societies, individuals are bombarded by an',
+        hasError: false,
+        correction: '正确',
+        explanation: '首行无语病。'
+      },
+      {
+        lineNo: 2,
+        text: 'unprecedented multiplicity of options, ranging to mundane grocery items',
+        hasError: true,
+        errorType: 'collocation',
+        originalWord: 'ranging to',
+        correction: 'to -> from',
+        explanation: '搭配错误：range 的标准介词固定搭配为 "ranging from A to B"，后文有 "to complex financial schemes"，此处应用 from。'
+      },
+      {
+        lineNo: 3,
+        text: 'to complex financial retirement schemes. Conventional economic dogma',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 4,
+        text: 'assumes that more choice unequivocally equalling greater individual freedom.',
+        hasError: true,
+        errorType: 'grammar',
+        originalWord: 'equalling',
+        correction: 'equalling -> equals',
+        explanation: '谓语残缺：that 引导的宾语从句中缺少限定谓语动词，现在分词 equalling 无法充当从句谓语，应改为第三人称单数形式 equals。'
+      },
+      {
+        lineNo: 5,
+        text: 'However, empirical psychological inquiries reveal an entirely reversed reality.',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 6,
+        text: 'When confronted with excessive alternatives, people frequently experience what',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 7,
+        text: 'psychologists term "choice paralysis," which an inability to decide prevents action.',
+        hasError: true,
+        errorType: 'grammar',
+        originalWord: 'which',
+        correction: 'which -> in which / where',
+        explanation: '定语从句关系代词误用：从句主谓宾成分完整 ("an inability to decide prevents action")，先行词为 choice paralysis 状态/情境，应用关系副词 where 或介词+关系代词 in which 充当从句状语。'
+      },
+      {
+        lineNo: 8,
+        text: 'Furthermore, even when a decision is ultimately reached, consumer satisfaction',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 9,
+        text: 'tends to be substantial lower than when fewer choices were present.',
+        hasError: true,
+        errorType: 'grammar',
+        originalWord: 'substantial',
+        correction: 'substantial -> substantially',
+        explanation: '副词修饰形容词：lower 为比较级形容词，修饰它的程度修饰语应当使用副词 substantially，而非形容词原级。'
+      },
+      {
+        lineNo: 10,
+        text: 'This paradox stems from escalated expectations: because so many alternatives',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 11,
+        text: 'are accessible, buyers irrationally assume that perfection is attainable,',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 12,
+        text: 'and any minor defect in the chosen item generates acute regret out of proportion',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      },
+      {
+        lineNo: 13,
+        text: 'with its actual triviality. Hence, genuine liberation requires not more choices,',
+        hasError: true,
+        errorType: 'collocation',
+        originalWord: 'out of proportion with',
+        correction: 'with -> to',
+        explanation: '介词固定搭配错误：表示“不成比例”的成语是 "out of proportion to something"，而非 with。'
+      },
+      {
+        lineNo: 14,
+        text: 'but the self-imposed discipline to curb one’s insatiable desire for all.',
+        hasError: false,
+        correction: '正确',
+        explanation: '本行无语病。'
+      }
+    ]
+  }
+];
+
+// ==================== 4. 专八写作 (Writing - 材料思辨议论文) ====================
+export const TEM8_WRITING_DATA: TEM8WritingPrompt[] = [
+  {
+    id: 'tem8_wt_1',
+    type: 'opinion',
+    title: 'On Whether Artificial Intelligence Diminishes Human Agency and Cognitive Depth',
+    sourceExam: 'TEM-8 专八写作经典思辨议论文真题',
+    materialsExcerpt: `[Materials Excerpt]
+In recent debates surrounding the ubiquitous adoption of automated generative algorithms, scholars are sharply divided. Optimists celebrate the liberation of humans from rote administrative and syntactical labor, arguing that cognitive offloading allows mankind to ascend toward higher-order philosophical reflection and imaginative frontiers. 
+Conversely, critics caution that cognitive faculties, much like physiological muscles, atrophy through disuse. When students, professionals, and writers delegate draft synthesis, critical literature review, and structural planning entirely to automated systems, human agency is reduced to mere passive ratification of statistical averages, ultimately resulting in cognitive enervation and standardized superficiality.`,
+    requiredWordCount: '400 - 450 words',
+    framework: [
+      {
+        step: '第一段：材料概括与引出论题 (Summary & Stance)',
+        purpose: '客观精炼总结材料争议焦点，旗帜鲜明提出个人中心论点（Thesis Statement）。拒绝空洞套话。',
+        keySentences: [
+          'The prompt delineates a profound ontological impasse between cognitive elevation and epistemic enervation in the age of generative algorithms.',
+          'While techno-utopians celebrate the emancipation of human intellect from mechanical drudgery, I contend that uncritical cognitive offloading poses a lethal hazard to our contemplative agency.'
+        ]
+      },
+      {
+        step: '第二段：主体论证一·思维即抵抗 (Deep Dive: The Crucible of Writing)',
+        purpose: '从认知心理学与哲学角度阐述：写作是思辨的熔炉，绕过痛苦过程即绕过了深度理解。',
+        keySentences: [
+          'Intellectual maturity is forged not in the effortless retrieval of synthesized text, but in the agonizing struggle against ambiguity and incoherence.',
+          'When we outsource the generative struggle, we forfeit the neural rewiring that accompanies true epistemological breakthroughs.'
+        ]
+      },
+      {
+        step: '第三段：主体论证二·反驳反方与辩证深化 (Counter-Argument & Refutation)',
+        purpose: '承认 AI 在计算与检索上的辅助价值，但指出其无法替代价值判断与伦理担当。',
+        keySentences: [
+          'Granted, technological automation can serve as a potent cognitive prosthesis when relegated strictly to mechanical aggregation.',
+          'Yet the demarcation line between augmentation and abdication remains perilously blurred when judgment is surrendered to probabilistic consensus.'
+        ]
+      },
+      {
+        step: '第四段：总结升华与行动呼吁 (Conclusion & Synthesis)',
+        purpose: '重申论点，以富有文采和哲学张力的学术句式收尾。',
+        keySentences: [
+          'To preserve the sovereignty of the human mind, we must treat technology not as an intellectual sovereign, but as a subordinate instrument.',
+          'The true dignity of human thought lies not in the speed of automated output, but in the courage to inhabit complexity.'
+        ]
+      }
+    ],
+    modelEssay: `The prompt delineates a profound ontological crossroads confronting modern civilization: does the pervasive delegation of linguistic and analytic tasks to generative artificial intelligence emancipate the human intellect, or does it surreptitiously erode the foundational sinews of critical agency? While evangelists celebrate the elimination of cognitive friction as a harbinger of unprecedented productivity, I firmly contend that uncritical cognitive offloading poses an existential hazard to the depth, originality, and moral sovereignty of human thought.
+
+To appreciate the gravity of this dilemma, one must recognize that intellectual discernment is not a discrete commodity that can be passively received; it is an arduous muscle forged exclusively through struggle. The act of drafting an essay, synthesizing conflicting historical narratives, or wrestling with philosophical paradoxes is fundamentally constitutive of thought itself. Language is not merely a transparent vessel through which pre-formed ideas are neatly channeled; rather, it is the transformative crucible wherein nebulous intuitions are interrogated, refined, and crystallized. When learners and researchers routinely outsource this generative agony to statistical prediction engines, they do not bypass superfluous labor—they bypass the very pedagogical process of neural architecture building. The inevitable consequence is cognitive atrophy: a generation adept at prompting, but fundamentally impoverished in original synthesis.
+
+Furthermore, excessive reliance on automated outputs instigates an insidious intellectual homogenization. Large language models operate on probabilistic aggregation, synthesizing normative averages culled from historical corpora. Consequently, their outputs intrinsically gravitate toward the consensus, smoothing over radical idiosyncratic nuances and dissenting sparks of insight. If human writers merely act as passive curators of algorithmic averages, the collective discourse risks settling into a glossy, syntactically pristine mediocrity. What distinguishes genuine humanistic scholarship is precisely that which defies probabilistic expectation: the disruptive moral indignation, the eccentric artistic metaphor, and the existential vulnerability that no statistical matrix can fathom.
+
+Admittedly, technological automation is not without merit. When judiciously deployed as an informational prosthesis—for rapid indexing, routine syntax validation, or preliminary literature scanning—AI can indeed liberate finite cognitive bandwidth for higher-order deliberation. However, the demarcation line between benign augmentation and intellectual abdication is perilously porous. The moment we permit the algorithm to dictate our interpretive frameworks or articulate our thesis statements, our capacity for autonomous reflection is irrevocably compromised.
+
+In conclusion, the ultimate benchmark of human cognitive dignity has never resided in the speed of mechanical output, but in the steadfast capacity to inhabit complexity and forge genuine conviction. We must discipline ourselves to employ artificial intelligence as an obedient instrument rather than an intellectual sovereign. Only by fiercely preserving the friction of contemplation can we ensure that our digital tools expand the horizon of human agency, rather than rendering us eloquent spectators to our own intellectual obsolescence.`,
+    essayAnalysis: '本篇范文全篇 442 词，用词极度严谨地道（ontological crossroads, generative agony, cognitive prosthesis, intellectual abdication），论证逻辑环环相扣，彻底摆脱了中式模板与套话，是专八作文（26分以上/满分30分）的标杆级典范。',
+    linkingDevices: [
+      'To appreciate the gravity of this dilemma... (为了理解此困境之严峻)',
+      'Rather, it is the transformative crucible wherein... (相反，它正是……的蜕变熔炉)',
+      'The inevitable consequence is cognitive atrophy... (其不可避免的后果是认知萎缩)',
+      'What distinguishes genuine scholarship is precisely... (真正学术之所以卓越，恰恰在于……)',
+      'The demarcation line between augmentation and abdication... (在辅助与放弃之间的界限极为模糊)'
+    ]
+  }
+];
+
+// ==================== 5. 专八口语 (Oral English / TEM-8 Oral Excellence) ====================
+export const TEM8_ORAL_DATA: TEM8OralTask[] = [
+  {
+    id: 'tem8_oral_1',
+    taskType: 'impromptu_speech',
+    title: 'Task: The Ethical Imperatives of Climate Responsibility vs. Developing Economies’ Sovereignty',
+    preparationTime: '3 分钟构思',
+    speakingTime: '3 分钟独白陈述 (Speech Presentation)',
+    backgroundMaterial: 'In global climate summits, developed nations insist on binding emissions caps for all participants, whereas emerging economies argue that historical cumulative emissions obligate industrialized powers to shoulder the financial compensation and technology transfer without capping developing nations’ path out of poverty.',
+    structureGuidelines: [
+      {
+        phase: 'Introduction (0:00 - 0:40)',
+        duration: '40 秒',
+        talkingPoints: [
+          '开门见山点出气候正义（Climate Justice）的核心矛盾：历史累积责任 vs. 现实增长权利。',
+          '明确亮出自己的辩证立场：坚持“共同但有区别的责任”（Common But Differentiated Responsibilities）。'
+        ]
+      },
+      {
+        phase: 'Body Paragraph 1: Historical Accountability (0:40 - 1:40)',
+        duration: '60 秒',
+        talkingPoints: [
+          '数据与逻辑支撑：工业化国家在过去两个世纪排放了全球70%以上的温室气体。',
+          '要求发展中国家在缺乏技术转移的前提下实行相同减排，属于实质上的生态殖民（Ecological Colonialism）。'
+        ]
+      },
+      {
+        phase: 'Body Paragraph 2: Constructive Path Forward (1:40 - 2:30)',
+        duration: '50 秒',
+        talkingPoints: [
+          '提出务实破局点：绿色技术转让基金、碳税返还机制、清洁能源联合研发。',
+          '气候行动不应是零和博弈，而是通过跨国制度协同实现跨越式绿色增长。'
+        ]
+      },
+      {
+        phase: 'Conclusion (2:30 - 3:00)',
+        duration: '30 秒',
+        talkingPoints: [
+          '有力总结：正义不能被效率牺牲，唯有以公平奠基的绿色未来，才能真正行稳致远。'
+        ]
+      }
+    ],
+    goldenExpressions: [
+      { en: 'Common but differentiated responsibilities', zh: '共同但有区别的责任', usage: '联合国气候公约核心基石原则' },
+      { en: 'Cumulative historical culpability', zh: '累积性历史问责/罪责', usage: '高阶学术修辞，比 historical guilt 更具法理威严' },
+      { en: 'Ecological colonialism', zh: '生态殖民主义', usage: '指责发达国家以环保之名限制别国发展的有力词汇' },
+      { en: 'A zero-sum standoff', zh: '零和僵局', usage: '描述谈判僵局的地道表达' }
+    ],
+    samplePresentation: `Good morning, distinguished examiners. Today, I stand before you to address an ethical dilemma that sits at the very heart of planetary survival: the delicate balance between climate responsibility and economic sovereignty.
+
+To untangle this knot, we must ground our discussion in the foundational doctrine of "common but differentiated responsibilities." For more than two centuries since the Industrial Revolution, the developed world amassed immense economic prosperity by utilizing carbon-intensive fuels, effectively exhausting the atmospheric carrying capacity of our planet. To now impose identical, stringent emissions ceilings upon emerging nations—whose populations are still fighting basic poverty—is not merely economically punitive, but morally untenable. It amounts to a subtle form of ecological colonialism.
+
+However, recognizing historical culpability must not become an excuse for paralyzing inaction. The climate crisis does not negotiate with diplomatic stalemates. The only viable path forward is institutional reciprocity: industrialized economies must fulfill their pledged climate financing and unreservedly transfer green technologies, allowing developing nations to leapfrog traditional fossil-fuel trajectories into renewable grids.
+
+In conclusion, true climate stewardship is impossible without international justice. Let us reject the false dichotomy between environmental preservation and human dignity, and construct a global compact rooted in empathy, equity, and genuine solidarity. Thank you.`
+  }
+];

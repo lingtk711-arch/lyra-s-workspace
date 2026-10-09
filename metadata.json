@@ -1,0 +1,6 @@
+{
+  "name": "KansoDesk - Personal Workbench",
+  "description": "A high-performance, aesthetically crafted personal workbench combining quick launchpads, daily productivity widgets, developer toolboxes, and GitHub radar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
