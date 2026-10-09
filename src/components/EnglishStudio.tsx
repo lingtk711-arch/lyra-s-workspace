@@ -8,6 +8,7 @@ import {
   BookOpen, 
   Briefcase, 
   ChevronRight, 
+  ChevronLeft, 
   Sparkles,
   ExternalLink,
   Upload,
@@ -70,6 +71,65 @@ export const EnglishStudio: React.FC<EnglishStudioProps> = ({ phrases, onUpdateP
   const [passages, setPassages] = useState<EnglishPassage[]>(BATCH_A_PASSAGES);
   const [selectedPassageId, setSelectedPassageId] = useState<string>(BATCH_A_PASSAGES[0].id);
   const currentPassage = passages.find((p) => p.id === selectedPassageId) || passages[0];
+  const currentPassageIndex = passages.findIndex((p) => p.id === currentPassage.id);
+
+  // 篇章长卷轮播容器 Ref 与滑轮支持
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // 监听鼠标滚轮：将纵向滚动转化为丝滑的横向长卷滑动
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY * 1.25;
+      }
+    };
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+    };
+  }, [passages]);
+
+  // 当选中的篇章改变时，自动将对应按钮滚动居中显示
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const activeTabEl = document.getElementById(`passage-tab-${selectedPassageId}`);
+    if (activeTabEl) {
+      activeTabEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [selectedPassageId]);
+
+  // 左右箭头步进滑动
+  const handleScrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollOffset = 320;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollOffset : scrollOffset,
+        behavior: 'smooth'
+      });
+      playChime('click');
+    }
+  };
+
+  // 快速切换至上一篇/下一篇
+  const handleSelectPrevPassage = () => {
+    if (currentPassageIndex > 0) {
+      setSelectedPassageId(passages[currentPassageIndex - 1].id);
+      setSelectedPartIndex('all');
+      playChime('click');
+    }
+  };
+
+  const handleSelectNextPassage = () => {
+    if (currentPassageIndex < passages.length - 1) {
+      setSelectedPassageId(passages[currentPassageIndex + 1].id);
+      setSelectedPartIndex('all');
+      playChime('click');
+    }
+  };
 
   // 篇章章节分段视图控制 (全篇连读 / 按 Part 分段阅读)
   const [selectedPartIndex, setSelectedPartIndex] = useState<'all' | number>('all');
@@ -160,6 +220,16 @@ export const EnglishStudio: React.FC<EnglishStudioProps> = ({ phrases, onUpdateP
       // ignore
     }
   }, [masteredPassageIds]);
+
+  // 切换篇章掌握状态
+  const handleToggleMastered = (passageId: string) => {
+    if (masteredPassageIds.includes(passageId)) {
+      setMasteredPassageIds((prev) => prev.filter((id) => id !== passageId));
+    } else {
+      setMasteredPassageIds((prev) => [...prev, passageId]);
+    }
+    playChime('complete');
+  };
 
   // Echo-Loop 四步循环口语训练台状态
   const [echoStep, setEchoStep] = useState<EchoStep>('listening');
@@ -633,13 +703,131 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             </button>
           </div>
 
-          {/* 篇章切换横向书签列表 */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-            <span className="text-xs font-semibold text-[#7D646B] shrink-0 mr-1">本批次语篇长卷:</span>
-            {passages.map((p) => {
-              const isSelected = p.id === currentPassage.id;
-              const isMastered = masteredPassageIds.includes(p.id);
-              return (
+          {/* 篇章切换横向书签列表 (带物理滚轮滑动、左右步进箭头与进度导航) */}
+          <div className="bg-white/90 rounded-2xl p-3.5 border border-[#F2D7DD] shadow-2xs space-y-2.5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-bold text-[#6D535A] flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-rose-600" />
+                  <span>本批次语篇长卷</span>
+                </span>
+                <span className="text-[11px] font-bold text-rose-900 bg-rose-100/90 px-2.5 py-0.5 rounded-full border border-rose-200">
+                  第 {currentPassageIndex + 1} / {passages.length} 篇
+                </span>
+                <span className="text-[11px] text-[#8C6F77] hidden md:inline">
+                  (滚轮/触控板横滑、或点箭头滑动查看更多)
+                </span>
+              </div>
+
+              {/* 左右滑动滚轮控制器与上下篇翻页按钮 */}
+              <div className="flex items-center gap-1.5 self-end sm:self-auto">
+                {/* 滚动长卷按钮 */}
+                <button
+                  onClick={() => handleScrollCarousel('left')}
+                  className="w-7 h-7 rounded-lg bg-white border border-[#F2D7DD] hover:border-rose-300 hover:bg-rose-50 text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
+                  title="向左滚动长卷列表"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => handleScrollCarousel('right')}
+                  className="w-7 h-7 rounded-lg bg-white border border-[#F2D7DD] hover:border-rose-300 hover:bg-rose-50 text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
+                  title="向右滚动长卷列表"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                <div className="h-4 w-px bg-[#F2D7DD] mx-1" />
+
+                {/* 上一篇/下一篇直接切换 */}
+                <button
+                  onClick={handleSelectPrevPassage}
+                  disabled={currentPassageIndex === 0}
+                  className={`px-2.5 py-1 text-xs rounded-lg border transition-all flex items-center gap-1 ${
+                    currentPassageIndex === 0
+                      ? 'opacity-40 cursor-not-allowed bg-neutral-50 text-neutral-400 border-neutral-200'
+                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium'
+                  }`}
+                  title="切换至上一篇长卷"
+                >
+                  <ChevronLeft className="w-3 h-3" />
+                  <span>上一篇</span>
+                </button>
+                <button
+                  onClick={handleSelectNextPassage}
+                  disabled={currentPassageIndex === passages.length - 1}
+                  className={`px-2.5 py-1 text-xs rounded-lg border transition-all flex items-center gap-1 ${
+                    currentPassageIndex === passages.length - 1
+                      ? 'opacity-40 cursor-not-allowed bg-neutral-50 text-neutral-400 border-neutral-200'
+                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium'
+                  }`}
+                  title="切换至下一篇长卷"
+                >
+                  <span>下一篇</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+
+            {/* 可滚动的横向长卷轨道 (附带清晰可见的水平滚动条，并支持滚轮转动) */}
+            <div
+              ref={carouselRef}
+              className="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5 px-1 passage-carousel-scroll select-none cursor-grab active:cursor-grabbing"
+            >
+              {passages.map((p, idx) => {
+                const isSelected = p.id === currentPassage.id;
+                const isMastered = masteredPassageIds.includes(p.id);
+                return (
+                  <button
+                    key={p.id}
+                    id={`passage-tab-${p.id}`}
+                    onClick={() => {
+                      setSelectedPassageId(p.id);
+                      setSelectedPartIndex('all');
+                      playChime('click');
+                    }}
+                    className={`shrink-0 px-3.5 py-2.5 text-xs rounded-xl transition-all flex items-center gap-2 border text-left ${
+                      isSelected
+                        ? 'bg-rose-500 text-white font-bold border-rose-600 shadow-xs ring-2 ring-rose-200'
+                        : 'bg-white border-[#F2D7DD] text-[#6A5259] hover:bg-rose-50 hover:border-rose-300'
+                    }`}
+                  >
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold shrink-0 ${
+                        isSelected ? 'bg-white text-rose-600' : 'bg-rose-100 text-rose-800'
+                      }`}
+                    >
+                      #{idx + 1}
+                    </span>
+                    <div className="min-w-0 max-w-[260px]">
+                      <div className="flex items-center gap-1.5">
+                        {isMastered && (
+                          <CheckCircle2
+                            className={`w-3.5 h-3.5 shrink-0 ${
+                              isSelected ? 'text-white' : 'text-emerald-600'
+                            }`}
+                          />
+                        )}
+                        <span className="font-semibold truncate">{p.theme}</span>
+                      </div>
+                      <div
+                        className={`text-[10px] mt-0.5 flex items-center gap-1.5 ${
+                          isSelected ? 'text-rose-100' : 'text-[#8C6F77]'
+                        }`}
+                      >
+                        <span>{p.categoryLabel.split(' · ')[0]}</span>
+                        <span>·</span>
+                        <span>~{p.estimatedWords} 词</span>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* 可视化指示圆点 (点击圆点直接跳转对应篇章) */}
+            <div className="flex items-center justify-center gap-1.5 pt-0.5">
+              {passages.map((p, idx) => (
                 <button
                   key={p.id}
                   onClick={() => {
@@ -647,20 +835,15 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     setSelectedPartIndex('all');
                     playChime('click');
                   }}
-                  className={`shrink-0 px-3.5 py-2 text-xs rounded-xl transition-all flex items-center gap-1.5 border ${
-                    isSelected
-                      ? 'bg-rose-100 text-rose-950 font-bold border-rose-300 shadow-2xs'
-                      : 'bg-white/80 border-[#F2D7DD] text-[#6A5259] hover:bg-rose-50'
+                  className={`h-1.5 rounded-full transition-all ${
+                    p.id === currentPassage.id
+                      ? 'w-6 bg-rose-500'
+                      : 'w-2 bg-[#E8CBD2] hover:bg-rose-300'
                   }`}
-                >
-                  {isMastered && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
-                  <span className="font-medium">{p.theme}</span>
-                  <span className="text-[10px] bg-rose-200/70 text-rose-900 px-1.5 py-0.2 rounded font-mono">
-                    ~{p.estimatedWords}词
-                  </span>
-                </button>
-              );
-            })}
+                  title={`快速跳转至第 ${idx + 1} 篇: ${p.theme}`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* 篇章主研读卡片 */}
@@ -884,8 +1067,64 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               </div>
             </div>
 
+            {/* 篇章切换翻页导航栏 */}
+            <div className="pt-4 border-t border-[#F2D7DD] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#FCF6F8]/60 p-3.5 rounded-xl">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleSelectPrevPassage}
+                  disabled={currentPassageIndex === 0}
+                  className={`px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition-all border ${
+                    currentPassageIndex === 0
+                      ? 'opacity-40 cursor-not-allowed bg-neutral-100 text-neutral-400 border-neutral-200'
+                      : 'bg-white text-[#5D4249] hover:bg-rose-50 border-[#F2D7DD] font-semibold shadow-2xs'
+                  }`}
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>上一篇语卷</span>
+                  {currentPassageIndex > 0 && (
+                    <span className="hidden md:inline text-[10px] text-[#8C6D75] truncate max-w-[120px]">
+                      ({passages[currentPassageIndex - 1].theme})
+                    </span>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleSelectNextPassage}
+                  disabled={currentPassageIndex === passages.length - 1}
+                  className={`px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition-all border ${
+                    currentPassageIndex === passages.length - 1
+                      ? 'opacity-40 cursor-not-allowed bg-neutral-100 text-neutral-400 border-neutral-200'
+                      : 'bg-white text-[#5D4249] hover:bg-rose-50 border-[#F2D7DD] font-semibold shadow-2xs'
+                  }`}
+                >
+                  <span>下一篇语卷</span>
+                  {currentPassageIndex < passages.length - 1 && (
+                    <span className="hidden md:inline text-[10px] text-[#8C6D75] truncate max-w-[120px]">
+                      ({passages[currentPassageIndex + 1].theme})
+                    </span>
+                  )}
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* 标记掌握按钮 */}
+              <button
+                onClick={() => handleToggleMastered(currentPassage.id)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition-all border ${
+                  masteredPassageIds.includes(currentPassage.id)
+                    ? 'bg-emerald-100 text-emerald-900 border-emerald-300 font-bold'
+                    : 'bg-white text-[#5D4249] border-[#F2D7DD] hover:bg-emerald-50 hover:text-emerald-950 font-medium'
+                }`}
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>
+                  {masteredPassageIds.includes(currentPassage.id) ? '已掌握此长篇' : '标记为已掌握'}
+                </span>
+              </button>
+            </div>
+
             {/* 直通车按钮 */}
-            <div className="pt-4 flex items-center justify-between">
+            <div className="pt-2 flex items-center justify-between">
               <span className="text-xs text-[#7B6067]">
                 已完成本篇阅读？立即进入 Echo-Loop 开展精听与跟读操练：
               </span>

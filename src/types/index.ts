@@ -67,10 +67,19 @@ export interface TrendingTopic {
   accountId: string;
   keyword: string;
   heat: string;               // 爆款热度指数
-  sourceType: string;         // "小红书热搜榜", "高赞爆款参考", "搜索下拉词"
+  sourceType: string;         // "小红书热搜榜", "知名AI博主发推", "高赞爆款参考", "官方一手发布"
   suggestedAngle: string;     // 推荐爆款切入视角
   sampleHook: string;         // 推荐开头钩子
   tags: string[];
+  author?: string;            // 知名博主或原厂机构，如 "Andrej Karpathy (@karpathy)", "宝玉 (@dotey)", "归藏 (@op7418)"
+  authorRole?: string;        // 身份认证，如 "前OpenAI联创 / 现Anthropic核心研究", "知名AIGC周刊主理人"
+  authorType?: 'blogger' | 'official' | 'community'; // 博主 / 官方 / 社区
+  postTime?: string;          // 动态发布时间，如 "2小时前", "今日高赞", "最新热议"
+  discussionMetrics?: {
+    likes?: string;
+    reposts?: string;
+    comments?: string;
+  };
 }
 
 // 每日 AI 权威情报条目

@@ -22,7 +22,11 @@ import {
   Globe, 
   BookOpen, 
   Wand2,
-  RefreshCw
+  RefreshCw,
+  User,
+  ThumbsUp,
+  MessageSquare,
+  Share2
 } from 'lucide-react';
 import { MediaAccount, ContentItem, PipelineStage, TrendingTopic, AIIntelligenceItem } from '../types';
 import { MEDIA_ACCOUNTS, ACCOUNT_TRENDING_TOPICS, DAILY_AI_INTELLIGENCE } from '../utils/mediaPresets';
@@ -63,6 +67,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [showTrendsDrawer, setShowTrendsDrawer] = useState(false);
   const [showAIIntelDrawer, setShowAIIntelDrawer] = useState(currentAccount.id === 'acc_ai');
+  const [aiRadarFilter, setAiRadarFilter] = useState<'all' | 'blogger' | 'official'>('all');
 
   // Filter content items for this account
   const accountItems = contentItems.filter((i) => i.accountId === selectedAccountId);
@@ -137,13 +142,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       }
     }
 
+    const topicSourceText = trend.author
+      ? `${trend.author} (${trend.authorRole || trend.sourceType}) · ${trend.heat}`
+      : `${trend.sourceType} · ${trend.heat}`;
+
     const newItem: ContentItem = {
       id: 'content_' + Date.now(),
       accountId: selectedAccountId,
       title: trend.keyword,
       stage: autoGenerate ? 'script' : 'topic',
-      topicSource: `${trend.sourceType} · ${trend.heat}`,
-      topicNotes: `【推荐切入视角】${trend.suggestedAngle}`,
+      topicSource: topicSourceText,
+      topicNotes: `【来源出处】${topicSourceText}\n【推荐切入视角】${trend.suggestedAngle}${trend.discussionMetrics ? `\n【热议数据】点赞 ${trend.discussionMetrics.likes || '-'} · 评论讨论 ${trend.discussionMetrics.comments || '-'} · 转推 ${trend.discussionMetrics.reposts || '-'}` : ''}`,
       hook: trend.sampleHook,
       scriptText: generatedScript || undefined,
       tags: trend.tags,
@@ -151,7 +160,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       coverLayout: {
         mainHeadline: trend.keyword,
         subHeadline: trend.sampleHook.slice(0, 24) + '...',
-        badgeText: trend.tags[0] || currentAccount.badge,
+        badgeText: trend.author ? trend.author.split(' ')[0] : (trend.tags[0] || currentAccount.badge),
         colorTheme: defaultColor
       },
       createdAt: Date.now(),
@@ -266,7 +275,12 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
     }
   };
 
-  const accountTrends = ACCOUNT_TRENDING_TOPICS.filter((t) => t.accountId === selectedAccountId);
+  const accountTrendsRaw = ACCOUNT_TRENDING_TOPICS.filter((t) => t.accountId === selectedAccountId);
+  const accountTrends = currentAccount.id === 'acc_ai' && aiRadarFilter !== 'all'
+    ? accountTrendsRaw.filter((t) => t.authorType === aiRadarFilter)
+    : accountTrendsRaw;
+  const bloggerCount = accountTrendsRaw.filter((t) => t.authorType === 'blogger').length;
+  const officialCount = accountTrendsRaw.filter((t) => t.authorType === 'official').length;
 
   return (
     <div className="flex flex-col lg:flex-row items-stretch gap-6">
@@ -350,23 +364,48 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
           </div>
         </div>
 
-        {/* AI Account Specific: Quick Trigger for AI Intelligence Stream */}
+        {/* AI Account Specific: Quick Trigger for AI Intelligence Stream & Blogger Trends */}
         {currentAccount.id === 'acc_ai' && (
-          <button
-            onClick={() => setShowAIIntelDrawer(!showAIIntelDrawer)}
-            className="w-full p-3 rounded-xl border border-sky-200 bg-sky-50/70 hover:bg-sky-50 text-left transition-colors flex items-center justify-between"
-          >
-            <div className="flex items-center gap-2">
-              <Radio className="w-4 h-4 text-sky-600 animate-pulse" />
-              <div>
-                <div className="text-xs font-bold text-sky-950">每日 AI 权威情报流</div>
-                <div className="text-[10px] text-sky-700">OpenAI · Anthropic · Google</div>
+          <div className="space-y-2">
+            <button
+              onClick={() => {
+                setShowTrendsDrawer(true);
+                setShowAIIntelDrawer(false);
+                playChime('click');
+              }}
+              className="w-full p-2.5 rounded-xl border border-rose-200 bg-rose-50/70 hover:bg-rose-100/70 text-left transition-colors flex items-center justify-between"
+            >
+              <div className="flex items-center gap-2">
+                <Flame className="w-4 h-4 text-rose-600 animate-pulse" />
+                <div>
+                  <div className="text-xs font-bold text-rose-950">AI 热点雷达 (知名博主+官方)</div>
+                  <div className="text-[10px] text-rose-700">Karpathy · 宝玉 · 归藏 · 原厂</div>
+                </div>
               </div>
-            </div>
-            <span className="text-[10px] font-bold text-sky-800 bg-white px-2 py-0.5 rounded border border-sky-200">
-              {DAILY_AI_INTELLIGENCE.length} 条一手
-            </span>
-          </button>
+              <span className="text-[10px] font-bold text-rose-800 bg-white px-2 py-0.5 rounded border border-rose-200">
+                {accountTrendsRaw.length} 条热榜
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                setShowAIIntelDrawer(!showAIIntelDrawer);
+                playChime('click');
+              }}
+              className="w-full p-2.5 rounded-xl border border-sky-200 bg-sky-50/70 hover:bg-sky-100/70 text-left transition-colors flex items-center justify-between"
+            >
+              <div className="flex items-center gap-2">
+                <Radio className="w-4 h-4 text-sky-600 animate-pulse" />
+                <div>
+                  <div className="text-xs font-bold text-sky-950">官方原厂权威情报流</div>
+                  <div className="text-[10px] text-sky-700">OpenAI · Anthropic · DeepMind</div>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold text-sky-800 bg-white px-2 py-0.5 rounded border border-sky-200">
+                {DAILY_AI_INTELLIGENCE.length} 条一手
+              </span>
+            </button>
+          </div>
         )}
       </div>
 
@@ -410,11 +449,11 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             {showTrendsDrawer && (
               <div className="p-3.5 rounded-xl border border-rose-200 bg-rose-50/40 space-y-2.5 animate-in fade-in duration-150">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <Flame className="w-3.5 h-3.5 text-rose-600 animate-pulse" />
                     <span className="text-xs font-bold text-rose-900">
                       {currentAccount.id === 'acc_sedona' ? '圣多纳疗愈 IP · 最高赞最高讨论度爆款雷达' :
-                       currentAccount.id === 'acc_ai' ? 'AI 科技前沿 · 近期高热度高讨论度风口雷达' :
+                       currentAccount.id === 'acc_ai' ? 'AI 科技前沿 · 知名博主爆款 (Karpathy/宝玉/归藏等) + 官方一手雷达' :
                        `${currentAccount.name} · 最高赞高讨论度爆款雷达`}
                     </span>
                     <span className="text-[10px] font-bold text-rose-700 bg-white px-2 py-0.2 rounded-full border border-rose-200">
@@ -442,47 +481,140 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   </div>
                 </div>
 
+                {/* AI 账号专属分类过滤器 */}
+                {currentAccount.id === 'acc_ai' && (
+                  <div className="flex items-center gap-1.5 pt-1">
+                    <button
+                      onClick={() => { setAiRadarFilter('all'); playChime('click'); }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold ${
+                        aiRadarFilter === 'all'
+                          ? 'bg-rose-600 text-white shadow-2xs'
+                          : 'bg-white text-[#6C5259] hover:bg-rose-100/60 border border-rose-200'
+                      }`}
+                    >
+                      全部精选 ({accountTrendsRaw.length})
+                    </button>
+                    <button
+                      onClick={() => { setAiRadarFilter('blogger'); playChime('click'); }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold flex items-center gap-1 ${
+                        aiRadarFilter === 'blogger'
+                          ? 'bg-purple-700 text-white shadow-2xs'
+                          : 'bg-white text-purple-900 hover:bg-purple-50 border border-purple-200'
+                      }`}
+                    >
+                      <span>🔥 知名 AI 博主顶流</span>
+                      <span className="text-[10px] bg-purple-100 text-purple-800 px-1 py-0.2 rounded font-mono">
+                        {bloggerCount}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => { setAiRadarFilter('official'); playChime('click'); }}
+                      className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold flex items-center gap-1 ${
+                        aiRadarFilter === 'official'
+                          ? 'bg-sky-700 text-white shadow-2xs'
+                          : 'bg-white text-sky-900 hover:bg-sky-50 border border-sky-200'
+                      }`}
+                    >
+                      <span>🏛️ 官方原厂一手</span>
+                      <span className="text-[10px] bg-sky-100 text-sky-800 px-1 py-0.2 rounded font-mono">
+                        {officialCount}
+                      </span>
+                    </button>
+                  </div>
+                )}
+
                 {/* 每日自动更新机制说明提示条 */}
                 <div className="p-2 rounded-lg bg-white/90 border border-rose-100 text-[11px] text-rose-950 flex items-start gap-1.5 leading-relaxed">
                   <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold">每日自动更新机制：</span>
-                    系统内置基于日期时间戳的真实热榜轮换算法，<strong>每日早晨 06:00 自动按最新日历周期刷新置顶今日精选 10 条高热选题</strong>；每条均配备真实热度指数与来源出处，点击右上角亦可随时即时轮换。
+                    系统每日全网抓取并筛选真实高热选题，<strong>涵盖知名技术 KOL（Karpathy、宝玉、归藏、量子位等）高赞动态与官方一手前沿发布</strong>；支持一键采纳或一键生成文案。
                   </div>
                 </div>
 
-                <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
                   {accountTrends.map((trend, idx) => (
                     <div
                       key={trend.id}
-                      className="p-2.5 rounded-lg border border-rose-100 bg-white space-y-1.5 hover:border-rose-300 transition-colors shadow-2xs"
+                      className="p-3 rounded-lg border border-rose-100 bg-white space-y-2 hover:border-rose-300 transition-colors shadow-2xs"
                     >
-                      <div className="flex items-center justify-between gap-1">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.2 rounded shrink-0 font-mono">
+                      {/* 标题与热度 */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-start gap-1.5 min-w-0">
+                          <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded shrink-0 font-mono mt-0.5">
                             #{idx + 1}
                           </span>
-                          <span className="text-xs font-bold text-[#2D2326] truncate">{trend.keyword}</span>
+                          <span className="text-xs font-bold text-[#2D2326] leading-snug">{trend.keyword}</span>
                         </div>
-                        <span className="text-[10px] text-rose-700 bg-rose-50/80 px-1.5 py-0.2 rounded font-mono shrink-0">
+                        <span className="text-[10px] text-rose-700 bg-rose-50/80 px-2 py-0.5 rounded font-mono shrink-0 font-medium">
                           {trend.heat}
                         </span>
                       </div>
-                      <p className="text-[11px] text-neutral-600 line-clamp-2 leading-relaxed">
+
+                      {/* 博主与来源出处条 */}
+                      {trend.author && (
+                        <div className="flex items-center gap-1.5 flex-wrap text-[11px] bg-[#FAF5F7] p-1.5 rounded-lg border border-[#F2DEE4]">
+                          <span className={`px-2 py-0.5 rounded font-bold flex items-center gap-1 text-[10px] ${
+                            trend.authorType === 'blogger'
+                              ? 'bg-purple-100 text-purple-900'
+                              : 'bg-sky-100 text-sky-900'
+                          }`}>
+                            <User className="w-2.5 h-2.5" />
+                            <span>{trend.author}</span>
+                          </span>
+                          {trend.authorRole && (
+                            <span className="text-[#7A5B64] text-[10px]">
+                              {trend.authorRole}
+                            </span>
+                          )}
+                          {trend.postTime && (
+                            <span className="text-[10px] bg-white text-neutral-600 px-1.5 py-0.2 rounded border border-[#ECD1D8] font-mono ml-auto">
+                              {trend.postTime}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      <p className="text-[11px] text-neutral-600 leading-relaxed">
                         {trend.suggestedAngle}
                       </p>
-                      <div className="flex items-center justify-between pt-1 border-t border-neutral-100 text-[10px]">
+
+                      {/* 讨论度数据指标 (点赞/讨论/转推) */}
+                      {trend.discussionMetrics && (
+                        <div className="flex items-center gap-3 text-[10px] text-[#7A5B63] bg-rose-50/40 px-2 py-1 rounded">
+                          {trend.discussionMetrics.likes && (
+                            <span className="flex items-center gap-0.5 font-medium">
+                              <ThumbsUp className="w-2.5 h-2.5 text-rose-500" />
+                              <span>点赞 {trend.discussionMetrics.likes}</span>
+                            </span>
+                          )}
+                          {trend.discussionMetrics.comments && (
+                            <span className="flex items-center gap-0.5 font-medium">
+                              <MessageSquare className="w-2.5 h-2.5 text-sky-500" />
+                              <span>讨论 {trend.discussionMetrics.comments}</span>
+                            </span>
+                          )}
+                          {trend.discussionMetrics.reposts && (
+                            <span className="flex items-center gap-0.5 font-medium">
+                              <Share2 className="w-2.5 h-2.5 text-emerald-500" />
+                              <span>转推 {trend.discussionMetrics.reposts}</span>
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between pt-1.5 border-t border-neutral-100 text-[10px]">
                         <span className="text-neutral-400">来源: {trend.sourceType}</span>
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => handleAdoptTrendingTopic(trend, false)}
-                            className="px-2 py-0.5 text-[11px] font-semibold text-rose-700 hover:bg-rose-50 rounded"
+                            className="px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-50 rounded"
                           >
                             采纳选题
                           </button>
                           <button
                             onClick={() => handleAdoptTrendingTopic(trend, true)}
-                            className="flex items-center gap-1 px-2.5 py-0.5 text-[11px] font-bold bg-[#2D2326] text-white hover:bg-[#45373B] rounded shadow-xs"
+                            className="flex items-center gap-1 px-3 py-1 text-[11px] font-bold bg-[#2D2326] text-white hover:bg-[#45373B] rounded shadow-xs"
                             title="采纳并直接生成初版文案与封面方案"
                           >
                             <Wand2 className="w-3 h-3 text-amber-300" />

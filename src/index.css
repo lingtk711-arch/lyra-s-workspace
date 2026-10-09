@@ -37,3 +37,22 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #D8BDC4;
 }
+
+/* Horizontal Passage Carousel Scrollbar */
+.passage-carousel-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.passage-carousel-scroll::-webkit-scrollbar-track {
+  background: rgba(242, 215, 221, 0.45);
+  border-radius: 9999px;
+}
+
+.passage-carousel-scroll::-webkit-scrollbar-thumb {
+  background: #E0829D;
+  border-radius: 9999px;
+}
+
+.passage-carousel-scroll::-webkit-scrollbar-thumb:hover {
+  background: #C96682;
+}
