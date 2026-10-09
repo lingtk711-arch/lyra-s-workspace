@@ -9,6 +9,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { ActiveView } from '../types';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface HeaderProps {
   activeView: ActiveView;
@@ -90,6 +91,8 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Zone 3: Primary Action Zone */}
         <div className="flex items-center gap-2 shrink-0">
+          <PWAInstallButton />
+
           <button
             onClick={onOpenCommandPalette}
             className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-600 bg-white border border-[#F2DFE4] hover:border-[#D9AAB6] rounded-lg transition-all shadow-xs"

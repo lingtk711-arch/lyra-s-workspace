@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="primaryGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <linearGradient id="accentGlow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#6366f1" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  
+  <!-- Outer rounded square background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  
+  <!-- Inner Ambient Glow Circle -->
+  <circle cx="256" cy="256" r="160" fill="#6366f1" opacity="0.12" filter="url(#shadow)"/>
+  
+  <!-- Stylized Workbench / K Monogram -->
+  <g filter="url(#shadow)">
+    <!-- Vertical Pillar -->
+    <rect x="144" y="132" width="48" height="248" rx="24" fill="url(#primaryGlow)"/>
+    
+    <!-- Top-Right Diagonal Wing -->
+    <path d="M 236 256 L 336 156 C 348 144 368 144 380 156 C 392 168 392 188 380 200 L 292 288 Z" fill="url(#accentGlow)"/>
+    
+    <!-- Bottom-Right Diagonal Wing -->
+    <path d="M 236 256 L 336 356 C 348 368 368 368 380 356 C 392 344 392 324 380 312 L 292 224 Z" fill="url(#primaryGlow)"/>
+    
+    <!-- Central Pivot Core Dot -->
+    <circle cx="240" cy="256" r="28" fill="#ffffff" opacity="0.95"/>
+    <circle cx="240" cy="256" r="16" fill="#6366f1"/>
+  </g>
+</svg>
