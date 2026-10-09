@@ -284,13 +284,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
   return (
     <div className="flex flex-col lg:flex-row items-stretch gap-6">
-      {/* 1. Leftmost Account Sub-Sidebar (物理隔离导航) */}
-      <div className="w-full lg:w-64 shrink-0 space-y-3">
-        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500 px-1">
+      {/* 1. Leftmost Account Sub-Sidebar (去卡片化精炼导览) */}
+      <div className="w-full lg:w-64 shrink-0 space-y-4">
+        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 px-1">
           自媒体矩阵独立空间
         </div>
 
-        <div className="space-y-2">
+        {/* 账号选择列表：去卡片化，采用极简无界条目 */}
+        <div className="space-y-1">
           {MEDIA_ACCOUNTS.map((account) => {
             const isSelected = account.id === selectedAccountId;
             const count = contentItems.filter((i) => i.accountId === account.id).length;
@@ -304,20 +305,20 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   if (account.id === 'acc_ai') setShowAIIntelDrawer(true);
                   playChime('click');
                 }}
-                className={`w-full p-3.5 rounded-xl border text-left transition-all duration-150 flex items-start gap-3 ${
+                className={`w-full p-2.5 rounded-xl text-left transition-all duration-150 flex items-start gap-3 border ${
                   isSelected
-                    ? 'border-[#E2BDC6] bg-white shadow-sm ring-1 ring-[#F3CCD5]'
-                    : 'border-[#F2DFE4] bg-white/60 hover:bg-white hover:border-[#E8D1D7]'
+                    ? 'bg-white text-[#2D2326] border-[#E2BDC6] shadow-2xs font-medium'
+                    : 'bg-transparent text-neutral-600 border-transparent hover:bg-white/60 hover:text-neutral-900'
                 }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                  account.id === 'acc_sedona' ? 'bg-emerald-100/80 text-emerald-800' :
-                  account.id === 'acc_ai' ? 'bg-sky-100/80 text-sky-800' :
-                  'bg-amber-100/80 text-amber-800'
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
+                  account.id === 'acc_sedona' ? 'bg-emerald-100 text-emerald-800' :
+                  account.id === 'acc_ai' ? 'bg-sky-100 text-sky-800' :
+                  'bg-amber-100 text-amber-800'
                 }`}>
-                  {account.id === 'acc_sedona' && <Sparkles className="w-4 h-4" />}
-                  {account.id === 'acc_ai' && <Cpu className="w-4 h-4" />}
-                  {(account.id === 'acc_bot1' || account.id === 'acc_bot2') && <Bot className="w-4 h-4" />}
+                  {account.id === 'acc_sedona' && <Sparkles className="w-3.5 h-3.5" />}
+                  {account.id === 'acc_ai' && <Cpu className="w-3.5 h-3.5" />}
+                  {(account.id === 'acc_bot1' || account.id === 'acc_bot2') && <Bot className="w-3.5 h-3.5" />}
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -332,10 +333,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   <p className="text-[11px] text-neutral-500 truncate mt-0.5">
                     {account.subTitle}
                   </p>
-                  <div className="mt-1 flex items-center gap-1.5">
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#FDF0F2] text-[#8C5D68] font-medium">
-                      {account.statusTag || account.badge}
-                    </span>
+                  <div className="mt-1 flex items-center gap-1.5 text-[10px] text-neutral-400">
+                    <span>{account.statusTag || account.badge}</span>
                   </div>
                 </div>
               </button>
@@ -343,21 +342,26 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
           })}
         </div>
 
-        {/* Global Pipeline Statistics */}
-        <div className="p-3.5 rounded-xl border border-[#F2DFE4] bg-white/70 space-y-2">
-          <div className="text-xs font-semibold text-[#2D2326] flex items-center justify-between">
+        {/* Global Pipeline Statistics (去多层嵌套卡片，化为纯净紧凑的统计流) */}
+        <div className="pt-3 border-t border-[#F2DFE4]/80 space-y-2 px-1">
+          <div className="text-xs font-semibold text-[#5C454B] flex items-center justify-between">
             <span>当前账号漏斗</span>
-            <span className="text-[10px] text-neutral-500">{currentAccount.followerGoal}</span>
+            <span className="text-[10px] text-neutral-400 font-mono">{currentAccount.followerGoal}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-[11px]">
+          <div className="grid grid-cols-2 gap-1.5 text-[11px]">
             {(['topic', 'script', 'staging', 'published'] as PipelineStage[]).map((st) => {
               const c = accountItems.filter((i) => i.stage === st).length;
               const cfg = STAGE_CONFIG[st];
               return (
-                <div key={st} className="p-2 rounded-lg bg-[#FAF0F3] border border-[#F5E2E7]">
-                  <div className="text-neutral-500 text-[10px]">{cfg.icon} {cfg.label}</div>
-                  <div className="text-sm font-bold text-[#2D2326] font-mono mt-0.5">{c} 篇</div>
+                <div key={st} className="p-2 rounded-lg bg-white/60 hover:bg-white transition-colors">
+                  <div className="text-neutral-500 text-[10px] flex items-center gap-1">
+                    <span>{cfg.icon}</span>
+                    <span>{cfg.label}</span>
+                  </div>
+                  <div className="text-xs font-bold text-[#2D2326] font-mono mt-0.5 tabular-nums">
+                    {c} 篇
+                  </div>
                 </div>
               );
             })}
@@ -366,24 +370,24 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
         {/* AI Account Specific: Quick Trigger for AI Intelligence Stream & Blogger Trends */}
         {currentAccount.id === 'acc_ai' && (
-          <div className="space-y-2">
+          <div className="space-y-1.5 pt-2 border-t border-[#F2DFE4]/80 px-1">
             <button
               onClick={() => {
                 setShowTrendsDrawer(true);
                 setShowAIIntelDrawer(false);
                 playChime('click');
               }}
-              className="w-full p-2.5 rounded-xl border border-rose-200 bg-rose-50/70 hover:bg-rose-100/70 text-left transition-colors flex items-center justify-between"
+              className="w-full p-2.5 rounded-xl border border-rose-200/80 bg-rose-50/50 hover:bg-rose-100/60 text-left transition-colors flex items-center justify-between"
             >
               <div className="flex items-center gap-2">
-                <Flame className="w-4 h-4 text-rose-600 animate-pulse" />
+                <Flame className="w-3.5 h-3.5 text-rose-600" />
                 <div>
-                  <div className="text-xs font-bold text-rose-950">AI 热点雷达 (知名博主+官方)</div>
-                  <div className="text-[10px] text-rose-700">Karpathy · 宝玉 · 归藏 · 原厂</div>
+                  <div className="text-xs font-bold text-rose-950">AI 热点雷达</div>
+                  <div className="text-[10px] text-rose-700">知名博主 + 官方一手</div>
                 </div>
               </div>
-              <span className="text-[10px] font-bold text-rose-800 bg-white px-2 py-0.5 rounded border border-rose-200">
-                {accountTrendsRaw.length} 条热榜
+              <span className="text-[10px] font-bold text-rose-800 bg-white/90 px-2 py-0.5 rounded border border-rose-200/70 font-mono">
+                {accountTrendsRaw.length}
               </span>
             </button>
 
@@ -392,17 +396,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 setShowAIIntelDrawer(!showAIIntelDrawer);
                 playChime('click');
               }}
-              className="w-full p-2.5 rounded-xl border border-sky-200 bg-sky-50/70 hover:bg-sky-100/70 text-left transition-colors flex items-center justify-between"
+              className="w-full p-2.5 rounded-xl border border-sky-200/80 bg-sky-50/50 hover:bg-sky-100/60 text-left transition-colors flex items-center justify-between"
             >
               <div className="flex items-center gap-2">
-                <Radio className="w-4 h-4 text-sky-600 animate-pulse" />
+                <Radio className="w-3.5 h-3.5 text-sky-600" />
                 <div>
-                  <div className="text-xs font-bold text-sky-950">官方原厂权威情报流</div>
-                  <div className="text-[10px] text-sky-700">OpenAI · Anthropic · DeepMind</div>
+                  <div className="text-xs font-bold text-sky-950">官方原厂情报流</div>
+                  <div className="text-[10px] text-sky-700">OpenAI · Anthropic · Google</div>
                 </div>
               </div>
-              <span className="text-[10px] font-bold text-sky-800 bg-white px-2 py-0.5 rounded border border-sky-200">
-                {DAILY_AI_INTELLIGENCE.length} 条一手
+              <span className="text-[10px] font-bold text-sky-800 bg-white/90 px-2 py-0.5 rounded border border-sky-200/70 font-mono">
+                {DAILY_AI_INTELLIGENCE.length}
               </span>
             </button>
           </div>
@@ -410,17 +414,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       </div>
 
       {/* 2. Form C: Dual-Pane Layout (形态 C 双版面) */}
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* --- PANE 1: Left List & Stage Pipeline (42% width) --- */}
         <div className="lg:col-span-5 space-y-3">
-          <div className="p-4 rounded-xl border border-[#F2DFE4] bg-white shadow-xs space-y-3">
+          <div className="p-4 rounded-2xl border border-[#F2DFE4]/80 bg-white/80 shadow-2xs space-y-3">
             {/* Account Title & Add Action */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pb-2 border-b border-[#F2DFE4]/60">
               <div>
                 <h2 className="text-sm font-bold text-[#2D2326] flex items-center gap-1.5">
                   <span>{currentAccount.name}</span>
                 </h2>
-                <div className="text-[11px] text-neutral-500 mt-0.5">
+                <div className="text-[11px] text-neutral-400 mt-0.5">
                   {currentAccount.platforms.join(' · ')}
                 </div>
               </div>
@@ -437,7 +441,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                 <button
                   onClick={handleAddNewContent}
-                  className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-[#2D2326] hover:bg-[#433539] text-white rounded-lg transition-colors shadow-xs"
+                  className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-[#2D2326] hover:bg-[#433539] text-white rounded-lg transition-colors shadow-2xs"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>新建</span>
@@ -445,28 +449,26 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
               </div>
             </div>
 
-            {/* Trending Topics Drawer (真实搜索热点雷达 + 一键生成文案) */}
+            {/* Trending Topics Drawer (去卡片化流式信息雷达) */}
             {showTrendsDrawer && (
-              <div className="p-3.5 rounded-xl border border-rose-200 bg-rose-50/40 space-y-2.5 animate-in fade-in duration-150">
+              <div className="p-3 rounded-xl border border-rose-200/80 bg-rose-50/30 space-y-2.5 animate-in fade-in duration-150">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <Flame className="w-3.5 h-3.5 text-rose-600 animate-pulse" />
-                    <span className="text-xs font-bold text-rose-900">
-                      {currentAccount.id === 'acc_sedona' ? '圣多纳疗愈 IP · 最高赞最高讨论度爆款雷达' :
-                       currentAccount.id === 'acc_ai' ? 'AI 科技前沿 · 知名博主爆款 (Karpathy/宝玉/归藏等) + 官方一手雷达' :
-                       `${currentAccount.name} · 最高赞高讨论度爆款雷达`}
+                    <Flame className="w-3.5 h-3.5 text-rose-600" />
+                    <span className="text-xs font-bold text-rose-950">
+                      {currentAccount.id === 'acc_sedona' ? '圣多纳疗愈 IP · 高赞高互动爆款雷达' :
+                       currentAccount.id === 'acc_ai' ? 'AI 科技前沿 · 知名博主高赞 + 官方一手' :
+                       `${currentAccount.name} · 高赞高互动爆款雷达`}
                     </span>
-                    <span className="text-[10px] font-bold text-rose-700 bg-white px-2 py-0.2 rounded-full border border-rose-200">
-                      今日 {accountTrends.length} 条精选
+                    <span className="text-[10px] text-rose-700 bg-white/90 px-2 py-0.2 rounded border border-rose-200/70 font-mono">
+                      今日 {accountTrends.length} 条
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => {
-                        playChime('click');
-                      }}
-                      className="text-[10px] text-rose-700 hover:text-rose-900 font-semibold flex items-center gap-0.5 bg-white px-2 py-0.5 rounded border border-rose-200"
+                      onClick={() => playChime('click')}
+                      className="text-[10px] text-rose-700 hover:text-rose-900 font-semibold flex items-center gap-0.5 bg-white/90 px-2 py-0.5 rounded border border-rose-200/70"
                       title="基于日历基准自动轮换最新推荐"
                     >
                       <RefreshCw className="w-2.5 h-2.5" />
@@ -489,7 +491,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold ${
                         aiRadarFilter === 'all'
                           ? 'bg-rose-600 text-white shadow-2xs'
-                          : 'bg-white text-[#6C5259] hover:bg-rose-100/60 border border-rose-200'
+                          : 'bg-white/80 text-[#6C5259] hover:bg-white border border-rose-200/60'
                       }`}
                     >
                       全部精选 ({accountTrendsRaw.length})
@@ -499,7 +501,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold flex items-center gap-1 ${
                         aiRadarFilter === 'blogger'
                           ? 'bg-purple-700 text-white shadow-2xs'
-                          : 'bg-white text-purple-900 hover:bg-purple-50 border border-purple-200'
+                          : 'bg-white/80 text-purple-900 hover:bg-white border border-purple-200/60'
                       }`}
                     >
                       <span>🔥 知名 AI 博主顶流</span>
@@ -512,7 +514,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       className={`px-2.5 py-1 text-[11px] rounded-lg transition-all font-semibold flex items-center gap-1 ${
                         aiRadarFilter === 'official'
                           ? 'bg-sky-700 text-white shadow-2xs'
-                          : 'bg-white text-sky-900 hover:bg-sky-50 border border-sky-200'
+                          : 'bg-white/80 text-sky-900 hover:bg-white border border-sky-200/60'
                       }`}
                     >
                       <span>🏛️ 官方原厂一手</span>
@@ -524,51 +526,45 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 )}
 
                 {/* 每日自动更新机制说明提示条 */}
-                <div className="p-2 rounded-lg bg-white/90 border border-rose-100 text-[11px] text-rose-950 flex items-start gap-1.5 leading-relaxed">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
+                <div className="py-1 px-2 text-[11px] text-rose-900/80 flex items-start gap-1.5 leading-relaxed">
+                  <Sparkles className="w-3 h-3 text-amber-500 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold">每日自动更新机制：</span>
-                    系统每日全网抓取并筛选真实高热选题，<strong>涵盖知名技术 KOL（Karpathy、宝玉、归藏、量子位等）高赞动态与官方一手前沿发布</strong>；支持一键采纳或一键生成文案。
+                    <span>每日抓取真实高热选题，涵盖知名技术 KOL（Karpathy、宝玉、归藏等）与官方前沿发布，支持一键采纳。</span>
                   </div>
                 </div>
 
-                <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
+                {/* 热点条目流：去内层套娃卡片，采用轻透优雅的条目行 */}
+                <div className="space-y-2 max-h-80 overflow-y-auto pr-1 divide-y divide-rose-100/70">
                   {accountTrends.map((trend, idx) => (
                     <div
                       key={trend.id}
-                      className="p-3 rounded-lg border border-rose-100 bg-white space-y-2 hover:border-rose-300 transition-colors shadow-2xs"
+                      className="pt-2 first:pt-0 space-y-1.5 transition-colors"
                     >
                       {/* 标题与热度 */}
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-start gap-1.5 min-w-0">
-                          <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded shrink-0 font-mono mt-0.5">
+                          <span className="text-[10px] font-bold text-rose-600 font-mono mt-0.5 shrink-0">
                             #{idx + 1}
                           </span>
                           <span className="text-xs font-bold text-[#2D2326] leading-snug">{trend.keyword}</span>
                         </div>
-                        <span className="text-[10px] text-rose-700 bg-rose-50/80 px-2 py-0.5 rounded font-mono shrink-0 font-medium">
+                        <span className="text-[10px] text-rose-700 font-mono shrink-0">
                           {trend.heat}
                         </span>
                       </div>
 
                       {/* 博主与来源出处条 */}
                       {trend.author && (
-                        <div className="flex items-center gap-1.5 flex-wrap text-[11px] bg-[#FAF5F7] p-1.5 rounded-lg border border-[#F2DEE4]">
-                          <span className={`px-2 py-0.5 rounded font-bold flex items-center gap-1 text-[10px] ${
-                            trend.authorType === 'blogger'
-                              ? 'bg-purple-100 text-purple-900'
-                              : 'bg-sky-100 text-sky-900'
-                          }`}>
-                            <User className="w-2.5 h-2.5" />
+                        <div className="flex items-center gap-1.5 flex-wrap text-[11px] text-[#7A5B64]">
+                          <span className="font-semibold text-[#2D2326] flex items-center gap-1">
+                            <User className="w-2.5 h-2.5 text-neutral-400" />
                             <span>{trend.author}</span>
                           </span>
                           {trend.authorRole && (
-                            <span className="text-[#7A5B64] text-[10px]">
-                              {trend.authorRole}
-                            </span>
+                            <span className="text-neutral-400 text-[10px]">· {trend.authorRole}</span>
                           )}
                           {trend.postTime && (
-                            <span className="text-[10px] bg-white text-neutral-600 px-1.5 py-0.2 rounded border border-[#ECD1D8] font-mono ml-auto">
+                            <span className="text-[10px] text-neutral-400 font-mono ml-auto">
                               {trend.postTime}
                             </span>
                           )}
@@ -581,40 +577,40 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                       {/* 讨论度数据指标 (点赞/讨论/转推) */}
                       {trend.discussionMetrics && (
-                        <div className="flex items-center gap-3 text-[10px] text-[#7A5B63] bg-rose-50/40 px-2 py-1 rounded">
+                        <div className="flex items-center gap-3 text-[10px] text-neutral-500">
                           {trend.discussionMetrics.likes && (
                             <span className="flex items-center gap-0.5 font-medium">
                               <ThumbsUp className="w-2.5 h-2.5 text-rose-500" />
-                              <span>点赞 {trend.discussionMetrics.likes}</span>
+                              <span>{trend.discussionMetrics.likes}</span>
                             </span>
                           )}
                           {trend.discussionMetrics.comments && (
                             <span className="flex items-center gap-0.5 font-medium">
                               <MessageSquare className="w-2.5 h-2.5 text-sky-500" />
-                              <span>讨论 {trend.discussionMetrics.comments}</span>
+                              <span>{trend.discussionMetrics.comments}</span>
                             </span>
                           )}
                           {trend.discussionMetrics.reposts && (
                             <span className="flex items-center gap-0.5 font-medium">
                               <Share2 className="w-2.5 h-2.5 text-emerald-500" />
-                              <span>转推 {trend.discussionMetrics.reposts}</span>
+                              <span>{trend.discussionMetrics.reposts}</span>
                             </span>
                           )}
                         </div>
                       )}
 
-                      <div className="flex items-center justify-between pt-1.5 border-t border-neutral-100 text-[10px]">
-                        <span className="text-neutral-400">来源: {trend.sourceType}</span>
+                      <div className="flex items-center justify-between pt-1 text-[10px]">
+                        <span className="text-neutral-400">出处: {trend.sourceType}</span>
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => handleAdoptTrendingTopic(trend, false)}
-                            className="px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-50 rounded"
+                            className="px-2 py-0.5 text-[11px] font-semibold text-rose-700 hover:text-rose-900"
                           >
                             采纳选题
                           </button>
                           <button
                             onClick={() => handleAdoptTrendingTopic(trend, true)}
-                            className="flex items-center gap-1 px-3 py-1 text-[11px] font-bold bg-[#2D2326] text-white hover:bg-[#45373B] rounded shadow-xs"
+                            className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold bg-[#2D2326] text-white hover:bg-[#45373B] rounded-lg shadow-2xs"
                             title="采纳并直接生成初版文案与封面方案"
                           >
                             <Wand2 className="w-3 h-3 text-amber-300" />
@@ -630,7 +626,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
             {/* AI Account: Verified Intelligence Drawer (每日 AI 权威情报流) */}
             {currentAccount.id === 'acc_ai' && showAIIntelDrawer && (
-              <div className="p-3.5 rounded-xl border border-sky-200 bg-sky-50/50 space-y-2.5 animate-in fade-in duration-150">
+              <div className="p-3 rounded-xl border border-sky-200/80 bg-sky-50/40 space-y-2.5 animate-in fade-in duration-150">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-sky-700" />
@@ -646,14 +642,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   </button>
                 </div>
 
-                <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
+                <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1 divide-y divide-sky-100">
                   {DAILY_AI_INTELLIGENCE.map((intel) => (
                     <div
                       key={intel.id}
-                      className="p-3 rounded-lg border border-sky-100 bg-white space-y-1.5 hover:border-sky-300 transition-colors shadow-xs"
+                      className="pt-2 first:pt-0 space-y-1.5"
                     >
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-[10px] font-bold text-sky-800 bg-sky-50 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-sky-800 bg-sky-100/70 px-1.5 py-0.5 rounded">
                           {intel.organization} · {intel.credibility}
                         </span>
                         <a
@@ -662,7 +658,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           rel="noopener noreferrer"
                           className="text-[10px] text-sky-600 hover:underline flex items-center gap-0.5"
                         >
-                          <span>查看原厂公告</span>
+                          <span>原厂公告</span>
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
                       </div>
@@ -674,17 +670,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         {intel.summary}
                       </p>
 
-                      <div className="p-2 rounded bg-sky-50/60 text-[11px] text-sky-900 space-y-0.5">
-                        <div><strong>自媒体传播切角：</strong>{intel.contentAngle}</div>
+                      <div className="text-[11px] text-sky-950">
+                        <strong>自媒体切角：</strong>{intel.contentAngle}
                       </div>
 
                       <div className="pt-1 flex items-center justify-end">
                         <button
                           onClick={() => handleConvertAIIntelToContent(intel)}
-                          className="flex items-center gap-1 px-3 py-1 text-xs font-bold bg-[#2D2326] text-white hover:bg-[#433539] rounded-lg shadow-xs transition-colors"
+                          className="flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-[#2D2326] text-white hover:bg-[#433539] rounded-lg shadow-2xs transition-colors"
                         >
                           <Zap className="w-3 h-3 text-amber-300" />
-                          <span>一键转为本号选题与文案</span>
+                          <span>一键转为本号文案</span>
                         </button>
                       </div>
                     </div>
@@ -699,16 +695,16 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="快速搜索选题、来源、文案或标签..."
-              className="w-full px-3 py-1.5 text-xs bg-[#FDF4F5] border border-[#F2DFE4] rounded-lg text-[#2D2326] placeholder-neutral-400 focus:outline-none focus:border-[#D9AAB6]"
+              className="w-full px-3 py-1.5 text-xs bg-[#FDF4F5]/70 border border-[#F2DFE4] rounded-lg text-[#2D2326] placeholder-neutral-400 focus:outline-none focus:border-[#D9AAB6] focus:bg-white"
             />
 
             {/* Stage Filter Segmented Buttons */}
-            <div className="flex items-center gap-1 p-1 bg-[#FDF4F5] border border-[#F5E2E7] rounded-lg overflow-x-auto scrollbar-none text-[11px]">
+            <div className="flex items-center gap-1 p-1 bg-[#FDF4F5]/80 border border-[#F5E2E7] rounded-lg overflow-x-auto scrollbar-none text-[11px]">
               <button
                 onClick={() => setSelectedStage('all')}
                 className={`px-2 py-1 rounded-md transition-colors whitespace-nowrap ${
                   selectedStage === 'all'
-                    ? 'bg-white text-[#2D2326] font-semibold shadow-xs'
+                    ? 'bg-white text-[#2D2326] font-semibold shadow-2xs'
                     : 'text-neutral-500 hover:text-neutral-800'
                 }`}
               >
@@ -720,7 +716,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   onClick={() => setSelectedStage(st)}
                   className={`px-2 py-1 rounded-md transition-colors whitespace-nowrap ${
                     selectedStage === st
-                      ? 'bg-white text-[#2D2326] font-semibold shadow-xs'
+                      ? 'bg-white text-[#2D2326] font-semibold shadow-2xs'
                       : 'text-neutral-500 hover:text-neutral-800'
                   }`}
                 >
@@ -729,8 +725,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
               ))}
             </div>
 
-            {/* Content Item List */}
-            <div className="space-y-2 max-h-[580px] overflow-y-auto pr-1">
+            {/* Content Item List (去卡片化，采用具有轻微留白与细发丝线分隔的编辑流) */}
+            <div className="divide-y divide-[#F2DFE4]/60 max-h-[580px] overflow-y-auto pr-1">
               {filteredItems.length > 0 ? (
                 filteredItems.map((item) => {
                   const isSelected = item.id === (activeItem?.id || '');
@@ -742,10 +738,10 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         setSelectedItemId(item.id);
                         playChime('click');
                       }}
-                      className={`p-3 rounded-lg border text-left cursor-pointer transition-all duration-150 relative ${
+                      className={`p-3 text-left cursor-pointer transition-all duration-150 rounded-xl relative ${
                         isSelected
-                          ? 'border-[#DEADC0] bg-[#FFF8FA] shadow-xs ring-1 ring-[#ECC4CE]'
-                          : 'border-[#F5E2E7] bg-white hover:border-[#E8D1D7] hover:bg-[#FCF6F8]'
+                          ? 'bg-[#FFF6F8] ring-1 ring-[#ECC4CE]'
+                          : 'bg-transparent hover:bg-neutral-50/70'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
@@ -759,7 +755,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                       {item.topicSource && (
                         <div className="text-[10px] text-[#8C5D68] truncate mt-1">
-                          📍 来源: {item.topicSource}
+                          📍 {item.topicSource}
                         </div>
                       )}
 
@@ -772,7 +768,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       <div className="mt-2 flex items-center justify-between text-[10px] text-neutral-400">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           {(item.tags || []).slice(0, 2).map((t) => (
-                            <span key={t} className="text-neutral-500">#{t}</span>
+                            <span key={t} className="text-neutral-400">#{t}</span>
                           ))}
                         </div>
 
@@ -799,22 +795,20 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
           </div>
         </div>
 
-        {/* --- PANE 2: Right Focused Bi-directional Canvas (58% width) --- */}
+        {/* --- PANE 2: Right Focused Bi-directional Canvas (58% width, 去除内部套娃卡片) --- */}
         <div className="lg:col-span-7 space-y-4">
           {activeItem ? (
-            <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-5">
-              {/* Top: Bi-directional Leap Bar (双向跃迁胶囊链路) */}
-              <div className="p-3.5 rounded-xl border border-[#F5E2E7] bg-[#FDF4F5]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="p-6 md:p-8 rounded-2xl border border-[#F2DFE4]/80 bg-white shadow-2xs space-y-6">
+              {/* Top: Bi-directional Leap Bar (去厚重卡片，采用轻透导览条) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#F2DFE4]/70">
                 <div>
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#8A6771] flex items-center gap-1.5">
-                    <LinkIcon className="w-3 h-3 text-[#A87A86]" />
-                    <span>双向跃迁全流程链路 (Bi-directional Pipeline)</span>
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-neutral-400 flex items-center gap-1.5">
+                    <LinkIcon className="w-3 h-3 text-neutral-400" />
+                    <span>双向跃迁链路 · 当前处于</span>
                   </div>
-                  <div className="text-xs text-[#2D2326] mt-0.5 font-medium flex items-center gap-1.5">
-                    <span>当前阶段：</span>
-                    <span className="font-bold underline decoration-[#DEADC0]">
-                      {STAGE_CONFIG[activeItem.stage].icon} {STAGE_CONFIG[activeItem.stage].label}
-                    </span>
+                  <div className="text-sm text-[#2D2326] mt-0.5 font-bold flex items-center gap-1.5">
+                    <span>{STAGE_CONFIG[activeItem.stage].icon}</span>
+                    <span>{STAGE_CONFIG[activeItem.stage].label}</span>
                   </div>
                 </div>
 
@@ -822,93 +816,95 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <button
                     onClick={handleGenerateContentForActiveItem}
-                    className="flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-[#FAF0F3] text-[#8C5D68] hover:bg-[#FCE5EB] rounded-md transition-colors border border-[#F2CCD6]"
+                    className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold bg-[#FAF0F3] text-[#8C5D68] hover:bg-[#FCE5EB] rounded-lg transition-colors border border-[#F2CCD6]"
                     title="根据选题一键生成完整爆款方案与文案"
                   >
                     <Wand2 className="w-3 h-3 text-amber-500" />
-                    <span>生成文案</span>
+                    <span>一键生成文案</span>
                   </button>
 
-                  {(['topic', 'script', 'staging', 'published'] as PipelineStage[]).map((st) => (
-                    <button
-                      key={st}
-                      onClick={() => handleAdvanceStage(st)}
-                      className={`px-2 py-1 text-xs rounded-md transition-colors border ${
-                        activeItem.stage === st
-                          ? 'bg-[#2D2326] text-white border-[#2D2326] font-semibold'
-                          : 'bg-white text-neutral-600 border-[#F2DFE4] hover:bg-[#FAF0F3]'
-                      }`}
-                      title={`跳跃至 ${STAGE_CONFIG[st].label}`}
-                    >
-                      {STAGE_CONFIG[st].label}
-                    </button>
-                  ))}
+                  <div className="flex items-center gap-1 bg-[#FAF0F3]/70 p-1 rounded-lg border border-[#F5DFE5]">
+                    {(['topic', 'script', 'staging', 'published'] as PipelineStage[]).map((st) => (
+                      <button
+                        key={st}
+                        onClick={() => handleAdvanceStage(st)}
+                        className={`px-2 py-1 text-xs rounded-md transition-colors ${
+                          activeItem.stage === st
+                            ? 'bg-[#2D2326] text-white font-semibold shadow-2xs'
+                            : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                        }`}
+                        title={`跳跃至 ${STAGE_CONFIG[st].label}`}
+                      >
+                        {STAGE_CONFIG[st].label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Title & Hook Inputs */}
-              <div className="space-y-3">
+              {/* Title & Hook Inputs (去卡片化，自然呼吸的编辑字段) */}
+              <div className="space-y-4">
                 {/* 选题来源 (Topic Source) */}
-                <div className="p-3 rounded-xl border border-[#F2DFE4] bg-[#FAF3F5]/40 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-semibold text-[#8C5D68] flex items-center gap-1">
-                      <span>📍 选题来源与背景 (Topic Source)</span>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-xs font-semibold text-[#8C5D68]">
+                      📍 选题来源与背景出处
                     </label>
-                    <span className="text-[10px] text-neutral-400">支持小红书热搜/官方发布/私信灵感</span>
+                    <span className="text-[10px] text-neutral-400">小红书热搜 / 官方一手发布 / 私信灵感</span>
                   </div>
                   <input
                     type="text"
                     value={activeItem.topicSource || ''}
                     onChange={(e) => handleUpdateActiveItem({ topicSource: e.target.value })}
-                    placeholder="例如: 小红书今日热搜 #允许一切发生 / OpenAI 官方开发者大会发布..."
-                    className="w-full px-3 py-1.5 text-xs bg-white border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none focus:border-[#D9AAB6]"
+                    placeholder="例如: 小红书今日热搜 #允许一切发生 / Karpathy 知名博主深度拆解..."
+                    className="w-full px-3.5 py-2 text-xs bg-[#FAF5F7]/60 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-[#2D2326] mb-1">
-                    内容主题与标题 (Title)
+                    内容主题与主标题
                   </label>
                   <input
                     type="text"
                     value={activeItem.title}
                     onChange={(e) => handleUpdateActiveItem({ title: e.target.value })}
-                    className="w-full px-3 py-2 text-sm font-semibold bg-[#FDF4F5]/50 border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white"
+                    className="w-full px-3.5 py-2 text-sm font-semibold bg-[#FAF5F7]/60 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-[#2D2326] mb-1 flex items-center justify-between">
-                    <span>黄金前3秒抓手 / 封面大字标题 (Hook)</span>
-                    <span className="text-[10px] text-neutral-400">小红书/全网爆款首句</span>
+                    <span>黄金前3秒抓手 (Hook)</span>
+                    <span className="text-[10px] text-neutral-400">首句痛点爆款钩子</span>
                   </label>
                   <input
                     type="text"
                     value={activeItem.hook || ''}
                     onChange={(e) => handleUpdateActiveItem({ hook: e.target.value })}
                     placeholder="如：你越用力想把焦虑赶走，它就越死死抓着你..."
-                    className="w-full px-3 py-2 text-xs bg-[#FDF4F5]/50 border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white"
+                    className="w-full px-3.5 py-2 text-xs bg-[#FAF5F7]/60 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               {/* STAGE-SPECIFIC VIEWS: 预发布定稿版面 VS 文案创作草稿 */}
               {activeItem.stage === 'staging' ? (
-                <div className="space-y-4 p-5 rounded-2xl border-2 border-purple-200 bg-purple-50/20">
-                  <div className="flex items-center justify-between">
+                <div className="space-y-5 pt-2">
+                  <div className="flex items-center justify-between pb-3 border-b border-purple-100">
                     <div className="flex items-center gap-2">
-                      <FileCheck className="w-5 h-5 text-purple-700" />
+                      <FileCheck className="w-4 h-4 text-purple-700" />
                       <div>
-                        <h3 className="text-sm font-bold text-purple-950">
-                          预发布定稿版面与封面展示 (Final Draft & Cover Showcase)
+                        <h3 className="text-xs font-bold text-purple-950">
+                          预发布定稿排版与 3:4 封面呈现
                         </h3>
-                        <p className="text-[11px] text-purple-700">小红书 3:4 封面真实比例渲染与终版排版</p>
+                        <p className="text-[10px] text-purple-600">小红书真实比例真实渲染</p>
                       </div>
                     </div>
 
                     <button
                       onClick={() => handleCopy(`${activeItem.finalDraftTitle || activeItem.title}\n\n${activeItem.finalDraftBody || activeItem.scriptText || ''}\n\n${(activeItem.tags || []).map(t => '#' + t).join(' ')}`, 'final')}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-purple-700 hover:bg-purple-800 text-white rounded-lg shadow-xs transition-colors"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-purple-700 hover:bg-purple-800 text-white rounded-lg shadow-2xs transition-colors"
                     >
                       {copiedFinalPackage ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copiedFinalPackage ? '已复制全套发布包' : '一键复制发布包'}</span>
@@ -916,10 +912,10 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   </div>
 
                   {/* 2-Column: Left 3:4 Mockup Card + Right Final Title/Body */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
-                    {/* Left 5 Cols: 小红书 3:4 模拟封面展示卡片 */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                    {/* Left 5 Cols: 小红书 3:4 模拟封面展示卡片（此卡片为真实封面图形，必要保留） */}
                     <div className="md:col-span-5 space-y-2">
-                      <span className="text-[11px] font-bold text-neutral-600 block">
+                      <span className="text-[11px] font-bold text-neutral-500 block">
                         小红书 3:4 封面图预览
                       </span>
 
@@ -929,7 +925,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         const themeStyles = COVER_COLOR_MAP[themeKey] || COVER_COLOR_MAP.sage;
                         return (
                           <div
-                            className={`w-full aspect-3/4 rounded-2xl border p-5 flex flex-col justify-between shadow-sm relative overflow-hidden transition-all ${themeStyles.bg} ${themeStyles.border} ${themeStyles.text}`}
+                            className={`w-full aspect-3/4 rounded-2xl border p-5 flex flex-col justify-between shadow-2xs relative overflow-hidden transition-all ${themeStyles.bg} ${themeStyles.border} ${themeStyles.text}`}
                           >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white/40 rounded-full blur-2xl pointer-events-none" />
 
@@ -938,7 +934,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                               <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${themeStyles.badgeBg}`}>
                                 {activeItem.coverLayout?.badgeText || currentAccount.badge}
                               </span>
-                              <Sparkles className="w-4 h-4 opacity-70" />
+                              <Sparkles className="w-3.5 h-3.5 opacity-70" />
                             </div>
 
                             {/* Center Main Headline */}
@@ -964,7 +960,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                       {/* Color Palette Switcher for Cover */}
                       <div className="flex items-center gap-1.5 pt-1">
-                        <span className="text-[10px] text-neutral-500">封面色调:</span>
+                        <span className="text-[10px] text-neutral-400">色调:</span>
                         {[
                           { key: 'sage', label: '鼠尾草绿', bg: 'bg-[#DCECE3]' },
                           { key: 'lilac', label: '轻柔紫', bg: 'bg-[#EAE0F0]' },
@@ -981,8 +977,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                                 colorTheme: c.key
                               }
                             })}
-                            className={`w-5 h-5 rounded-full border border-neutral-300 ${c.bg} transition-transform ${
-                              (activeItem.coverLayout?.colorTheme || 'sage') === c.key ? 'scale-115 ring-2 ring-purple-400' : 'hover:scale-105'
+                            className={`w-4 h-4 rounded-full border border-neutral-300 ${c.bg} transition-transform ${
+                              (activeItem.coverLayout?.colorTheme || 'sage') === c.key ? 'scale-125 ring-2 ring-purple-400' : 'hover:scale-110'
                             }`}
                             title={c.label}
                           />
@@ -990,10 +986,10 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       </div>
                     </div>
 
-                    {/* Right 7 Cols: 终版定稿标题与正文 */}
+                    {/* Right 7 Cols: 终版定稿标题与正文（去卡片化编辑） */}
                     <div className="md:col-span-7 space-y-3">
                       <div>
-                        <label className="block text-xs font-bold text-purple-950 mb-1">
+                        <label className="block text-xs font-bold text-neutral-700 mb-1">
                           终版定稿大标题
                         </label>
                         <input
@@ -1001,14 +997,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           value={activeItem.finalDraftTitle || activeItem.title}
                           onChange={(e) => handleUpdateActiveItem({ finalDraftTitle: e.target.value })}
                           placeholder="例如: 越用力越焦虑？3个呼吸，用圣多纳释放胸口那团闷气 🌿"
-                          className="w-full px-3 py-2 text-xs font-bold bg-white border border-purple-200 rounded-lg text-[#2D2326] focus:outline-none focus:border-purple-400"
+                          className="w-full px-3 py-2 text-xs font-bold bg-[#FAF5F7]/50 border border-neutral-200 rounded-xl text-[#2D2326] focus:outline-none focus:border-purple-400 focus:bg-white"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-purple-950 mb-1 flex items-center justify-between">
-                          <span>终版定稿排版正文 (含 Emoji 与分段空行)</span>
-                          <span className="text-[10px] font-mono text-purple-700">
+                        <label className="block text-xs font-bold text-neutral-700 mb-1 flex items-center justify-between">
+                          <span>终版定稿排版正文</span>
+                          <span className="text-[10px] font-mono text-neutral-400">
                             {(activeItem.finalDraftBody || '').length} 字符
                           </span>
                         </label>
@@ -1016,12 +1012,12 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           value={activeItem.finalDraftBody || activeItem.scriptText || ''}
                           onChange={(e) => handleUpdateActiveItem({ finalDraftBody: e.target.value })}
                           rows={8}
-                          className="w-full p-3 text-xs leading-relaxed font-sans bg-white border border-purple-200 rounded-xl text-[#2D2326] focus:outline-none focus:border-purple-400 resize-y"
+                          className="w-full p-3 text-xs leading-relaxed font-sans bg-[#FAF5F7]/50 border border-neutral-200 rounded-xl text-[#2D2326] focus:outline-none focus:border-purple-400 focus:bg-white resize-y"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-purple-950 mb-1">
+                        <label className="block text-xs font-medium text-neutral-600 mb-1">
                           预定发布时间与平台
                         </label>
                         <div className="grid grid-cols-2 gap-2">
@@ -1030,13 +1026,13 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                             value={activeItem.targetDate || ''}
                             onChange={(e) => handleUpdateActiveItem({ targetDate: e.target.value })}
                             placeholder="如: 2026-10-12 20:00"
-                            className="w-full px-2.5 py-1.5 text-xs font-mono bg-white border border-purple-200 rounded-lg text-[#2D2326]"
+                            className="w-full px-2.5 py-1.5 text-xs font-mono bg-white border border-neutral-200 rounded-lg text-[#2D2326]"
                           />
                           <input
                             type="text"
                             value={activeItem.platforms.join(' · ')}
                             readOnly
-                            className="w-full px-2.5 py-1.5 text-xs bg-purple-100/50 border border-purple-200 rounded-lg text-purple-900"
+                            className="w-full px-2.5 py-1.5 text-xs bg-neutral-100 border border-neutral-200 rounded-lg text-neutral-700 font-medium"
                           />
                         </div>
                       </div>
@@ -1045,8 +1041,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 </div>
               ) : (
                 <>
-                  {/* 选题痛点与切入视角 */}
-                  <div className="p-3.5 rounded-xl border border-[#F2DFE4] bg-[#FAF3F5]/50 space-y-1.5">
+                  {/* 选题痛点与切入视角 (无卡片化，自然融入画卷) */}
+                  <div className="space-y-1">
                     <div className="flex items-center justify-between text-xs font-semibold text-[#8C5D68]">
                       <span>💡 选题痛点备忘 & 推荐切入视角</span>
                       <span className="text-[10px] text-neutral-400">双向绑定选题源头</span>
@@ -1056,17 +1052,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       onChange={(e) => handleUpdateActiveItem({ topicNotes: e.target.value })}
                       placeholder="记录为什么要做这个选题？读者最扎心的痛点是什么？"
                       rows={2}
-                      className="w-full p-2.5 text-xs bg-white border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] resize-none"
+                      className="w-full p-2.5 text-xs bg-[#FAF5F7]/50 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white resize-none transition-all"
                     />
                   </div>
 
-                  {/* 文案正文草稿 */}
+                  {/* 文案正文草稿 (沉浸式编辑，无卡片框束缚) */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs font-semibold text-[#2D2326]">
                       <div className="flex items-center gap-2">
                         <span>✍️ 正文草稿与分镜脚本</span>
                         <span className="text-[10px] font-mono text-neutral-400">
-                          {(activeItem.scriptText || '').length} 字 (小红书限1000字)
+                          {(activeItem.scriptText || '').length} 字 (建议 600~1000 字)
                         </span>
                       </div>
 
@@ -1093,14 +1089,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       onChange={(e) => handleUpdateActiveItem({ scriptText: e.target.value })}
                       placeholder="在此沉浸撰写你的文案草稿... 或点击右上角【一键生成文案】启动创作..."
                       rows={8}
-                      className="w-full p-3.5 text-xs font-sans leading-relaxed bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white resize-y"
+                      className="w-full p-3.5 text-xs font-sans leading-relaxed bg-[#FAF5F7]/40 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white resize-y transition-all"
                     />
                   </div>
                 </>
               )}
 
               {/* 话题标签 */}
-              <div className="pt-2 border-t border-[#F5E2E7]">
+              <div className="pt-2 border-t border-[#F5E2E7]/80">
                 <label className="block text-xs font-semibold text-[#2D2326] mb-1">
                   小红书话题标签 (以空格分隔)
                 </label>
@@ -1109,14 +1105,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   value={(activeItem.tags || []).join(' ')}
                   onChange={(e) => handleUpdateActiveItem({ tags: e.target.value.split(/\s+/).filter(Boolean) })}
                   placeholder="圣多纳释放法 情绪急救 深度冥想"
-                  className="w-full px-3 py-1.5 text-xs bg-[#FDF4F5]/50 border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none focus:border-[#D9AAB6]"
+                  className="w-full px-3 py-1.5 text-xs bg-[#FAF5F7]/50 border border-[#F2DFE4]/80 rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white"
                 />
               </div>
 
-              {/* 阶段 5 数据复盘 */}
+              {/* 阶段 5 数据复盘 (去卡片化平铺网格) */}
               {(activeItem.stage === 'published' || activeItem.stage === 'analytics') && (
-                <div className="p-4 rounded-xl border border-sky-200 bg-sky-50/50 space-y-3">
-                  <div className="flex items-center justify-between text-xs font-bold text-sky-900">
+                <div className="pt-3 border-t border-sky-100 space-y-3">
+                  <div className="flex items-center justify-between text-xs font-bold text-sky-950">
                     <span className="flex items-center gap-1.5">
                       <TrendingUp className="w-4 h-4 text-sky-600" />
                       <span>已发布数据复盘与经验沉淀</span>
@@ -1126,7 +1122,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                   <div className="grid grid-cols-3 gap-2">
                     <div>
-                      <span className="text-[10px] text-neutral-500 block">播放/展现量</span>
+                      <span className="text-[10px] text-neutral-400 block">展现/播放量</span>
                       <input
                         type="number"
                         value={activeItem.metrics?.views || ''}
@@ -1134,11 +1130,11 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           metrics: { ...activeItem.metrics, views: Number(e.target.value) }
                         })}
                         placeholder="0"
-                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-sky-200 rounded"
+                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-neutral-200 rounded-lg"
                       />
                     </div>
                     <div>
-                      <span className="text-[10px] text-neutral-500 block">点赞数</span>
+                      <span className="text-[10px] text-neutral-400 block">点赞数</span>
                       <input
                         type="number"
                         value={activeItem.metrics?.likes || ''}
@@ -1146,11 +1142,11 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           metrics: { ...activeItem.metrics, likes: Number(e.target.value) }
                         })}
                         placeholder="0"
-                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-sky-200 rounded"
+                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-neutral-200 rounded-lg"
                       />
                     </div>
                     <div>
-                      <span className="text-[10px] text-neutral-500 block">收藏数</span>
+                      <span className="text-[10px] text-neutral-400 block">收藏数</span>
                       <input
                         type="number"
                         value={activeItem.metrics?.collects || ''}
@@ -1158,13 +1154,13 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           metrics: { ...activeItem.metrics, collects: Number(e.target.value) }
                         })}
                         placeholder="0"
-                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-sky-200 rounded"
+                        className="w-full px-2 py-1 text-xs font-mono bg-white border border-neutral-200 rounded-lg"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-neutral-500 block mb-1">复盘心得与下期迭代建议</span>
+                    <span className="text-[10px] text-neutral-400 block mb-1">复盘心得与下期迭代建议</span>
                     <input
                       type="text"
                       value={activeItem.metrics?.keyTakeaway || ''}
@@ -1172,7 +1168,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         metrics: { ...activeItem.metrics, keyTakeaway: e.target.value }
                       })}
                       placeholder="如：真实第一人称故事互动率极高，封面大字要更精炼..."
-                      className="w-full px-3 py-1.5 text-xs bg-white border border-sky-200 rounded text-[#2D2326]"
+                      className="w-full px-3 py-1.5 text-xs bg-white border border-neutral-200 rounded-lg text-[#2D2326]"
                     />
                   </div>
                 </div>

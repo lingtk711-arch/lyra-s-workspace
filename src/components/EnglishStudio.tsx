@@ -597,105 +597,103 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6 font-sans text-[#332226]">
-      {/* ===================== 顶部主导航栏 ===================== */}
-      <header className="mb-6 bg-white/70 backdrop-blur-md rounded-2xl p-5 border border-[#F2D7DD] shadow-xs">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-rose-800 uppercase">
-              <Sparkle className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
-              <span>English Studio · 数字化英语多任务工作台 (V1 第一版)</span>
-            </div>
-            <h1 className="text-xl md:text-2xl font-serif font-bold text-[#2A1D21] mt-1">
-              千词情境长篇研读 · 四步循环口语 · 专八学术备战
-            </h1>
+      {/* ===================== 顶部主导航栏 (去卡片化，自然呼吸的顶栏空间) ===================== */}
+      <header className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#F2D7DD]/80">
+        <div>
+          <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-rose-800 uppercase">
+            <Sparkle className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
+            <span>English Studio · 数字化英语多任务工作台 (V1 第一版)</span>
           </div>
-
-          {/* 五大核心功能模块切换 */}
-          <nav className="flex flex-wrap items-center gap-1.5 bg-[#FAF0F3] p-1.5 rounded-xl border border-[#F4D9E0]">
-            <button
-              onClick={() => setActiveTab('daily_passages')}
-              className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
-                activeTab === 'daily_passages'
-                  ? 'bg-white text-rose-950 shadow-xs font-bold'
-                  : 'text-[#6C535A] hover:text-[#2A1D21]'
-              }`}
-            >
-              <BookOpen className="w-3.5 h-3.5 text-rose-600" />
-              <span>每日情境长篇</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('echo_loop')}
-              className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
-                activeTab === 'echo_loop'
-                  ? 'bg-white text-purple-950 shadow-xs font-bold'
-                  : 'text-[#6C535A] hover:text-[#2A1D21]'
-              }`}
-            >
-              <Headphones className="w-3.5 h-3.5 text-purple-600" />
-              <span>四步循环操练</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('tem8_prep')}
-              className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
-                activeTab === 'tem8_prep'
-                  ? 'bg-white text-indigo-950 shadow-xs font-bold'
-                  : 'text-[#6C535A] hover:text-[#2A1D21]'
-              }`}
-            >
-              <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
-              <span>专八备考专区</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('import_workshop')}
-              className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
-                activeTab === 'import_workshop'
-                  ? 'bg-white text-rose-950 shadow-xs font-bold'
-                  : 'text-[#6C535A] hover:text-[#2A1D21]'
-              }`}
-            >
-              <Upload className="w-3.5 h-3.5 text-rose-600" />
-              <span>自主多源导入</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('mastered_library')}
-              className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
-                activeTab === 'mastered_library'
-                  ? 'bg-white text-emerald-950 shadow-xs font-bold'
-                  : 'text-[#6C535A] hover:text-[#2A1D21]'
-              }`}
-            >
-              <FolderCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>掌握库 & 生词本</span>
-              <span className="text-[10px] bg-rose-200 text-rose-900 font-bold px-1.5 py-0.2 rounded-full">
-                {savedWords.length}
-              </span>
-            </button>
-          </nav>
+          <h1 className="text-xl md:text-2xl font-serif font-bold text-[#2A1D21] mt-1">
+            千词情境长篇研读 · 四步循环口语 · 专八学术备战
+          </h1>
         </div>
+
+        {/* 五大核心功能模块切换 (精简 Segmented 控件) */}
+        <nav className="flex flex-wrap items-center gap-1 bg-[#FAF0F3]/80 p-1 rounded-xl border border-[#F4D9E0]/80">
+          <button
+            onClick={() => setActiveTab('daily_passages')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
+              activeTab === 'daily_passages'
+                ? 'bg-white text-rose-950 shadow-2xs font-bold'
+                : 'text-[#6C535A] hover:text-[#2A1D21]'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5 text-rose-600" />
+            <span>每日情境长篇</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('echo_loop')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
+              activeTab === 'echo_loop'
+                ? 'bg-white text-purple-950 shadow-2xs font-bold'
+                : 'text-[#6C535A] hover:text-[#2A1D21]'
+            }`}
+          >
+            <Headphones className="w-3.5 h-3.5 text-purple-600" />
+            <span>四步循环操练</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('tem8_prep')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
+              activeTab === 'tem8_prep'
+                ? 'bg-white text-indigo-950 shadow-2xs font-bold'
+                : 'text-[#6C535A] hover:text-[#2A1D21]'
+            }`}
+          >
+            <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
+            <span>专八备考专区</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('import_workshop')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
+              activeTab === 'import_workshop'
+                ? 'bg-white text-rose-950 shadow-2xs font-bold'
+                : 'text-[#6C535A] hover:text-[#2A1D21]'
+            }`}
+          >
+            <Upload className="w-3.5 h-3.5 text-rose-600" />
+            <span>自主多源导入</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('mastered_library')}
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
+              activeTab === 'mastered_library'
+                ? 'bg-white text-emerald-950 shadow-2xs font-bold'
+                : 'text-[#6C535A] hover:text-[#2A1D21]'
+            }`}
+          >
+            <FolderCheck className="w-3.5 h-3.5 text-emerald-600" />
+            <span>掌握库 & 生词本</span>
+            <span className="text-[10px] bg-rose-200 text-rose-900 font-bold px-1.5 py-0.2 rounded-full font-mono">
+              {savedWords.length}
+            </span>
+          </button>
+        </nav>
       </header>
 
       {/* ===================== 视图 1：每日情境长篇研读 (1000 词深度语篇 + 常驻更新换一批入口) ===================== */}
       {activeTab === 'daily_passages' && (
-        <section className="space-y-6 animate-fadeIn">
-          {/* 更新机制状态与「换一批」入口栏 */}
-          <div className="bg-white/80 rounded-2xl p-4 border border-[#F2D7DD] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+        <section className="space-y-5 animate-fadeIn">
+          {/* 更新机制状态与「换一批」入口栏 (去大卡片化，扁平轻快) */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
             <div className="flex flex-wrap items-center gap-2 text-xs">
-              <span className="flex items-center gap-1.5 text-emerald-800 font-medium bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>今日篇章已就绪（{currentPassage.batchDate || '2026-10-09 批次'}）</span>
+              <span className="text-emerald-800 font-medium flex items-center gap-1.5 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-200/60">
+                <span>今日批次已就绪</span>
+                <span className="font-mono text-emerald-900">({currentPassage.batchDate || '2026-10-09'})</span>
               </span>
-              <span className="text-[#8C7077]">·</span>
-              <span className="text-[#8C7077]">每日 00:00 自动跨日轮转，亦可随时手动换新</span>
+              <span className="text-neutral-400">·</span>
+              <span className="text-neutral-500">每日 00:00 自动跨日轮转，支持即时手动换新</span>
             </div>
 
             {/* 常驻「换一批」新语篇按钮 */}
             <button
               onClick={handleRotateBatch}
-              className="px-4 py-2 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-xl text-xs font-semibold shadow-xs flex items-center gap-2 transition-all shrink-0 self-start sm:self-auto"
+              className="px-4 py-2 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-xl text-xs font-semibold shadow-2xs flex items-center gap-2 transition-all shrink-0 self-start sm:self-auto"
               title="立即换入下一批全新主题的 1000 词长篇语篇"
             >
               <RefreshCw className="w-3.5 h-3.5" />
@@ -703,19 +701,19 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             </button>
           </div>
 
-          {/* 篇章切换横向书签列表 (带物理滚轮滑动、左右步进箭头与进度导航) */}
-          <div className="bg-white/90 rounded-2xl p-3.5 border border-[#F2D7DD] shadow-2xs space-y-2.5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+          {/* 篇章切换横向书签列表 (去外层厚重卡片，保留流线型滑动轨道与滚轮交互) */}
+          <div className="space-y-2 px-1">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-bold text-[#6D535A] flex items-center gap-1.5">
                   <Compass className="w-3.5 h-3.5 text-rose-600" />
                   <span>本批次语篇长卷</span>
                 </span>
-                <span className="text-[11px] font-bold text-rose-900 bg-rose-100/90 px-2.5 py-0.5 rounded-full border border-rose-200">
-                  第 {currentPassageIndex + 1} / {passages.length} 篇
+                <span className="text-[11px] font-mono font-bold text-rose-900 bg-rose-100/70 px-2 py-0.5 rounded-full">
+                  {currentPassageIndex + 1} / {passages.length}
                 </span>
-                <span className="text-[11px] text-[#8C6F77] hidden md:inline">
-                  (滚轮/触控板横滑、或点箭头滑动查看更多)
+                <span className="text-[11px] text-neutral-400 hidden md:inline">
+                  (滚轮横滑或点箭头滑动切换)
                 </span>
               </div>
 
@@ -724,14 +722,14 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                 {/* 滚动长卷按钮 */}
                 <button
                   onClick={() => handleScrollCarousel('left')}
-                  className="w-7 h-7 rounded-lg bg-white border border-[#F2D7DD] hover:border-rose-300 hover:bg-rose-50 text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
+                  className="w-7 h-7 rounded-lg bg-white/80 border border-[#F2D7DD] hover:border-rose-300 hover:bg-white text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
                   title="向左滚动长卷列表"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => handleScrollCarousel('right')}
-                  className="w-7 h-7 rounded-lg bg-white border border-[#F2D7DD] hover:border-rose-300 hover:bg-rose-50 text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
+                  className="w-7 h-7 rounded-lg bg-white/80 border border-[#F2D7DD] hover:border-rose-300 hover:bg-white text-[#6C5259] flex items-center justify-center transition-all shadow-2xs"
                   title="向右滚动长卷列表"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -746,7 +744,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   className={`px-2.5 py-1 text-xs rounded-lg border transition-all flex items-center gap-1 ${
                     currentPassageIndex === 0
                       ? 'opacity-40 cursor-not-allowed bg-neutral-50 text-neutral-400 border-neutral-200'
-                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium'
+                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium shadow-2xs'
                   }`}
                   title="切换至上一篇长卷"
                 >
@@ -759,7 +757,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   className={`px-2.5 py-1 text-xs rounded-lg border transition-all flex items-center gap-1 ${
                     currentPassageIndex === passages.length - 1
                       ? 'opacity-40 cursor-not-allowed bg-neutral-50 text-neutral-400 border-neutral-200'
-                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium'
+                      : 'bg-white text-[#6C5259] border-[#F2D7DD] hover:bg-rose-50 hover:text-rose-950 font-medium shadow-2xs'
                   }`}
                   title="切换至下一篇长卷"
                 >
@@ -769,10 +767,10 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               </div>
             </div>
 
-            {/* 可滚动的横向长卷轨道 (附带清晰可见的水平滚动条，并支持滚轮转动) */}
+            {/* 可滚动的横向长卷轨道 */}
             <div
               ref={carouselRef}
-              className="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5 px-1 passage-carousel-scroll select-none cursor-grab active:cursor-grabbing"
+              className="flex items-center gap-2 overflow-x-auto pb-2 pt-0.5 passage-carousel-scroll select-none cursor-grab active:cursor-grabbing"
             >
               {passages.map((p, idx) => {
                 const isSelected = p.id === currentPassage.id;
@@ -786,10 +784,10 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                       setSelectedPartIndex('all');
                       playChime('click');
                     }}
-                    className={`shrink-0 px-3.5 py-2.5 text-xs rounded-xl transition-all flex items-center gap-2 border text-left ${
+                    className={`shrink-0 px-3 py-2 text-xs rounded-xl transition-all flex items-center gap-2 border text-left ${
                       isSelected
-                        ? 'bg-rose-500 text-white font-bold border-rose-600 shadow-xs ring-2 ring-rose-200'
-                        : 'bg-white border-[#F2D7DD] text-[#6A5259] hover:bg-rose-50 hover:border-rose-300'
+                        ? 'bg-rose-500 text-white font-bold border-rose-600 shadow-2xs ring-2 ring-rose-200'
+                        : 'bg-white/80 border-[#F2D7DD]/80 text-[#6A5259] hover:bg-white hover:border-rose-300'
                     }`}
                   >
                     <span
@@ -799,7 +797,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     >
                       #{idx + 1}
                     </span>
-                    <div className="min-w-0 max-w-[260px]">
+                    <div className="min-w-0 max-w-[240px]">
                       <div className="flex items-center gap-1.5">
                         {isMastered && (
                           <CheckCircle2
@@ -812,7 +810,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                       </div>
                       <div
                         className={`text-[10px] mt-0.5 flex items-center gap-1.5 ${
-                          isSelected ? 'text-rose-100' : 'text-[#8C6F77]'
+                          isSelected ? 'text-rose-100' : 'text-neutral-400'
                         }`}
                       >
                         <span>{p.categoryLabel.split(' · ')[0]}</span>
@@ -825,7 +823,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               })}
             </div>
 
-            {/* 可视化指示圆点 (点击圆点直接跳转对应篇章) */}
+            {/* 可视化指示圆点 */}
             <div className="flex items-center justify-center gap-1.5 pt-0.5">
               {passages.map((p, idx) => (
                 <button
@@ -846,17 +844,17 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             </div>
           </div>
 
-          {/* 篇章主研读卡片 */}
-          <article className="bg-white/90 rounded-2xl p-6 md:p-8 border border-[#F2D7DD] shadow-xs space-y-6">
+          {/* 篇章主研读画卷（保留单层高质量阅读大画卷，去除其内部套娃卡片） */}
+          <article className="bg-white rounded-2xl p-6 md:p-8 border border-[#F2D7DD]/80 shadow-2xs space-y-6">
             {/* 篇章头部信息栏 */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#F2D7DD] pb-5">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#F2D7DD]/70 pb-5">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-xs font-semibold text-rose-800">
-                  <span className="bg-rose-100 px-2 py-0.5 rounded text-[11px]">
+                  <span className="bg-rose-50 text-rose-800 px-2 py-0.5 rounded text-[11px] font-medium">
                     {currentPassage.categoryLabel}
                   </span>
                   <span>·</span>
-                  <span className="text-[#8C6D75] flex items-center gap-1">
+                  <span className="text-neutral-500 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
                     <span>篇幅约 {currentPassage.estimatedWords} 词 · 预计研读 {currentPassage.readTimeMin} 分钟</span>
                   </span>
@@ -877,7 +875,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   className={`px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 transition-all font-semibold ${
                     isPlayingAudio
                       ? 'bg-rose-600 text-white animate-pulse'
-                      : 'bg-rose-100 text-rose-900 hover:bg-rose-200'
+                      : 'bg-rose-50 text-rose-900 hover:bg-rose-100'
                   }`}
                 >
                   {isPlayingAudio ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
@@ -892,8 +890,8 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   }}
                   className={`px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all font-medium border ${
                     showRhythmMarks
-                      ? 'bg-purple-100 text-purple-900 border-purple-300 font-bold'
-                      : 'bg-[#FBF0F3] text-[#6A5259] border-transparent hover:bg-[#F3D9DF]'
+                      ? 'bg-purple-50 text-purple-900 border-purple-200 font-bold'
+                      : 'bg-transparent text-neutral-600 border-neutral-200 hover:bg-neutral-50'
                   }`}
                   title="开启后显示由 Enjoy 语料提取的朗读停顿标记 (| 与 //)"
                 >
@@ -907,12 +905,12 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     setTranslationMode(translationMode === 'visible' ? 'blur' : 'visible');
                     playChime('click');
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-[#FBF0F3] text-[#6A5259] hover:bg-[#F3D9DF] flex items-center gap-1.5 transition-all font-medium"
+                  className="px-3 py-1.5 rounded-xl bg-neutral-50 text-neutral-700 hover:bg-neutral-100 flex items-center gap-1.5 transition-all font-medium border border-neutral-200/60"
                 >
                   {translationMode === 'visible' ? (
                     <>
                       <EyeOff className="w-3.5 h-3.5 text-rose-700" />
-                      <span>遮罩译文 (纯英文思考)</span>
+                      <span>遮罩译文 (纯英思考)</span>
                     </>
                   ) : (
                     <>
@@ -927,29 +925,29 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   onClick={() => handleTogglePassageMastered(currentPassage.id)}
                   className={`px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all font-medium border ${
                     isCurrentPassageMastered
-                      ? 'bg-emerald-100 text-emerald-800 border-emerald-300 font-bold'
-                      : 'bg-[#FBF0F3] text-[#6A5259] border-transparent hover:bg-[#F3D9DF]'
+                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200 font-bold'
+                      : 'bg-transparent text-neutral-600 border-neutral-200 hover:bg-neutral-50'
                   }`}
                 >
                   <Check className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>{isCurrentPassageMastered ? '已收录掌握库' : '标记已熟练掌握'}</span>
+                  <span>{isCurrentPassageMastered ? '已熟练掌握' : '标记已掌握'}</span>
                 </button>
               </div>
             </div>
 
-            {/* 章节导航条 (Part 1 ~ Part 4 小节切换或全览) */}
+            {/* 章节导航条 (无套娃卡片，极简章节选择器) */}
             {currentPassage.sections && currentPassage.sections.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 p-2 bg-[#FDF4F6] rounded-xl border border-[#F6DCE2]">
-                <span className="text-xs font-semibold text-[#7D646B] ml-1">章节选读:</span>
+              <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-[#F2D7DD]/50">
+                <span className="text-xs font-semibold text-neutral-400 mr-1">章节选读:</span>
                 <button
                   onClick={() => setSelectedPartIndex('all')}
                   className={`px-2.5 py-1 text-xs rounded-lg transition-all ${
                     selectedPartIndex === 'all'
-                      ? 'bg-rose-600 text-white font-bold'
-                      : 'bg-white text-[#6A5258] hover:bg-rose-50'
+                      ? 'bg-[#2D2326] text-white font-bold shadow-2xs'
+                      : 'text-neutral-600 hover:bg-neutral-100'
                   }`}
                 >
-                  全文连读 (Full Passage)
+                  全文连读
                 </button>
                 {currentPassage.sections.map((sec, idx) => (
                   <button
@@ -957,8 +955,8 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     onClick={() => setSelectedPartIndex(idx)}
                     className={`px-2.5 py-1 text-xs rounded-lg transition-all truncate max-w-[200px] ${
                       selectedPartIndex === idx
-                        ? 'bg-rose-600 text-white font-bold'
-                        : 'bg-white text-[#6A5258] hover:bg-rose-50'
+                        ? 'bg-[#2D2326] text-white font-bold shadow-2xs'
+                        : 'text-neutral-600 hover:bg-neutral-100'
                     }`}
                   >
                     {sec.partTitle.split(':')[0]}
@@ -969,9 +967,9 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
 
             {/* 英文段落核心区 (支持点词即查) */}
             <div className="space-y-6">
-              <div className="text-[11px] text-[#93757D] flex items-center gap-1.5 bg-[#FAF2F4] px-3 py-1.5 rounded-lg">
+              <div className="text-[11px] text-neutral-400 flex items-center gap-1.5">
                 <HelpCircle className="w-3.5 h-3.5 text-rose-500" />
-                <span>提示：在长文中点击任意陌生单词即可弹出音标释义，并能「一键收录至生词本」高亮标出</span>
+                <span>在长文中点击任意生词即可弹出音标释义，并一键收录至生词本</span>
               </div>
 
               {selectedPartIndex === 'all' ? (
@@ -982,8 +980,8 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   )}
                 </div>
               ) : (
-                // 聚焦单个章节
-                <div className="p-5 bg-[#FCF8F9] rounded-xl border border-[#F4D9E0] space-y-4">
+                // 聚焦单个章节 (去除外层卡片框，书页式自然排版)
+                <div className="py-2 space-y-4">
                   <div className="text-xs font-bold text-rose-900 uppercase tracking-wider">
                     {currentPassage.sections[selectedPartIndex].partTitle}
                   </div>
@@ -994,8 +992,8 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                         : currentPassage.sections[selectedPartIndex].sectionEn
                     )}
                   </div>
-                  <div className="pt-3 border-t border-[#F2D7DD]/80">
-                    <div className="text-xs font-bold text-[#8C6D75] mb-1">本节参考译文:</div>
+                  <div className="pt-3 border-t border-[#F2D7DD]/60">
+                    <div className="text-xs font-semibold text-neutral-400 mb-1">本节参考译文:</div>
                     <p className={`text-xs md:text-sm text-[#554046] leading-relaxed ${
                       translationMode === 'blur' ? 'filter blur-sm hover:blur-none select-none transition-all' : ''
                     }`}>
@@ -1007,17 +1005,17 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
 
               {/* 全文中文译文对照区 */}
               {selectedPartIndex === 'all' && (
-                <div className="pt-6 border-t border-[#F2D7DD]">
+                <div className="pt-6 border-t border-[#F2D7DD]/60">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-[#7E656C] uppercase">
+                    <span className="text-xs font-bold text-neutral-500 uppercase tracking-wide">
                       全篇中文地道参考译文
                     </span>
-                    <span className="text-[11px] text-[#A88C94]">
+                    <span className="text-[11px] text-neutral-400">
                       {translationMode === 'blur' ? '(当前处于悬停偷瞄模式：鼠标悬停即可解除模糊)' : ''}
                     </span>
                   </div>
                   <div 
-                    className={`text-[15px] leading-[2.1] text-[#554046] border-l-2 border-rose-300 pl-4 py-1 transition-all duration-300 ${
+                    className={`text-[15px] leading-[2.1] text-[#554046] transition-all duration-300 ${
                       translationMode === 'blur'
                         ? 'filter blur-sm hover:blur-none select-none hover:select-text cursor-pointer'
                         : translationMode === 'hidden'
@@ -1031,8 +1029,8 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               )}
             </div>
 
-            {/* 核心考点与用法笔记 */}
-            <div className="pt-6 border-t border-[#F2D7DD] grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* 核心考点与用法笔记 (去卡片化平铺) */}
+            <div className="pt-6 border-t border-[#F2D7DD]/60 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-sm font-bold text-[#2A1D21] flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4 text-rose-600" />

@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSettings,
 }) => {
   return (
-    <header className="sticky top-0 z-40 border-b border-[#F2DFE4] bg-[#FDF4F5]/90 backdrop-blur-md px-4 lg:px-8 py-3 transition-colors duration-200">
+    <header className="sticky top-0 z-40 border-b border-[#F2DFE4]/80 bg-[#FDF4F5]/90 backdrop-blur-md px-4 lg:px-8 py-3 transition-colors duration-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-8">
         {/* Zone 1: Single text element wordmark */}
         <div 
@@ -38,14 +38,14 @@ export const Header: React.FC<HeaderProps> = ({
           <span>KansoDesk</span>
         </div>
 
-        {/* Zone 2: 4 Concise Single-line Nav Links */}
-        <nav className="hidden md:flex items-center gap-1.5 text-sm font-medium">
+        {/* Zone 2: 4 Concise Single-line Nav Links (De-cardified text links with subtle active indicator) */}
+        <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
           <button
             onClick={() => onSelectView('media')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
               activeView === 'media'
-                ? 'bg-white text-[#2D2326] font-bold shadow-xs border border-[#F2DFE4]'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                ? 'bg-white text-[#2D2326] font-bold shadow-2xs border border-[#F2DFE4]'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
             }`}
           >
             <LayoutGrid className="w-4 h-4 text-[#8C5D68]" />
@@ -54,10 +54,10 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => onSelectView('schedule')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
               activeView === 'schedule'
-                ? 'bg-white text-[#2D2326] font-bold shadow-xs border border-[#F2DFE4]'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                ? 'bg-white text-[#2D2326] font-bold shadow-2xs border border-[#F2DFE4]'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
             }`}
           >
             <Calendar className="w-4 h-4 text-purple-600" />
@@ -66,22 +66,22 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => onSelectView('english')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
               activeView === 'english'
-                ? 'bg-white text-[#2D2326] font-bold shadow-xs border border-[#F2DFE4]'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                ? 'bg-white text-[#2D2326] font-bold shadow-2xs border border-[#F2DFE4]'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
             }`}
           >
-            <BookOpen className="w-4 h-4 text-emerald-600" />
+            <BookOpen className="w-4 h-4 text-rose-600" />
             <span>英语口语训练</span>
           </button>
 
           <button
             onClick={() => onSelectView('tools')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap shrink-0 ${
               activeView === 'tools'
-                ? 'bg-white text-[#2D2326] font-bold shadow-xs border border-[#F2DFE4]'
-                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/60'
+                ? 'bg-white text-[#2D2326] font-bold shadow-2xs border border-[#F2DFE4]'
+                : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
             }`}
           >
             <Wrench className="w-4 h-4 text-sky-600" />
@@ -95,7 +95,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-600 bg-white border border-[#F2DFE4] hover:border-[#D9AAB6] rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-600 bg-white/80 hover:bg-white border border-[#F2DFE4] hover:border-[#D9AAB6] rounded-lg transition-all shadow-2xs"
             title="快捷搜索与指令 (Cmd+K / Ctrl+K)"
           >
             <Search className="w-3.5 h-3.5 text-neutral-400" />
@@ -107,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenSettings}
-            className="p-2 text-neutral-600 hover:text-[#2D2326] bg-white hover:bg-[#FAF0F3] rounded-lg transition-colors border border-[#F2DFE4] shadow-xs"
+            className="p-2 text-neutral-600 hover:text-[#2D2326] bg-white/80 hover:bg-white rounded-lg transition-colors border border-[#F2DFE4] shadow-2xs"
             title="数据备份与配置"
             aria-label="Settings"
           >
