@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
+import { KoiPondBackground, AmbientSettings } from './components/KoiPondBackground';
 import { MediaWorkspace } from './components/MediaWorkspace';
 import { ScheduleView } from './components/ScheduleView';
 import { EnglishStudio } from './components/EnglishStudio';
@@ -111,6 +112,30 @@ export default function App() {
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
+  // Dynamic Pond Ambient Settings
+  const [ambientSettings, setAmbientSettings] = useState<AmbientSettings>(() => {
+    try {
+      const saved = localStorage.getItem('kansodesk_ambient_settings');
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // ignore
+    }
+    return {
+      showKoi: true,
+      showPetals: true,
+      showCaustics: true,
+      koiSpeed: 1.0,
+    };
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('kansodesk_ambient_settings', JSON.stringify(ambientSettings));
+    } catch {
+      // ignore
+    }
+  }, [ambientSettings]);
+
   // Global Keyboard Shortcut (Cmd+K / Ctrl+K)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -134,17 +159,22 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-[#FDF4F5] text-[#2D2326] selection:bg-[#F2CCD6] selection:text-[#2D2326]">
+    <div className="relative min-h-screen flex flex-col font-sans text-[#E7F6F1] selection:bg-[#FF6B4A]/30 selection:text-[#FFFFFF]">
+      {/* Dynamic Koi Pond Canvas Background */}
+      <KoiPondBackground settings={ambientSettings} />
+
       {/* Top Bar adheres to 3-zone Top Bar Contract */}
       <Header
         activeView={activeView}
         onSelectView={setActiveView}
         onOpenCommandPalette={() => setIsCommandOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        ambientSettings={ambientSettings}
+        onUpdateAmbientSettings={setAmbientSettings}
       />
 
       {/* Main Content Viewport */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+      <main className="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         {activeView === 'media' && (
           <MediaWorkspace
             contentItems={contentItems}

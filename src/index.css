@@ -7,35 +7,36 @@
 
 :root {
   font-family: var(--font-sans);
-  --color-bg-dream: #FDF4F5;
-  --color-surface-card: #FFFFFF;
-  --color-text-main: #2D2326;
-  --color-text-muted: #7A696E;
-  --color-border-delicate: #F2DEE3;
+  --color-bg-dream: #091F1D;
+  --color-surface-card: rgba(12, 34, 32, 0.75);
+  --color-text-main: #F4FAF8;
+  --color-text-muted: #8DB5AB;
+  --color-border-delicate: rgba(45, 105, 96, 0.35);
 }
 
 body {
-  background-color: #FDF4F5;
-  color: #2D2326;
+  background-color: #081C1B;
+  color: #F4FAF8;
+  overflow-x: hidden;
 }
 
-/* Custom delicate scrollbar */
+/* Custom delicate scrollbar matching jade pond */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(8, 28, 27, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E8D3D8;
+  background: rgba(52, 128, 117, 0.5);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D8BDC4;
+  background: rgba(245, 197, 100, 0.7);
 }
 
 /* Horizontal Passage Carousel Scrollbar */
@@ -44,15 +45,15 @@ body {
 }
 
 .passage-carousel-scroll::-webkit-scrollbar-track {
-  background: rgba(242, 215, 221, 0.45);
+  background: rgba(12, 35, 33, 0.6);
   border-radius: 9999px;
 }
 
 .passage-carousel-scroll::-webkit-scrollbar-thumb {
-  background: #E0829D;
+  background: rgba(255, 107, 74, 0.6);
   border-radius: 9999px;
 }
 
 .passage-carousel-scroll::-webkit-scrollbar-thumb:hover {
-  background: #C96682;
+  background: rgba(245, 184, 56, 0.85);
 }
