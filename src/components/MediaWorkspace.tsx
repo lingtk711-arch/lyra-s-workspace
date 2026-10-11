@@ -65,6 +65,9 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
   // Navigation mode: 'portal' (矩阵总控大厅) vs 'account' (专属账号独立工作台)
   const [viewMode, setViewMode] = useState<'portal' | 'account'>('portal');
 
+  // Category filter in portal: 'all' | 'ip' | 'auto'
+  const [accountCategoryFilter, setAccountCategoryFilter] = useState<'all' | 'ip' | 'auto'>('all');
+
   const currentAccount = MEDIA_ACCOUNTS.find((a) => a.id === selectedAccountId) || MEDIA_ACCOUNTS[0];
 
   // Stage Filter inside account view
@@ -118,6 +121,18 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
     const firstOfAccount = contentItems.find((i) => i.accountId === accId);
     setSelectedItemId(firstOfAccount?.id || null);
     setSelectedStage('all');
+    setSearchQuery('');
+    setViewMode('account');
+    playChime('click');
+  };
+
+  // Enter account directly targeting a specific stage
+  const handleEnterAccountWithStage = (accId: string, stage: PipelineStage | 'all') => {
+    onSelectAccount(accId);
+    const firstOfStage = contentItems.find((i) => i.accountId === accId && (stage === 'all' || i.stage === stage));
+    const fallbackFirst = contentItems.find((i) => i.accountId === accId);
+    setSelectedItemId(firstOfStage?.id || fallbackFirst?.id || null);
+    setSelectedStage(stage);
     setSearchQuery('');
     setViewMode('account');
     playChime('click');
@@ -366,6 +381,88 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             <span>全网粉丝目标 <strong className="text-[#2D2326]">65,000+</strong></span>
           </div>
 
+          {/* Live Radar Ticker Bar (Bloomberg/Linear Style Live Hot Ticker with Verified Real Links) */}
+          <div className="bg-[#FAF3F5] border border-[#F2DFE4] rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="flex items-center gap-1 text-rose-700 font-bold shrink-0">
+                <Flame className="w-4 h-4 text-rose-600 animate-pulse" />
+                <span>全矩阵爆款速报</span>
+              </span>
+              <span className="text-neutral-300">|</span>
+              <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-0.5">
+                {ACCOUNT_TRENDING_TOPICS.slice(0, 3).map((topTrend, i) => (
+                  <div key={topTrend.id} className="flex items-center gap-1.5 shrink-0 text-neutral-700">
+                    <span className="font-mono text-[10px] font-bold text-rose-600">#{i + 1}</span>
+                    <span className="font-semibold">{topTrend.keyword}</span>
+                    <span className="text-[10px] font-mono text-neutral-400">({topTrend.heat})</span>
+                    <a
+                      href={topTrend.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-rose-700 hover:text-rose-950 underline flex items-center gap-0.5"
+                    >
+                      <span>原帖/信源</span>
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                setTrendsAccountFilter('all');
+                setShowTrendsModal(true);
+                playChime('click');
+              }}
+              className="text-xs font-semibold text-rose-700 hover:text-rose-900 shrink-0 flex items-center gap-1"
+            >
+              <span>查看全部 45 条</span>
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+
+          {/* Category Filter Tabs */}
+          <div className="flex items-center justify-between gap-3 flex-wrap pt-1">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-neutral-500 font-medium mr-1">矩阵赛道筛选:</span>
+              <button
+                onClick={() => { setAccountCategoryFilter('all'); playChime('click'); }}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  accountCategoryFilter === 'all'
+                    ? 'bg-[#2D2326] text-white shadow-2xs'
+                    : 'bg-white text-neutral-600 hover:bg-neutral-50 border border-[#F2DFE4]'
+                }`}
+              >
+                全部矩阵 (4)
+              </button>
+              <button
+                onClick={() => { setAccountCategoryFilter('ip'); playChime('click'); }}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  accountCategoryFilter === 'ip'
+                    ? 'bg-emerald-800 text-white shadow-2xs'
+                    : 'bg-white text-neutral-600 hover:bg-neutral-50 border border-[#F2DFE4]'
+                }`}
+              >
+                🌿 个人IP与深度疗愈 (1)
+              </button>
+              <button
+                onClick={() => { setAccountCategoryFilter('auto'); playChime('click'); }}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  accountCategoryFilter === 'auto'
+                    ? 'bg-sky-800 text-white shadow-2xs'
+                    : 'bg-white text-neutral-600 hover:bg-neutral-50 border border-[#F2DFE4]'
+                }`}
+              >
+                🤖 AI与自动化硬件矩阵 (3)
+              </button>
+            </div>
+
+            <div className="text-[11px] text-neutral-400">
+              提示：点击行直接进入工作台，点击阶段数字穿透进入对应工位
+            </div>
+          </div>
+
           {/* Architectural Registry Table (无卡片，纯粹的高密度行政注册表) */}
           <div className="border border-[#ECD1D8] rounded-2xl overflow-hidden bg-white/95 shadow-2xs">
             {/* Table Header Row */}
@@ -376,111 +473,160 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
               <div className="col-span-12 md:col-span-2 text-right">专属工作空间</div>
             </div>
 
-            {/* Account Rows (4 Accounts) */}
+            {/* Account Rows */}
             <div className="divide-y divide-[#F2DFE4]/80">
-              {MEDIA_ACCOUNTS.map((account) => {
-                const accItems = contentItems.filter((i) => i.accountId === account.id);
-                const topicCount = accItems.filter((i) => i.stage === 'topic').length;
-                const scriptCount = accItems.filter((i) => i.stage === 'script').length;
-                const stagingCount = accItems.filter((i) => i.stage === 'staging').length;
-                const pubCount = accItems.filter((i) => i.stage === 'published').length;
-                const trendsCount = ACCOUNT_TRENDING_TOPICS.filter((t) => t.accountId === account.id).length;
+              {MEDIA_ACCOUNTS
+                .filter((acc) => {
+                  if (accountCategoryFilter === 'ip') return acc.id === 'acc_sedona';
+                  if (accountCategoryFilter === 'auto') return acc.id !== 'acc_sedona';
+                  return true;
+                })
+                .map((account) => {
+                  const accItems = contentItems.filter((i) => i.accountId === account.id);
+                  const topicCount = accItems.filter((i) => i.stage === 'topic').length;
+                  const scriptCount = accItems.filter((i) => i.stage === 'script').length;
+                  const stagingCount = accItems.filter((i) => i.stage === 'staging').length;
+                  const pubCount = accItems.filter((i) => i.stage === 'published').length;
+                  const trendsCount = ACCOUNT_TRENDING_TOPICS.filter((t) => t.accountId === account.id).length;
+                  const accTotal = accItems.length;
 
-                return (
-                  <div
-                    key={account.id}
-                    onClick={() => handleEnterAccount(account.id)}
-                    className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-rose-50/20 transition-all cursor-pointer group"
-                  >
-                    {/* Col 1: Account Brand & Niche */}
-                    <div className="col-span-12 md:col-span-4 flex items-start gap-3.5">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-2xs ${
-                        account.id === 'acc_sedona' ? 'bg-emerald-100 text-emerald-800' :
-                        account.id === 'acc_ai' ? 'bg-sky-100 text-sky-800' :
-                        account.id === 'acc_bot1' ? 'bg-amber-100 text-amber-800' :
-                        'bg-purple-100 text-purple-800'
-                      }`}>
-                        {account.id === 'acc_sedona' && <Sparkles className="w-5 h-5" />}
-                        {account.id === 'acc_ai' && <Cpu className="w-5 h-5" />}
-                        {account.id === 'acc_bot1' && <Bot className="w-5 h-5" />}
-                        {account.id === 'acc_bot2' && <Layers className="w-5 h-5" />}
+                  return (
+                    <div
+                      key={account.id}
+                      onClick={() => handleEnterAccount(account.id)}
+                      className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-rose-50/20 transition-all cursor-pointer group"
+                    >
+                      {/* Col 1: Account Brand & Niche */}
+                      <div className="col-span-12 md:col-span-4 flex items-start gap-3.5">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-2xs ${
+                          account.id === 'acc_sedona' ? 'bg-emerald-100 text-emerald-800' :
+                          account.id === 'acc_ai' ? 'bg-sky-100 text-sky-800' :
+                          account.id === 'acc_bot1' ? 'bg-amber-100 text-amber-800' :
+                          'bg-purple-100 text-purple-800'
+                        }`}>
+                          {account.id === 'acc_sedona' && <Sparkles className="w-5 h-5" />}
+                          {account.id === 'acc_ai' && <Cpu className="w-5 h-5" />}
+                          {account.id === 'acc_bot1' && <Bot className="w-5 h-5" />}
+                          {account.id === 'acc_bot2' && <Layers className="w-5 h-5" />}
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="text-sm font-bold text-[#2D2326] group-hover:text-rose-700 transition-colors">
+                              {account.name}
+                            </h3>
+                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
+                              account.id === 'acc_sedona' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' :
+                              account.id === 'acc_ai' ? 'bg-sky-50 text-sky-800 border border-sky-200' :
+                              'bg-amber-50 text-amber-800 border border-amber-200'
+                            }`}>
+                              {account.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-neutral-500 mt-1 line-clamp-1">
+                            {account.subTitle}
+                          </p>
+                          <p className="text-[11px] text-neutral-400 mt-0.5 line-clamp-1">
+                            {account.description}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-sm font-bold text-[#2D2326] group-hover:text-rose-700 transition-colors">
-                            {account.name}
-                          </h3>
-                          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
-                            account.id === 'acc_sedona' ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' :
-                            account.id === 'acc_ai' ? 'bg-sky-50 text-sky-800 border border-sky-200' :
-                            'bg-amber-50 text-amber-800 border border-amber-200'
-                          }`}>
-                            {account.badge}
+                      {/* Col 2: Platform & Goal */}
+                      <div className="col-span-6 md:col-span-3 space-y-1">
+                        <div className="text-xs font-medium text-[#2D2326] flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          <span>{account.platforms.join(' · ')}</span>
+                        </div>
+                        <div className="text-[11px] font-mono text-neutral-500">
+                          阶段目标: <strong className="text-[#2D2326]">{account.followerGoal}</strong>
+                        </div>
+                        <div className="text-[10px] text-rose-700">
+                          {account.statusTag}
+                        </div>
+                      </div>
+
+                      {/* Col 3: Pipeline Breakdown & Linear Segmented Waterline */}
+                      <div className="col-span-6 md:col-span-3 space-y-2">
+                        {/* Interactive Stage Triggers */}
+                        <div className="flex items-center gap-1.5 text-[11px] font-mono">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEnterAccountWithStage(account.id, 'topic');
+                            }}
+                            className="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded border border-emerald-200 transition-colors cursor-pointer"
+                            title="点击直接穿透到该账号的选题池"
+                          >
+                            💡 {topicCount}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEnterAccountWithStage(account.id, 'script');
+                            }}
+                            className="bg-amber-50 hover:bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded border border-amber-200 transition-colors cursor-pointer"
+                            title="点击直接穿透到该账号的文案创作"
+                          >
+                            ✍️ {scriptCount}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEnterAccountWithStage(account.id, 'staging');
+                            }}
+                            className="bg-purple-50 hover:bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded border border-purple-200 transition-colors cursor-pointer"
+                            title="点击直接穿透到该账号的预发布排期"
+                          >
+                            📅 {stagingCount}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEnterAccountWithStage(account.id, 'published');
+                            }}
+                            className="bg-sky-50 hover:bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded border border-sky-200 transition-colors cursor-pointer"
+                            title="点击直接穿透到该账号的已发归档"
+                          >
+                            🎉 {pubCount}
+                          </button>
+                        </div>
+
+                        {/* Linear Segmented Pipeline Waterline */}
+                        <div className="w-full h-1.5 bg-neutral-100 rounded-full overflow-hidden flex items-center">
+                          <div style={{ width: `${accTotal > 0 ? (topicCount / accTotal) * 100 : 25}%` }} className="h-full bg-emerald-500 transition-all" title={`选题池: ${topicCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (scriptCount / accTotal) * 100 : 25}%` }} className="h-full bg-amber-500 transition-all" title={`文案撰写: ${scriptCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (stagingCount / accTotal) * 100 : 25}%` }} className="h-full bg-purple-500 transition-all" title={`预发排期: ${stagingCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (pubCount / accTotal) * 100 : 25}%` }} className="h-full bg-sky-500 transition-all" title={`已发归档: ${pubCount} 篇`} />
+                        </div>
+
+                        <div className="text-[11px] text-neutral-400 flex items-center justify-between">
+                          <span className="flex items-center gap-1">
+                            <Flame className="w-3 h-3 text-rose-500" />
+                            <span>雷达: {trendsCount} 条爆款带真实外链</span>
+                          </span>
+                          <span className="text-[10px] text-neutral-400 font-mono">
+                            总计 {accTotal} 篇
                           </span>
                         </div>
-                        <p className="text-xs text-neutral-500 mt-1 line-clamp-1">
-                          {account.subTitle}
-                        </p>
-                        <p className="text-[11px] text-neutral-400 mt-0.5 line-clamp-1">
-                          {account.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Col 2: Platform & Goal */}
-                    <div className="col-span-6 md:col-span-3 space-y-1">
-                      <div className="text-xs font-medium text-[#2D2326] flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        <span>{account.platforms.join(' · ')}</span>
-                      </div>
-                      <div className="text-[11px] font-mono text-neutral-500">
-                        阶段目标: <strong className="text-[#2D2326]">{account.followerGoal}</strong>
-                      </div>
-                      <div className="text-[10px] text-rose-700">
-                        {account.statusTag}
-                      </div>
-                    </div>
-
-                    {/* Col 3: Pipeline Breakdown & Radar Status */}
-                    <div className="col-span-6 md:col-span-3 space-y-1.5">
-                      <div className="flex items-center gap-2 text-[11px] font-mono">
-                        <span className="bg-emerald-50 text-emerald-800 px-1.5 py-0.5 rounded border border-emerald-200" title="选题池">
-                          💡 {topicCount}
-                        </span>
-                        <span className="bg-amber-50 text-amber-800 px-1.5 py-0.5 rounded border border-amber-200" title="文案创作">
-                          ✍️ {scriptCount}
-                        </span>
-                        <span className="bg-purple-50 text-purple-800 px-1.5 py-0.5 rounded border border-purple-200" title="预发布排期">
-                          📅 {stagingCount}
-                        </span>
-                        <span className="bg-sky-50 text-sky-800 px-1.5 py-0.5 rounded border border-sky-200" title="已发布归档">
-                          🎉 {pubCount}
-                        </span>
                       </div>
 
-                      <div className="text-[11px] text-neutral-400 flex items-center gap-1">
-                        <Flame className="w-3 h-3 text-rose-500" />
-                        <span>实时雷达: {trendsCount} 条爆款带真实外链</span>
+                      {/* Col 4: Action button */}
+                      <div className="col-span-12 md:col-span-2 flex items-center justify-end">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEnterAccount(account.id);
+                          }}
+                          className="px-3.5 py-2 text-xs font-semibold bg-[#2D2326] text-white hover:bg-[#4A393E] group-hover:bg-rose-600 rounded-xl transition-all flex items-center gap-1.5 shadow-2xs"
+                        >
+                          <span>进入专属工作台</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
                       </div>
                     </div>
-
-                    {/* Col 4: Action button */}
-                    <div className="col-span-12 md:col-span-2 flex items-center justify-end">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEnterAccount(account.id);
-                        }}
-                        className="px-3.5 py-2 text-xs font-semibold bg-[#2D2326] text-white hover:bg-[#4A393E] group-hover:bg-rose-600 rounded-xl transition-all flex items-center gap-1.5 shadow-2xs"
-                      >
-                        <span>进入专属工作台</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         </div>
