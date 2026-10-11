@@ -65,25 +65,25 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-150">
       <div 
-        className="relative w-full max-w-xl rounded-2xl border border-[#235850] bg-[#0b2421]/95 text-[#E1F1EC] p-2 shadow-2xl overflow-hidden backdrop-blur-xl"
+        className="relative w-full max-w-xl rounded-2xl border border-pink-200 bg-white/95 text-[#2D1E24] p-2 shadow-2xl overflow-hidden backdrop-blur-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-3 py-2 border-b border-[#1d4c44]/70">
-          <Search className="w-4 h-4 text-[#76A196] shrink-0" />
+        <div className="flex items-center gap-3 px-3 py-2 border-b border-pink-100">
+          <Search className="w-4 h-4 text-pink-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="搜索选题、文案草稿、日程或工具..."
-            className="w-full bg-transparent text-sm text-[#F4FAF8] placeholder-[#6A9489] focus:outline-none"
+            className="w-full bg-transparent text-sm text-[#2D1E24] placeholder-[#9E8B92] focus:outline-none"
           />
           <button 
             onClick={onClose}
-            className="p-1 text-[#76A196] hover:text-[#FFFFFF] rounded hover:bg-[#133e38] transition-colors"
+            className="p-1 text-[#8C767E] hover:text-[#2D1E24] rounded hover:bg-pink-50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -94,7 +94,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Section 1: Navigation */}
           {navigationCommands.length > 0 && (
             <div className="space-y-1">
-              <div className="px-2 text-[10px] uppercase font-bold tracking-wider text-[#F7CE74]">
+              <div className="px-2 text-[10px] uppercase font-bold tracking-wider text-pink-700">
                 主视图导航
               </div>
               {navigationCommands.map((item) => {
@@ -106,9 +106,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onSelectView(item.view);
                       onClose();
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-[#CBE3DC] hover:text-white hover:bg-[#153f3a] text-left transition-colors"
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-[#4A383F] hover:text-[#2D1E24] hover:bg-pink-50 text-left transition-colors"
                   >
-                    <Icon className="w-4 h-4 text-[#76A196]" />
+                    <Icon className="w-4 h-4 text-pink-500" />
                     <span>{item.label}</span>
                   </button>
                 );
@@ -119,7 +119,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Section 2: Contents */}
           {matchedContents.length > 0 && (
             <div className="space-y-1">
-              <div className="px-2 text-[10px] uppercase font-bold tracking-wider text-[#F7CE74]">
+              <div className="px-2 text-[10px] uppercase font-bold tracking-wider text-pink-700">
                 自媒体内容选题与草稿
               </div>
               {matchedContents.slice(0, 6).map((c) => (
@@ -130,13 +130,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     onSelectView('media');
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#CBE3DC] hover:text-white hover:bg-[#153f3a] transition-colors text-left"
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#4A383F] hover:text-[#2D1E24] hover:bg-pink-50 transition-colors text-left"
                 >
                   <div className="flex items-center gap-2 min-w-0">
-                    <FileText className="w-3.5 h-3.5 text-[#76A196] shrink-0" />
+                    <FileText className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span className="font-semibold truncate">{c.title}</span>
                   </div>
-                  <span className="text-[10px] text-[#8DB5AB] font-mono shrink-0 ml-2">
+                  <span className="text-[10px] text-[#8C767E] font-mono shrink-0 ml-2">
                     {c.targetDate || '选题中'}
                   </span>
                 </button>
@@ -145,15 +145,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
 
           {navigationCommands.length === 0 && matchedContents.length === 0 && (
-            <div className="py-8 text-center text-xs text-[#76A196]">
+            <div className="py-8 text-center text-xs text-[#8C767E]">
               未匹配到任何结果，按 Esc 退出
             </div>
           )}
         </div>
 
-        <div className="px-3 py-2 border-t border-[#1d4c44]/70 flex items-center justify-between text-[11px] text-[#76A196]">
+        <div className="px-3 py-2 border-t border-pink-100 flex items-center justify-between text-[11px] text-[#8C767E]">
           <span>Esc 退出 · ↑↓ 选择 · ↵ 跳转</span>
-          <span className="text-[#F7CE74]/90 font-serif">🐟 澄潭 · 快捷检索</span>
+          <span className="text-pink-600/90 font-serif">🌸 灵境 · 快捷检索</span>
         </div>
       </div>
     </div>

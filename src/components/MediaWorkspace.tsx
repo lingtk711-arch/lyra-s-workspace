@@ -42,18 +42,18 @@ interface MediaWorkspaceProps {
 }
 
 const STAGE_CONFIG: Record<PipelineStage, { label: string; icon: string; bg: string; text: string }> = {
-  topic: { label: '选题池', icon: '💡', bg: 'bg-[#0f3832]/80 border-[#1f6b5f]/70', text: 'text-[#A7F3D0]' },
-  script: { label: '文案创作', icon: '✍️', bg: 'bg-[#3d2712]/80 border-[#945619]/70', text: 'text-[#FDE68A]' },
-  staging: { label: '预发布排期', icon: '📅', bg: 'bg-[#29173b]/80 border-[#69339e]/70', text: 'text-[#E9D5FF]' },
-  published: { label: '已发布归档', icon: '🎉', bg: 'bg-[#0f2e42]/80 border-[#206394]/70', text: 'text-[#BAE6FD]' },
-  analytics: { label: '数据复盘', icon: '📊', bg: 'bg-[#3b1522]/80 border-[#942042]/70', text: 'text-[#FECDD3]' },
+  topic: { label: '选题池', icon: '💡', bg: 'bg-emerald-50/90 border-emerald-200/80', text: 'text-emerald-800' },
+  script: { label: '文案创作', icon: '✍️', bg: 'bg-pink-50/90 border-pink-200/80', text: 'text-pink-800' },
+  staging: { label: '预发布排期', icon: '📅', bg: 'bg-amber-50/90 border-amber-200/80', text: 'text-amber-800' },
+  published: { label: '已发布归档', icon: '🎉', bg: 'bg-teal-50/90 border-teal-200/80', text: 'text-teal-800' },
+  analytics: { label: '数据复盘', icon: '📊', bg: 'bg-purple-50/90 border-purple-200/80', text: 'text-purple-800' },
 };
 
 const COVER_COLOR_MAP: Record<string, { bg: string; border: string; text: string; badgeBg: string }> = {
-  sage: { bg: 'bg-[#0c2f2a]/90', border: 'border-[#1e6155]/70', text: 'text-[#D1FAE5]', badgeBg: 'bg-[#144f45] text-[#A7F3D0]' },
-  lilac: { bg: 'bg-[#261833]/90', border: 'border-[#5a3375]/70', text: 'text-[#F3E8FF]', badgeBg: 'bg-[#432356] text-[#E9D5FF]' },
-  cyan: { bg: 'bg-[#0e2c3b]/90', border: 'border-[#1b5b78]/70', text: 'text-[#E0F2FE]', badgeBg: 'bg-[#15465c] text-[#BAE6FD]' },
-  apricot: { bg: 'bg-[#362112]/90', border: 'border-[#824b21]/70', text: 'text-[#FEF3C7]', badgeBg: 'bg-[#5b3216] text-[#FDE68A]' },
+  sage: { bg: 'bg-emerald-50/90', border: 'border-emerald-200/80', text: 'text-emerald-950', badgeBg: 'bg-emerald-100 text-emerald-800' },
+  lilac: { bg: 'bg-purple-50/90', border: 'border-purple-200/80', text: 'text-purple-950', badgeBg: 'bg-purple-100 text-purple-800' },
+  cyan: { bg: 'bg-teal-50/90', border: 'border-teal-200/80', text: 'text-teal-950', badgeBg: 'bg-teal-100 text-teal-800' },
+  apricot: { bg: 'bg-pink-50/90', border: 'border-pink-200/80', text: 'text-pink-950', badgeBg: 'bg-pink-100 text-pink-800' },
 };
 
 export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
@@ -325,18 +325,18 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       {/* MODE 1: 矩阵大厅入口页 (Architectural Executive Dossier Registry - 坚决去卡片化) */}
       {/* ========================================================================= */}
       {viewMode === 'portal' && (
-        <div className="space-y-6 text-[#E1F1EC]">
+        <div className="space-y-6 text-[#34262B]">
           {/* Header Banner (去卡片化，轻盈水幕雅致格调) */}
-          <div className="pb-4 border-b border-[#235850]/50 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="pb-4 border-b border-pink-200/60 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="text-xs font-semibold text-[#86C2B6] uppercase tracking-wider flex items-center gap-1.5">
-                <Globe className="w-3.5 h-3.5 text-[#FF6B4A]" />
+              <div className="text-xs font-semibold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5">
+                <Globe className="w-3.5 h-3.5 text-pink-500" />
                 <span>全域自媒体矩阵总控台 · 独立空间架构</span>
               </div>
-              <h1 className="text-2xl font-bold text-[#F4FAF8] mt-1 tracking-tight flex items-center gap-2">
+              <h1 className="text-2xl font-bold text-[#2D1E24] mt-1 tracking-tight flex items-center gap-2 font-serif">
                 <span>4 大账号独立矩阵，点击账号进入专属工作台</span>
               </h1>
-              <p className="text-xs text-[#9DC4BB] mt-1">
+              <p className="text-xs text-[#7A666D] mt-1">
                 每个账号拥有专属独立的选题池、文案工作流、预发布定稿与复盘体系，互不干扰，静水深流。
               </p>
             </div>
@@ -349,9 +349,9 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   setShowTrendsModal(true);
                   playChime('click');
                 }}
-                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-[#3D1A15]/85 hover:bg-[#52231C] text-[#FFB09C] border border-[#FF6B4A]/50 rounded-xl transition-all shadow-md shadow-orange-950/20"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-pink-50 hover:bg-pink-100 text-pink-900 border border-pink-300 rounded-xl transition-all shadow-xs"
               >
-                <Flame className="w-3.5 h-3.5 text-[#FF6B4A] animate-pulse" />
+                <Flame className="w-3.5 h-3.5 text-pink-600 animate-pulse" />
                 <span>全矩阵热点雷达 (45 条带真实外链)</span>
               </button>
 
@@ -360,46 +360,46 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   setShowAIIntelModal(true);
                   playChime('click');
                 }}
-                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-[#11333D]/85 hover:bg-[#16424E] text-[#8CE3F5] border border-[#38BDF8]/40 rounded-xl transition-all shadow-md"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl transition-all shadow-xs"
               >
-                <Radio className="w-3.5 h-3.5 text-[#38BDF8]" />
+                <Radio className="w-3.5 h-3.5 text-emerald-600" />
                 <span>AI 原厂权威情报流</span>
               </button>
             </div>
           </div>
 
           {/* Telemetry Strip (Swiss Minimalist Inline Data, NO NESTED CARDS) */}
-          <div className="flex items-center gap-6 text-xs text-[#93BBB2] px-1 border-b border-[#235850]/40 pb-3 flex-wrap font-mono">
-            <span>活跃账号 <strong className="text-[#F7CE74]">4 个</strong></span>
+          <div className="flex items-center gap-6 text-xs text-[#7A666D] px-1 border-b border-pink-200/40 pb-3 flex-wrap font-mono">
+            <span>活跃账号 <strong className="text-pink-700 font-bold">4 个</strong></span>
             <span>·</span>
-            <span>矩阵在编内容 <strong className="text-[#F7CE74]">{contentItems.length} 篇</strong></span>
+            <span>矩阵在编内容 <strong className="text-emerald-800 font-bold">{contentItems.length} 篇</strong></span>
             <span>·</span>
-            <span>待发布排期 <strong className="text-[#D8B4FE] font-bold">{contentItems.filter((i) => i.stage === 'staging').length} 篇</strong></span>
+            <span>待发布排期 <strong className="text-purple-700 font-bold">{contentItems.filter((i) => i.stage === 'staging').length} 篇</strong></span>
             <span>·</span>
-            <span>已发布归档 <strong className="text-[#6EE7B7] font-bold">{contentItems.filter((i) => i.stage === 'published').length} 篇</strong></span>
+            <span>已发布归档 <strong className="text-teal-700 font-bold">{contentItems.filter((i) => i.stage === 'published').length} 篇</strong></span>
             <span>·</span>
-            <span>全网粉丝目标 <strong className="text-[#F7CE74]">65,000+</strong></span>
+            <span>全网粉丝目标 <strong className="text-amber-800 font-bold">65,000+</strong></span>
           </div>
 
           {/* Live Radar Ticker Bar (Bloomberg/Linear Style Live Hot Ticker with Verified Real Links) */}
-          <div className="bg-[#0b2623]/80 border border-[#235b52]/80 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs shadow-xs">
+          <div className="bg-white/80 border border-pink-200/80 backdrop-blur-md rounded-xl px-4 py-2.5 flex items-center justify-between gap-3 text-xs shadow-xs">
             <div className="flex items-center gap-2 min-w-0">
-              <span className="flex items-center gap-1 text-[#FF8256] font-bold shrink-0">
-                <Flame className="w-4 h-4 text-[#FF6B4A] animate-pulse" />
+              <span className="flex items-center gap-1 text-pink-700 font-bold shrink-0">
+                <Flame className="w-4 h-4 text-pink-500 animate-pulse" />
                 <span>全矩阵爆款速报</span>
               </span>
-              <span className="text-[#2B6057]">|</span>
+              <span className="text-pink-200">|</span>
               <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-0.5">
                 {ACCOUNT_TRENDING_TOPICS.slice(0, 3).map((topTrend, i) => (
-                  <div key={topTrend.id} className="flex items-center gap-1.5 shrink-0 text-[#E1F1EC]">
-                    <span className="font-mono text-[10px] font-bold text-[#FF8256]">#{i + 1}</span>
-                    <span className="font-semibold text-[#F2FAF7]">{topTrend.keyword}</span>
-                    <span className="text-[10px] font-mono text-[#F4D288]">({topTrend.heat})</span>
+                  <div key={topTrend.id} className="flex items-center gap-1.5 shrink-0 text-[#34262B]">
+                    <span className="font-mono text-[10px] font-bold text-pink-600">#{i + 1}</span>
+                    <span className="font-semibold text-[#2D1E24]">{topTrend.keyword}</span>
+                    <span className="text-[10px] font-mono text-amber-700">({topTrend.heat})</span>
                     <a
                       href={topTrend.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] text-[#7DD3FC] hover:text-[#BAE6FD] underline flex items-center gap-0.5"
+                      className="text-[10px] text-teal-700 hover:text-teal-900 underline flex items-center gap-0.5"
                     >
                       <span>原帖/信源</span>
                       <ExternalLink className="w-2.5 h-2.5" />
@@ -415,7 +415,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 setShowTrendsModal(true);
                 playChime('click');
               }}
-              className="text-xs font-semibold text-[#F7CE74] hover:text-[#FFE8AA] shrink-0 flex items-center gap-1"
+              className="text-xs font-semibold text-pink-700 hover:text-pink-900 shrink-0 flex items-center gap-1"
             >
               <span>查看全部 45 条</span>
               <ArrowRight className="w-3 h-3" />
@@ -425,13 +425,13 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
           {/* Category Filter Tabs */}
           <div className="flex items-center justify-between gap-3 flex-wrap pt-1">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs text-[#8DB5AB] font-medium mr-1">矩阵赛道筛选:</span>
+              <span className="text-xs text-[#7A666D] font-medium mr-1">矩阵赛道筛选:</span>
               <button
                 onClick={() => { setAccountCategoryFilter('all'); playChime('click'); }}
                 className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                   accountCategoryFilter === 'all'
-                    ? 'bg-[#184843] text-[#F7CE74] border border-[#F5C564]/50 shadow-xs'
-                    : 'bg-[#0f2d2a]/80 text-[#A6CFC4] hover:bg-[#153b36] border border-[#235850]/60'
+                    ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
+                    : 'bg-white/80 text-[#7A666D] hover:bg-white border border-pink-200/60'
                 }`}
               >
                 全部矩阵 (4)
@@ -440,8 +440,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 onClick={() => { setAccountCategoryFilter('ip'); playChime('click'); }}
                 className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                   accountCategoryFilter === 'ip'
-                    ? 'bg-[#14473e] text-[#A7F3D0] border border-[#34D399]/60 shadow-xs'
-                    : 'bg-[#0f2d2a]/80 text-[#A6CFC4] hover:bg-[#153b36] border border-[#235850]/60'
+                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 shadow-xs'
+                    : 'bg-white/80 text-[#7A666D] hover:bg-white border border-pink-200/60'
                 }`}
               >
                 🌿 个人IP与深度疗愈 (1)
@@ -450,23 +450,23 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                 onClick={() => { setAccountCategoryFilter('auto'); playChime('click'); }}
                 className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                   accountCategoryFilter === 'auto'
-                    ? 'bg-[#113a47] text-[#BAE6FD] border border-[#38BDF8]/60 shadow-xs'
-                    : 'bg-[#0f2d2a]/80 text-[#A6CFC4] hover:bg-[#153b36] border border-[#235850]/60'
+                    ? 'bg-teal-100 text-teal-900 border border-teal-300 shadow-xs'
+                    : 'bg-white/80 text-[#7A666D] hover:bg-white border border-pink-200/60'
                 }`}
               >
                 🤖 AI与自动化硬件矩阵 (3)
               </button>
             </div>
 
-            <div className="text-[11px] text-[#7EA69D]">
+            <div className="text-[11px] text-[#7A666D]">
               提示：点击行直接进入工作台，点击阶段数字穿透进入对应工位
             </div>
           </div>
 
           {/* Architectural Registry Table (无卡片，纯粹的高密度行政注册表) */}
-          <div className="border border-[#235850]/70 rounded-2xl overflow-hidden bg-[#0a2321]/80 backdrop-blur-xl shadow-2xl">
+          <div className="border border-pink-200/70 rounded-2xl overflow-hidden bg-white/75 backdrop-blur-xl shadow-md">
             {/* Table Header Row */}
-            <div className="grid grid-cols-12 gap-4 px-6 py-3.5 bg-[#0e302c]/90 border-b border-[#235850]/80 text-xs font-bold text-[#F4D288]">
+            <div className="grid grid-cols-12 gap-4 px-6 py-3.5 bg-pink-50/70 border-b border-pink-200/60 text-xs font-bold text-[#6D424F]">
               <div className="col-span-12 md:col-span-4">账号品牌与定位</div>
               <div className="col-span-6 md:col-span-3">主营平台与粉丝目标</div>
               <div className="col-span-6 md:col-span-3">流水线健康度 (选题/草稿/排期/已发)</div>
@@ -474,7 +474,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             </div>
 
             {/* Account Rows */}
-            <div className="divide-y divide-[#1d4c44]/60">
+            <div className="divide-y divide-pink-100">
               {MEDIA_ACCOUNTS
                 .filter((acc) => {
                   if (accountCategoryFilter === 'ip') return acc.id === 'acc_sedona';
@@ -494,39 +494,39 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     <div
                       key={account.id}
                       onClick={() => handleEnterAccount(account.id)}
-                      className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-[#123833]/50 transition-all cursor-pointer group"
+                      className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-pink-50/40 transition-all cursor-pointer group"
                     >
                       {/* Col 1: Account Brand & Niche */}
                       <div className="col-span-12 md:col-span-4 flex items-start gap-3.5">
-                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-md ${
-                          account.id === 'acc_sedona' ? 'bg-[#15473f] text-[#6EE7B7] border border-[#2EB094]/50' :
-                          account.id === 'acc_ai' ? 'bg-[#153f4d] text-[#38BDF8] border border-[#208CB8]/50' :
-                          account.id === 'acc_bot1' ? 'bg-[#422912] text-[#FBBF24] border border-[#A66C23]/50' :
-                          'bg-[#341b47] text-[#C084FC] border border-[#8141B3]/50'
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-xs ${
+                          account.id === 'acc_sedona' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
+                          account.id === 'acc_ai' ? 'bg-teal-100 text-teal-800 border border-teal-200' :
+                          account.id === 'acc_bot1' ? 'bg-amber-100 text-amber-800 border border-amber-200' :
+                          'bg-purple-100 text-purple-800 border border-purple-200'
                         }`}>
-                          {account.id === 'acc_sedona' && <Sparkles className="w-5 h-5 text-[#6EE7B7]" />}
-                          {account.id === 'acc_ai' && <Cpu className="w-5 h-5 text-[#38BDF8]" />}
-                          {account.id === 'acc_bot1' && <Bot className="w-5 h-5 text-[#FBBF24]" />}
-                          {account.id === 'acc_bot2' && <Layers className="w-5 h-5 text-[#C084FC]" />}
+                          {account.id === 'acc_sedona' && <Sparkles className="w-5 h-5 text-emerald-600" />}
+                          {account.id === 'acc_ai' && <Cpu className="w-5 h-5 text-teal-600" />}
+                          {account.id === 'acc_bot1' && <Bot className="w-5 h-5 text-amber-600" />}
+                          {account.id === 'acc_bot2' && <Layers className="w-5 h-5 text-purple-600" />}
                         </div>
 
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="text-sm font-bold text-[#F4FAF8] group-hover:text-[#F7CE74] transition-colors">
+                            <h3 className="text-sm font-bold text-[#2D1E24] group-hover:text-pink-600 transition-colors">
                               {account.name}
                             </h3>
                             <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${
-                              account.id === 'acc_sedona' ? 'bg-[#103b34] text-[#A7F3D0] border-[#227063]' :
-                              account.id === 'acc_ai' ? 'bg-[#113847] text-[#BAE6FD] border-[#1f637d]' :
-                              'bg-[#3b2713] text-[#FDE68A] border-[#754e24]'
+                              account.id === 'acc_sedona' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' :
+                              account.id === 'acc_ai' ? 'bg-teal-50 text-teal-800 border-teal-200' :
+                              'bg-amber-50 text-amber-800 border-amber-200'
                             }`}>
                               {account.badge}
                             </span>
                           </div>
-                          <p className="text-xs text-[#90B5AB] mt-1 line-clamp-1">
+                          <p className="text-xs text-[#7A666D] mt-1 line-clamp-1">
                             {account.subTitle}
                           </p>
-                          <p className="text-[11px] text-[#6E958C] mt-0.5 line-clamp-1">
+                          <p className="text-[11px] text-[#9E8B92] mt-0.5 line-clamp-1">
                             {account.description}
                           </p>
                         </div>
@@ -534,14 +534,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                       {/* Col 2: Platform & Goal */}
                       <div className="col-span-6 md:col-span-3 space-y-1">
-                        <div className="text-xs font-medium text-[#E1F1EC] flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                        <div className="text-xs font-medium text-[#34262B] flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           <span>{account.platforms.join(' · ')}</span>
                         </div>
-                        <div className="text-[11px] font-mono text-[#8FB5AB]">
-                          阶段目标: <strong className="text-[#F7CE74]">{account.followerGoal}</strong>
+                        <div className="text-[11px] font-mono text-[#7A666D]">
+                          阶段目标: <strong className="text-pink-700 font-bold">{account.followerGoal}</strong>
                         </div>
-                        <div className="text-[10px] text-[#FF8566]">
+                        <div className="text-[10px] text-pink-600 font-medium">
                           {account.statusTag}
                         </div>
                       </div>
@@ -555,7 +555,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                               e.stopPropagation();
                               handleEnterAccountWithStage(account.id, 'topic');
                             }}
-                            className="bg-[#113d36] hover:bg-[#18534a] text-[#A7F3D0] px-1.5 py-0.5 rounded border border-[#216d60] transition-colors cursor-pointer"
+                            className="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded border border-emerald-200 transition-colors cursor-pointer"
                             title="点击直接穿透到该账号的选题池"
                           >
                             💡 {topicCount}
@@ -565,7 +565,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                               e.stopPropagation();
                               handleEnterAccountWithStage(account.id, 'script');
                             }}
-                            className="bg-[#3a2614] hover:bg-[#52351b] text-[#FDE68A] px-1.5 py-0.5 rounded border border-[#7d4e24] transition-colors cursor-pointer"
+                            className="bg-pink-50 hover:bg-pink-100 text-pink-800 px-1.5 py-0.5 rounded border border-pink-200 transition-colors cursor-pointer"
                             title="点击直接穿透到该账号的文案创作"
                           >
                             ✍️ {scriptCount}
@@ -575,7 +575,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                               e.stopPropagation();
                               handleEnterAccountWithStage(account.id, 'staging');
                             }}
-                            className="bg-[#2a173d] hover:bg-[#3d2057] text-[#E9D5FF] px-1.5 py-0.5 rounded border border-[#60328a] transition-colors cursor-pointer"
+                            className="bg-amber-50 hover:bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded border border-amber-200 transition-colors cursor-pointer"
                             title="点击直接穿透到该账号的预发布排期"
                           >
                             📅 {stagingCount}
@@ -585,7 +585,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                               e.stopPropagation();
                               handleEnterAccountWithStage(account.id, 'published');
                             }}
-                            className="bg-[#113144] hover:bg-[#1a445d] text-[#BAE6FD] px-1.5 py-0.5 rounded border border-[#235d82] transition-colors cursor-pointer"
+                            className="bg-teal-50 hover:bg-teal-100 text-teal-800 px-1.5 py-0.5 rounded border border-teal-200 transition-colors cursor-pointer"
                             title="点击直接穿透到该账号的已发归档"
                           >
                             🎉 {pubCount}
@@ -593,19 +593,19 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         </div>
 
                         {/* Linear Segmented Pipeline Waterline */}
-                        <div className="w-full h-1.5 bg-[#0e2a27] rounded-full overflow-hidden flex items-center border border-[#1b4b44]">
+                        <div className="w-full h-1.5 bg-pink-100/60 rounded-full overflow-hidden flex items-center border border-pink-200/50">
                           <div style={{ width: `${accTotal > 0 ? (topicCount / accTotal) * 100 : 25}%` }} className="h-full bg-emerald-400 transition-all shadow-xs" title={`选题池: ${topicCount} 篇`} />
-                          <div style={{ width: `${accTotal > 0 ? (scriptCount / accTotal) * 100 : 25}%` }} className="h-full bg-amber-400 transition-all shadow-xs" title={`文案撰写: ${scriptCount} 篇`} />
-                          <div style={{ width: `${accTotal > 0 ? (stagingCount / accTotal) * 100 : 25}%` }} className="h-full bg-purple-400 transition-all shadow-xs" title={`预发排期: ${stagingCount} 篇`} />
-                          <div style={{ width: `${accTotal > 0 ? (pubCount / accTotal) * 100 : 25}%` }} className="h-full bg-sky-400 transition-all shadow-xs" title={`已发归档: ${pubCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (scriptCount / accTotal) * 100 : 25}%` }} className="h-full bg-pink-400 transition-all shadow-xs" title={`文案撰写: ${scriptCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (stagingCount / accTotal) * 100 : 25}%` }} className="h-full bg-amber-400 transition-all shadow-xs" title={`预发排期: ${stagingCount} 篇`} />
+                          <div style={{ width: `${accTotal > 0 ? (pubCount / accTotal) * 100 : 25}%` }} className="h-full bg-teal-400 transition-all shadow-xs" title={`已发归档: ${pubCount} 篇`} />
                         </div>
 
-                        <div className="text-[11px] text-[#7CA298] flex items-center justify-between">
+                        <div className="text-[11px] text-[#7A666D] flex items-center justify-between">
                           <span className="flex items-center gap-1">
-                            <Flame className="w-3 h-3 text-[#FF6B4A]" />
+                            <Flame className="w-3 h-3 text-pink-500" />
                             <span>雷达: {trendsCount} 条爆款带真实外链</span>
                           </span>
-                          <span className="text-[10px] text-[#8CB1A7] font-mono">
+                          <span className="text-[10px] text-[#8C767E] font-mono">
                             总计 {accTotal} 篇
                           </span>
                         </div>
@@ -618,10 +618,10 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                             e.stopPropagation();
                             handleEnterAccount(account.id);
                           }}
-                          className="px-3.5 py-2 text-xs font-semibold bg-[#184843] text-[#F7CE74] hover:bg-[#FF6B4A] hover:text-white group-hover:border-[#FF6B4A] border border-[#E5B85C]/40 rounded-xl transition-all flex items-center gap-1.5 shadow-md"
+                          className="px-3.5 py-2 text-xs font-semibold bg-pink-50 text-pink-800 hover:bg-pink-100 border border-pink-200 group-hover:border-pink-300 rounded-xl transition-all flex items-center gap-1.5 shadow-xs"
                         >
                           <span>进入专属工作台</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </button>
                       </div>
                     </div>
@@ -636,40 +636,40 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       {/* MODE 2: 独立账号专属工作台 (Dedicated Focused Studio for the Selected Account) */}
       {/* ========================================================================= */}
       {viewMode === 'account' && (
-        <div className="space-y-5 text-[#E1F1EC]">
+        <div className="space-y-5 text-[#34262B]">
           {/* Top Breadcrumb & Fast Switcher Bar (去卡片化极简条) */}
-          <div className="pb-3 border-b border-[#235850]/50 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="pb-3 border-b border-pink-200/60 flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <button
                 onClick={() => {
                   setViewMode('portal');
                   playChime('click');
                 }}
-                className="px-3 py-1.5 text-xs font-semibold bg-[#113833]/80 hover:bg-[#194c45] text-[#C4EAE0] border border-[#235850]/70 rounded-xl transition-colors flex items-center gap-1.5 shadow-xs"
+                className="px-3 py-1.5 text-xs font-semibold bg-white/80 hover:bg-white text-pink-900 border border-pink-200/80 rounded-xl transition-colors flex items-center gap-1.5 shadow-xs"
               >
-                <ChevronLeft className="w-3.5 h-3.5 text-[#6EE7B7]" />
+                <ChevronLeft className="w-3.5 h-3.5 text-pink-500" />
                 <span>返回矩阵总控大厅</span>
               </button>
 
-              <span className="text-[#245b53]">|</span>
+              <span className="text-pink-200">|</span>
 
               <div className="flex items-center gap-2">
                 <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs shadow-xs ${
-                  currentAccount.id === 'acc_sedona' ? 'bg-[#15473f] text-[#6EE7B7] border border-[#2EB094]/50' :
-                  currentAccount.id === 'acc_ai' ? 'bg-[#153f4d] text-[#38BDF8] border border-[#208CB8]/50' :
-                  'bg-[#422912] text-[#FBBF24] border border-[#A66C23]/50'
+                  currentAccount.id === 'acc_sedona' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
+                  currentAccount.id === 'acc_ai' ? 'bg-teal-100 text-teal-800 border border-teal-200' :
+                  'bg-amber-100 text-amber-800 border border-amber-200'
                 }`}>
-                  {currentAccount.id === 'acc_sedona' && <Sparkles className="w-3 h-3 text-[#6EE7B7]" />}
-                  {currentAccount.id === 'acc_ai' && <Cpu className="w-3 h-3 text-[#38BDF8]" />}
-                  {(currentAccount.id === 'acc_bot1' || currentAccount.id === 'acc_bot2') && <Bot className="w-3 h-3 text-[#FBBF24]" />}
+                  {currentAccount.id === 'acc_sedona' && <Sparkles className="w-3 h-3 text-emerald-600" />}
+                  {currentAccount.id === 'acc_ai' && <Cpu className="w-3 h-3 text-teal-600" />}
+                  {(currentAccount.id === 'acc_bot1' || currentAccount.id === 'acc_bot2') && <Bot className="w-3 h-3 text-amber-600" />}
                 </div>
-                <h2 className="text-base font-bold text-[#F4FAF8]">
+                <h2 className="text-base font-bold text-[#2D1E24]">
                   {currentAccount.name}
                 </h2>
-                <span className="text-[10px] text-[#A7F3D0] bg-[#103831] px-2 py-0.5 rounded border border-[#246b5e]">
+                <span className="text-[10px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                   {currentAccount.badge}
                 </span>
-                <span className="text-xs text-[#8DB4AB] hidden sm:inline">
+                <span className="text-xs text-[#7A666D] hidden sm:inline">
                   {currentAccount.subTitle}
                 </span>
               </div>
@@ -677,7 +677,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
             {/* Fast Account Switcher Dropdown */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#7CA298]">切换账号:</span>
+              <span className="text-xs text-[#7A666D]">切换账号:</span>
               <div className="flex items-center gap-1">
                 {MEDIA_ACCOUNTS.map((acc) => (
                   <button
@@ -685,8 +685,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     onClick={() => handleEnterAccount(acc.id)}
                     className={`px-2.5 py-1 text-xs rounded-lg transition-all font-medium ${
                       acc.id === selectedAccountId
-                        ? 'bg-[#184843] text-[#F7CE74] border border-[#E5B85C]/50 shadow-xs'
-                        : 'bg-[#0f2d2a]/80 text-[#A6CFC4] hover:bg-[#153b36] border border-[#235850]/60'
+                        ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
+                        : 'bg-white/80 text-[#7A666D] hover:bg-white border border-pink-200/60'
                     }`}
                   >
                     {acc.badge}
@@ -697,15 +697,15 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
           </div>
 
           {/* Dedicated Studio Funnel Header & Action Strip */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-[#0a2321]/80 backdrop-blur-xl p-3 rounded-2xl border border-[#235850]/70 shadow-lg">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white/75 backdrop-blur-xl p-3 rounded-2xl border border-pink-200/70 shadow-md">
             {/* Stage Filter Tabs */}
             <div className="flex items-center gap-1 flex-wrap">
               <button
                 onClick={() => { setSelectedStage('all'); playChime('click'); }}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
                   selectedStage === 'all'
-                    ? 'bg-[#184843] text-[#F7CE74] border border-[#E5B85C]/50 shadow-xs'
-                    : 'text-[#9BC2B7] hover:text-[#FFFFFF]'
+                    ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
+                    : 'text-[#7A666D] hover:text-[#2D1E24]'
                 }`}
               >
                 全部 ({accountItems.length})
@@ -720,13 +720,13 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     onClick={() => { setSelectedStage(stage); playChime('click'); }}
                     className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1 ${
                       selectedStage === stage
-                        ? 'bg-[#123934] text-[#F4FAF8] border border-[#338173] shadow-xs'
-                        : 'text-[#9BC2B7] hover:text-[#FFFFFF]'
+                        ? 'bg-white text-pink-900 border border-pink-300 shadow-xs'
+                        : 'text-[#7A666D] hover:text-[#2D1E24]'
                     }`}
                   >
                     <span>{cfg.icon}</span>
                     <span>{cfg.label}</span>
-                    <span className="text-[10px] font-mono text-[#F4D288]">({count})</span>
+                    <span className="text-[10px] font-mono text-pink-600 font-bold">({count})</span>
                   </button>
                 );
               })}
@@ -740,15 +740,15 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   setShowTrendsModal(true);
                   playChime('click');
                 }}
-                className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-[#3D1A15]/85 text-[#FFB09C] hover:bg-[#52231C] rounded-xl transition-all border border-[#FF6B4A]/50 shadow-xs"
+                className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold bg-pink-50 text-pink-900 hover:bg-pink-100 rounded-xl transition-all border border-pink-300 shadow-xs"
               >
-                <Flame className="w-3.5 h-3.5 text-[#FF6B4A]" />
+                <Flame className="w-3.5 h-3.5 text-pink-500" />
                 <span>本号专属热点雷达 (附真实外链)</span>
               </button>
 
               <button
                 onClick={handleAddNewContent}
-                className="flex items-center gap-1 px-3.5 py-1.5 text-xs font-semibold bg-[#184843] hover:bg-[#205b54] text-[#F7CE74] border border-[#E5B85C]/40 rounded-xl transition-colors shadow-xs"
+                className="flex items-center gap-1 px-3.5 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-colors shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>新增选题</span>
@@ -762,18 +762,18 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             <div className="lg:col-span-5 space-y-3">
               {/* Search Bar */}
               <div className="relative">
-                <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-[#6B958B]" />
+                <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-pink-400" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="搜索本账号标题、正文、标签..."
-                  className="w-full pl-9 pr-3 py-2 text-xs bg-[#0b2724]/90 border border-[#235850]/70 rounded-xl text-[#F4FAF8] placeholder-[#6B958B] focus:outline-none focus:border-[#F5C564]/60 shadow-xs"
+                  className="w-full pl-9 pr-3 py-2 text-xs bg-white/80 border border-pink-200/80 rounded-xl text-[#34262B] placeholder-[#9E8B92] focus:outline-none focus:border-pink-400 shadow-xs"
                 />
               </div>
 
               {/* Items List */}
-              <div className="border border-[#235850]/70 rounded-2xl bg-[#0a2321]/80 backdrop-blur-xl divide-y divide-[#1e4e46]/60 overflow-hidden shadow-xl max-h-[700px] overflow-y-auto">
+              <div className="border border-pink-200/70 rounded-2xl bg-white/75 backdrop-blur-xl divide-y divide-pink-100 overflow-hidden shadow-md max-h-[700px] overflow-y-auto">
                 {filteredItems.length > 0 ? (
                   filteredItems.map((item) => {
                     const isSelected = item.id === (activeItem?.id || selectedItemId);
@@ -788,39 +788,39 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         }}
                         className={`p-3.5 transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#133d37]/80 border-l-4 border-l-[#F5C564]'
-                            : 'hover:bg-[#10342f]/50'
+                            ? 'bg-pink-50/80 border-l-4 border-l-pink-500'
+                            : 'hover:bg-pink-50/30'
                         }`}
                       >
                         <div className="flex items-start justify-between gap-2">
                           <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${stageCfg.bg} ${stageCfg.text}`}>
                             {stageCfg.icon} {stageCfg.label}
                           </span>
-                          <span className="text-[10px] font-mono text-[#7EA89E]">
+                          <span className="text-[10px] font-mono text-[#8C767E]">
                             {new Date(item.updatedAt).toLocaleDateString()}
                           </span>
                         </div>
 
-                        <h4 className="text-xs font-bold text-[#F4FAF8] mt-1.5 line-clamp-2">
+                        <h4 className="text-xs font-bold text-[#2D1E24] mt-1.5 line-clamp-2">
                           {item.title}
                         </h4>
 
                         {item.hook && (
-                          <p className="text-[11px] text-[#A6CFC4] mt-1 line-clamp-1 italic">
+                          <p className="text-[11px] text-[#7A666D] mt-1 line-clamp-1 italic">
                             “{item.hook}”
                           </p>
                         )}
 
-                        <div className="mt-2 flex items-center justify-between text-[10px] text-[#7EA89E]">
+                        <div className="mt-2 flex items-center justify-between text-[10px] text-[#8C767E]">
                           <div className="flex items-center gap-1 flex-wrap">
                             {(item.tags || []).slice(0, 2).map((tag) => (
-                              <span key={tag} className="bg-[#123a34] text-[#A7F3D0] px-1.5 py-0.2 rounded border border-[#215d52]">
+                              <span key={tag} className="bg-emerald-50 text-emerald-800 px-1.5 py-0.2 rounded border border-emerald-200">
                                 #{tag}
                               </span>
                             ))}
                           </div>
                           {item.targetDate && (
-                            <span className="text-[#D8B4FE] font-mono font-medium">
+                            <span className="text-purple-700 font-mono font-medium">
                               {item.targetDate}
                             </span>
                           )}
@@ -829,7 +829,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     );
                   })
                 ) : (
-                  <div className="py-12 text-center text-xs text-[#7EA89E]">
+                  <div className="py-12 text-center text-xs text-[#8C767E]">
                     暂无符合条件的内容条目，点击上方“新增选题”开启创作
                   </div>
                 )}
@@ -839,14 +839,14 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             {/* Right Pane: Deep Inspector & Full Editor for Active Content (7 cols) */}
             <div className="lg:col-span-7">
               {activeItem ? (
-                <div className="border border-[#235850]/70 rounded-2xl bg-[#092220]/90 backdrop-blur-xl p-5 space-y-5 shadow-2xl">
+                <div className="border border-pink-200/70 rounded-2xl bg-white/85 backdrop-blur-xl p-5 space-y-5 shadow-lg">
                   {/* Top Header of Editor */}
-                  <div className="flex items-center justify-between pb-3 border-b border-[#1f5047]/60">
+                  <div className="flex items-center justify-between pb-3 border-b border-pink-100">
                     <div className="flex items-center gap-2">
                       <span className={`text-xs font-bold px-2 py-0.5 rounded border ${STAGE_CONFIG[activeItem.stage].bg} ${STAGE_CONFIG[activeItem.stage].text}`}>
                         {STAGE_CONFIG[activeItem.stage].icon} {STAGE_CONFIG[activeItem.stage].label}
                       </span>
-                      <span className="text-xs text-[#7EA89E] font-mono">
+                      <span className="text-xs text-[#8C767E] font-mono">
                         ID: {activeItem.id.slice(-6)}
                       </span>
                     </div>
@@ -855,7 +855,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       {activeItem.stage !== 'analytics' && (
                         <button
                           onClick={handleAdvanceStage}
-                          className="px-3 py-1.5 text-xs font-semibold bg-[#185348] hover:bg-[#20695b] text-[#A7F3D0] border border-[#2db097]/50 rounded-xl transition-colors flex items-center gap-1 shadow-xs"
+                          className="px-3 py-1.5 text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl transition-colors flex items-center gap-1 shadow-xs"
                         >
                           <span>推进下一阶段</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -864,7 +864,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                       <button
                         onClick={() => handleDeleteItem(activeItem.id)}
-                        className="p-1.5 text-[#88ABA1] hover:text-[#FF6B4A] transition-colors"
+                        className="p-1.5 text-neutral-400 hover:text-rose-600 transition-colors"
                         title="删除该内容"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -874,66 +874,66 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
                   {/* Title Input */}
                   <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-[#8FB5AB]">内容工作标题</label>
+                    <label className="text-[11px] font-bold text-[#6B575F]">内容工作标题</label>
                     <input
                       type="text"
                       value={activeItem.title}
                       onChange={(e) => handleUpdateActiveItem({ title: e.target.value })}
-                      className="w-full px-3 py-2 text-sm font-bold text-[#F4FAF8] bg-[#0d2a27]/90 border border-[#235850]/80 rounded-xl focus:outline-none focus:border-[#F5C564]/60"
+                      className="w-full px-3 py-2 text-sm font-bold text-[#2D1E24] bg-white border border-pink-200 rounded-xl focus:outline-none focus:border-pink-400"
                     />
                   </div>
 
                   {/* Stage-Specific Editor Sections */}
 
                   {/* STAGE 1: 选题池 (Topic Pool & Hook) */}
-                  <div className="space-y-3 p-3.5 rounded-xl border border-[#1d6b5e]/70 bg-[#0c2e29]/70">
+                  <div className="space-y-3 p-3.5 rounded-xl border border-emerald-200/80 bg-emerald-50/40">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#A7F3D0] flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-emerald-900 flex items-center gap-1.5">
                         <span>💡 选题痛点、灵感与黄金前3秒抓手 (Hook)</span>
                       </span>
                       <button
                         onClick={handleGenerateContentForActiveItem}
-                        className="text-xs font-semibold text-[#F7CE74] hover:text-[#FFE39B] flex items-center gap-1 bg-[#15443e] px-2 py-0.5 rounded border border-[#2b776a]"
+                        className="text-xs font-semibold text-emerald-900 hover:text-emerald-950 flex items-center gap-1 bg-white px-2 py-0.5 rounded border border-emerald-300 shadow-2xs"
                       >
-                        <Zap className="w-3 h-3 text-[#F59E0B]" />
+                        <Zap className="w-3 h-3 text-amber-500" />
                         <span>一键生成文案草案</span>
                       </button>
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[11px] font-medium text-[#7EA89E]">黄金抓手 (前3秒停顿大字或视频开头)</label>
+                      <label className="text-[11px] font-medium text-emerald-900/80">黄金抓手 (前3秒停顿大字或视频开头)</label>
                       <input
                         type="text"
                         value={activeItem.hook || ''}
                         onChange={(e) => handleUpdateActiveItem({ hook: e.target.value })}
                         placeholder="例如：为什么你读了那么多心理学书，依然在深夜胸口发堵？"
-                        className="w-full px-3 py-2 text-xs bg-[#09221f] border border-[#21665a] rounded-lg text-[#F4FAF8] placeholder-[#5d857c] focus:outline-none focus:border-[#6EE7B7]"
+                        className="w-full px-3 py-2 text-xs bg-white border border-emerald-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none focus:border-emerald-400"
                       />
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[11px] font-medium text-[#7EA89E]">选题来源与真实外链备注</label>
+                      <label className="text-[11px] font-medium text-emerald-900/80">选题来源与真实外链备注</label>
                       <textarea
                         rows={2}
                         value={activeItem.topicSource || ''}
                         onChange={(e) => handleUpdateActiveItem({ topicSource: e.target.value })}
                         placeholder="记录小红书热搜词、知名博主推特或官方一手发布链接..."
-                        className="w-full px-3 py-2 text-xs bg-[#09221f] border border-[#21665a] rounded-lg text-[#F4FAF8] placeholder-[#5d857c] focus:outline-none font-mono"
+                        className="w-full px-3 py-2 text-xs bg-white border border-emerald-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none font-mono"
                       />
                     </div>
                   </div>
 
                   {/* STAGE 2: 文案草稿正文 */}
-                  <div className="space-y-2 p-3.5 rounded-xl border border-[#7a481c]/70 bg-[#2d1b0d]/70">
+                  <div className="space-y-2 p-3.5 rounded-xl border border-pink-200/80 bg-pink-50/40">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#FDE68A] flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-pink-900 flex items-center gap-1.5">
                         <span>✍️ 文案正文草稿排版</span>
                       </span>
                       <button
                         onClick={() => handleCopy(activeItem.scriptText || '', 'script')}
-                        className="text-xs font-semibold text-[#FDE68A] hover:text-white flex items-center gap-1 bg-[#422914] px-2.5 py-1 rounded-lg border border-[#7d4e23]"
+                        className="text-xs font-semibold text-pink-900 hover:text-pink-950 flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-pink-300 shadow-2xs"
                       >
-                        {copiedScript ? <Check className="w-3 h-3 text-[#10B981]" /> : <Copy className="w-3 h-3" />}
+                        {copiedScript ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedScript ? '已复制正文' : '一键复制正文'}</span>
                       </button>
                     </div>
@@ -943,26 +943,26 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       value={activeItem.scriptText || ''}
                       onChange={(e) => handleUpdateActiveItem({ scriptText: e.target.value })}
                       placeholder="编写正文草稿，支持段落空行与分点排版..."
-                      className="w-full px-3 py-2 text-xs bg-[#191008] border border-[#6b3e18] rounded-lg text-[#F4FAF8] placeholder-[#7d5635] focus:outline-none font-sans leading-relaxed"
+                      className="w-full px-3 py-2 text-xs bg-white border border-pink-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none font-sans leading-relaxed"
                     />
 
                     {/* Tags input */}
                     <div className="space-y-1">
-                      <label className="text-[11px] font-medium text-[#A68767]">话题标签 (以空格分隔)</label>
+                      <label className="text-[11px] font-medium text-pink-900/80">话题标签 (以空格分隔)</label>
                       <input
                         type="text"
                         value={(activeItem.tags || []).join(' ')}
                         onChange={(e) => handleUpdateActiveItem({ tags: e.target.value.split(/\s+/).filter(Boolean) })}
                         placeholder="例如：圣多纳释放法 精神内耗 情绪急救"
-                        className="w-full px-3 py-1.5 text-xs bg-[#191008] border border-[#6b3e18] rounded-lg text-[#F4FAF8] placeholder-[#7d5635] focus:outline-none"
+                        className="w-full px-3 py-1.5 text-xs bg-white border border-pink-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none"
                       />
                     </div>
                   </div>
 
                   {/* STAGE 3: 预发布定稿版面与排期 */}
-                  <div className="space-y-3 p-3.5 rounded-xl border border-[#60308c]/70 bg-[#241336]/70">
+                  <div className="space-y-3 p-3.5 rounded-xl border border-purple-200/80 bg-purple-50/40">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#E9D5FF] flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-purple-900 flex items-center gap-1.5">
                         <span>📅 预发布封面版面与分发排期</span>
                       </span>
                       <button
@@ -970,59 +970,59 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                           const fullPackage = `【定稿标题】\n${activeItem.finalDraftTitle || activeItem.title}\n\n【封面大字】\n${activeItem.coverLayout?.mainHeadline || activeItem.title}\n\n【精修正文】\n${activeItem.finalDraftBody || activeItem.scriptText || ''}\n\n【话题标签】\n${(activeItem.tags || []).map((t) => '#' + t).join(' ')}`;
                           handleCopy(fullPackage, 'final');
                         }}
-                        className="text-xs font-semibold text-[#E9D5FF] hover:text-white flex items-center gap-1 bg-[#371d52] px-2.5 py-1 rounded-lg border border-[#61348a]"
+                        className="text-xs font-semibold text-purple-900 hover:text-purple-950 flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-purple-300 shadow-2xs"
                       >
-                        {copiedFinalPackage ? <Check className="w-3 h-3 text-[#10B981]" /> : <Copy className="w-3 h-3" />}
+                        {copiedFinalPackage ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedFinalPackage ? '已打包复制' : '一键复制全套发布包'}</span>
                       </button>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-[#B89ACF]">终版定稿标题</label>
+                        <label className="text-[11px] font-medium text-purple-900/80">终版定稿标题</label>
                         <input
                           type="text"
                           value={activeItem.finalDraftTitle || ''}
                           onChange={(e) => handleUpdateActiveItem({ finalDraftTitle: e.target.value })}
                           placeholder="小红书吸睛定稿大标题..."
-                          className="w-full px-3 py-1.5 text-xs bg-[#170a24] border border-[#5c2b87] rounded-lg text-[#F4FAF8] placeholder-[#7c569b] focus:outline-none"
+                          className="w-full px-3 py-1.5 text-xs bg-white border border-purple-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none"
                         />
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-[#B89ACF]">预定发布时间 (联动月历)</label>
+                        <label className="text-[11px] font-medium text-purple-900/80">预定发布时间 (联动月历)</label>
                         <input
                           type="text"
                           value={activeItem.targetDate || ''}
                           onChange={(e) => handleUpdateActiveItem({ targetDate: e.target.value })}
                           placeholder="例如 2026-10-11 18:00"
-                          className="w-full px-3 py-1.5 text-xs bg-[#170a24] border border-[#5c2b87] rounded-lg text-[#F4FAF8] placeholder-[#7c569b] focus:outline-none font-mono"
+                          className="w-full px-3 py-1.5 text-xs bg-white border border-purple-200 rounded-lg text-[#2D1E24] placeholder-neutral-400 focus:outline-none font-mono"
                         />
                       </div>
                     </div>
 
                     {/* Cover Preview Mini Component */}
                     {activeItem.coverLayout && (
-                      <div className="p-3 rounded-lg border border-[#5c2b87]/70 bg-[#150a21] space-y-2">
-                        <div className="text-[11px] font-bold text-[#C8B1DE] flex items-center justify-between">
+                      <div className="p-3 rounded-lg border border-purple-200/80 bg-white/70 space-y-2">
+                        <div className="text-[11px] font-bold text-purple-900 flex items-center justify-between">
                           <span>封面版面排版预览</span>
-                          <span className="text-[10px] text-[#9375AA]">小红书 3:4 黄金视觉比</span>
+                          <span className="text-[10px] text-purple-600">小红书 3:4 黄金视觉比</span>
                         </div>
                         <div className={`p-4 rounded-lg border text-center space-y-1.5 ${
-                          COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.bg || 'bg-[#0c2f2a]/90'
-                        } ${COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.border || 'border-[#1e6155]/70'}`}>
+                          COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.bg || 'bg-emerald-50/90'
+                        } ${COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.border || 'border-emerald-200/80'}`}>
                           <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                            COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.badgeBg || 'bg-[#144f45] text-[#A7F3D0]'
+                            COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.badgeBg || 'bg-emerald-100 text-emerald-800'
                           }`}>
                             {activeItem.coverLayout.badgeText || currentAccount.badge}
                           </span>
                           <div className={`text-base font-bold whitespace-pre-line leading-snug ${
-                            COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.text || 'text-[#D1FAE5]'
+                            COVER_COLOR_MAP[activeItem.coverLayout.colorTheme || 'sage']?.text || 'text-emerald-950'
                           }`}>
                             {activeItem.coverLayout.mainHeadline}
                           </div>
                           {activeItem.coverLayout.subHeadline && (
-                            <div className="text-xs text-[#8EB7AC]">
+                            <div className="text-xs text-neutral-600">
                               {activeItem.coverLayout.subHeadline}
                             </div>
                           )}
@@ -1032,7 +1032,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                   </div>
                 </div>
               ) : (
-                <div className="border border-[#235850]/70 rounded-2xl bg-[#0a2321]/80 backdrop-blur-xl p-12 text-center text-xs text-[#7EA89E]">
+                <div className="border border-pink-200/70 rounded-2xl bg-white/75 backdrop-blur-xl p-12 text-center text-xs text-[#8C767E]">
                   请在左侧选择或新建一条内容进行深度编辑与排版
                 </div>
               )}
@@ -1045,17 +1045,17 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       {/* MODAL: 全矩阵热点雷达 (每个热点附带真实有效的原帖/官方外链) */}
       {/* ========================================================================= */}
       {showTrendsModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="bg-[#09221f]/95 rounded-3xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-[#235850] overflow-hidden text-[#E1F1EC]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-150">
+          <div className="bg-white/95 rounded-3xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-pink-200 overflow-hidden text-[#34262B]">
             {/* Modal Header */}
-            <div className="p-5 border-b border-[#1f5047]/70 flex items-center justify-between bg-[#0e302b]/90">
+            <div className="p-5 border-b border-pink-100 flex items-center justify-between bg-pink-50/70">
               <div className="flex items-center gap-2">
-                <Flame className="w-5 h-5 text-[#FF6B4A]" />
+                <Flame className="w-5 h-5 text-pink-500" />
                 <div>
-                  <h3 className="text-base font-bold text-[#F4FAF8]">
+                  <h3 className="text-base font-bold text-[#2D1E24]">
                     自媒体热点雷达 · 真实信源与权威爆款库
                   </h3>
-                  <p className="text-xs text-[#8DB5AB] mt-0.5">
+                  <p className="text-xs text-[#7A666D] mt-0.5">
                     每条热点均附带真实可点击的原帖/小红书话题/官方公告外部直达链接
                   </p>
                 </div>
@@ -1063,21 +1063,21 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
 
               <button
                 onClick={() => setShowTrendsModal(false)}
-                className="p-1.5 text-[#7EA89E] hover:text-white rounded-lg hover:bg-[#133d36]"
+                className="p-1.5 text-neutral-400 hover:text-neutral-700 rounded-lg hover:bg-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Account Selector filter */}
-            <div className="p-3 border-b border-[#1f5047]/60 bg-[#0c2724]/70 flex items-center gap-2 flex-wrap text-xs">
-              <span className="font-bold text-[#7EA89E]">筛选账号:</span>
+            <div className="p-3 border-b border-pink-100 bg-white/70 flex items-center gap-2 flex-wrap text-xs">
+              <span className="font-bold text-[#7A666D]">筛选账号:</span>
               <button
                 onClick={() => { setTrendsAccountFilter('all'); playChime('click'); }}
                 className={`px-3 py-1 rounded-lg transition-all font-semibold ${
                   trendsAccountFilter === 'all'
-                    ? 'bg-[#184843] text-[#F7CE74] border border-[#E5B85C]/50 shadow-xs'
-                    : 'bg-[#0f2d2a]/80 text-[#A6CFC4] border border-[#235850]/60 hover:bg-[#153b36]'
+                    ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
+                    : 'bg-white text-[#7A666D] border border-pink-200 hover:bg-pink-50'
                 }`}
               >
                 全矩阵 ({ACCOUNT_TRENDING_TOPICS.length})
@@ -1090,8 +1090,8 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     onClick={() => { setTrendsAccountFilter(acc.id); playChime('click'); }}
                     className={`px-3 py-1 rounded-lg transition-all font-semibold ${
                       trendsAccountFilter === acc.id
-                        ? 'bg-[#184843] text-[#F7CE74] border border-[#E5B85C]/50 shadow-xs'
-                        : 'bg-[#0f2d2a]/80 text-[#A6CFC4] border border-[#235850]/60 hover:bg-[#153b36]'
+                        ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
+                        : 'bg-white text-[#7A666D] border border-pink-200 hover:bg-pink-50'
                     }`}
                   >
                     {acc.name} ({count})
@@ -1101,7 +1101,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
             </div>
 
             {/* Trend Items Scroll Stream */}
-            <div className="flex-1 overflow-y-auto p-5 divide-y divide-[#1d4c44]/60 space-y-4">
+            <div className="flex-1 overflow-y-auto p-5 divide-y divide-pink-100 space-y-4">
               {displayedTrends.map((trend) => {
                 const acc = MEDIA_ACCOUNTS.find((a) => a.id === trend.accountId);
 
@@ -1110,13 +1110,13 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     {/* Top Row: Account Badge, Heat, & REAL EXTERNAL LINK */}
                     <div className="flex items-center justify-between flex-wrap gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-[#A7F3D0] bg-[#113d36] px-2 py-0.5 rounded border border-[#1f6b5f]">
+                        <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                           {acc?.name}
                         </span>
-                        <span className="text-[10px] font-semibold text-[#FF8256] bg-[#3d1812] px-2 py-0.5 rounded border border-[#823324]">
+                        <span className="text-[10px] font-semibold text-pink-700 bg-pink-50 px-2 py-0.5 rounded border border-pink-200">
                           {trend.heat}
                         </span>
-                        <span className="text-[10px] text-[#7EA89E]">
+                        <span className="text-[10px] text-[#8C767E]">
                           {trend.sourceType}
                         </span>
                       </div>
@@ -1126,28 +1126,28 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                         href={trend.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7DD3FC] hover:text-[#BAE6FD] bg-[#0c2f3d] hover:bg-[#123e4f] px-2.5 py-1 rounded-lg border border-[#226885] transition-colors shadow-xs"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-950 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-lg border border-teal-200 transition-colors shadow-2xs"
                         title={`打开真实外链: ${trend.url}`}
                       >
                         <span>{trend.urlTitle || '查看原帖 / 官方一手'}</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-[#38BDF8]" />
+                        <ExternalLink className="w-3.5 h-3.5 text-teal-600" />
                       </a>
                     </div>
 
                     {/* Topic Keyword */}
-                    <h4 className="text-sm font-bold text-[#F4FAF8]">
+                    <h4 className="text-sm font-bold text-[#2D1E24]">
                       {trend.keyword}
                     </h4>
 
                     {/* Hook & Angle */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-[#0b2421]/90 p-3 rounded-xl border border-[#1d4e46]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-white p-3 rounded-xl border border-pink-100">
                       <div>
-                        <div className="text-[10px] font-bold text-[#7EA89E] uppercase">推荐爆款切入视角</div>
-                        <p className="text-[#C4EAE0] mt-0.5 leading-relaxed">{trend.suggestedAngle}</p>
+                        <div className="text-[10px] font-bold text-[#7A666D] uppercase">推荐爆款切入视角</div>
+                        <p className="text-[#34262B] mt-0.5 leading-relaxed">{trend.suggestedAngle}</p>
                       </div>
                       <div>
-                        <div className="text-[10px] font-bold text-[#FF8566] uppercase">黄金抓手开头 (Hook)</div>
-                        <p className="text-[#FFB09C] font-medium mt-0.5 leading-relaxed italic">“{trend.sampleHook}”</p>
+                        <div className="text-[10px] font-bold text-pink-600 uppercase">黄金抓手开头 (Hook)</div>
+                        <p className="text-pink-900 font-medium mt-0.5 leading-relaxed italic">“{trend.sampleHook}”</p>
                       </div>
                     </div>
 
@@ -1155,7 +1155,7 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                     <div className="flex items-center justify-between text-xs pt-1">
                       <div className="flex items-center gap-1.5 flex-wrap">
                         {trend.tags.map((tag) => (
-                          <span key={tag} className="text-[10px] text-[#8FB5AB] bg-[#113832] px-1.5 py-0.2 rounded border border-[#1c554b]">
+                          <span key={tag} className="text-[10px] text-[#7A666D] bg-neutral-100 px-1.5 py-0.2 rounded border border-neutral-200">
                             #{tag}
                           </span>
                         ))}
@@ -1164,15 +1164,15 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleAdoptTrendingTopic(trend, false)}
-                          className="px-3 py-1 text-xs font-semibold bg-[#113833] hover:bg-[#184d46] text-[#C4EAE0] border border-[#235850] rounded-lg transition-colors"
+                          className="px-3 py-1 text-xs font-semibold bg-white hover:bg-neutral-50 text-[#34262B] border border-neutral-200 rounded-lg transition-colors"
                         >
                           导入为选题
                         </button>
                         <button
                           onClick={() => handleAdoptTrendingTopic(trend, true)}
-                          className="px-3 py-1 text-xs font-semibold bg-[#184843] hover:bg-[#205b54] text-[#F7CE74] border border-[#E5B85C]/40 rounded-lg transition-colors flex items-center gap-1 shadow-xs"
+                          className="px-3 py-1 text-xs font-semibold bg-pink-50 hover:bg-pink-100 text-pink-900 border border-pink-300 rounded-lg transition-colors flex items-center gap-1 shadow-xs"
                         >
-                          <Zap className="w-3 h-3 text-[#F59E0B]" />
+                          <Zap className="w-3 h-3 text-amber-500" />
                           <span>一键智能生成草案</span>
                         </button>
                       </div>
@@ -1189,37 +1189,37 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
       {/* MODAL: 每日 AI 权威情报流 (OpenAI, Anthropic, Google DeepMind 原厂直通) */}
       {/* ========================================================================= */}
       {showAIIntelModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="bg-[#09221f]/95 rounded-3xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-[#226885] overflow-hidden text-[#E1F1EC]">
-            <div className="p-5 border-b border-[#1c5061] flex items-center justify-between bg-[#0e313d]/90">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-150">
+          <div className="bg-white/95 rounded-3xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-teal-200 overflow-hidden text-[#34262B]">
+            <div className="p-5 border-b border-teal-100 flex items-center justify-between bg-teal-50/70">
               <div className="flex items-center gap-2">
-                <Radio className="w-5 h-5 text-[#38BDF8]" />
+                <Radio className="w-5 h-5 text-teal-600" />
                 <div>
-                  <h3 className="text-base font-bold text-[#F4FAF8]">
+                  <h3 className="text-base font-bold text-[#2D1E24]">
                     每日 AI 权威原厂情报流 (官方一手白皮书与技术发布)
                   </h3>
-                  <p className="text-xs text-[#8CE3F5] mt-0.5">
+                  <p className="text-xs text-teal-800 mt-0.5">
                     严格筛选 OpenAI, Anthropic, Google DeepMind, Cursor, DeepSeek 官方技术公告
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowAIIntelModal(false)}
-                className="p-1.5 text-[#7EA89E] hover:text-white rounded-lg hover:bg-[#133d36]"
+                className="p-1.5 text-neutral-400 hover:text-neutral-700 rounded-lg hover:bg-white"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-5 divide-y divide-[#174654]/60 space-y-4">
+            <div className="flex-1 overflow-y-auto p-5 divide-y divide-teal-100 space-y-4">
               {DAILY_AI_INTELLIGENCE.map((intel) => (
                 <div key={intel.id} className="pt-4 first:pt-0 space-y-2.5">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold text-[#BAE6FD] bg-[#0c2f3d] px-2 py-0.5 rounded border border-[#1f5d75]">
+                      <span className="text-[10px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
                         {intel.organization}
                       </span>
-                      <span className="text-[10px] text-[#7DD3FC] bg-[#082029] px-2 py-0.5 rounded border border-[#1b5066] font-mono">
+                      <span className="text-[10px] text-[#7A666D] bg-neutral-100 px-2 py-0.5 rounded border border-neutral-200 font-mono">
                         {intel.date} · {intel.credibility}
                       </span>
                     </div>
@@ -1228,28 +1228,28 @@ export const MediaWorkspace: React.FC<MediaWorkspaceProps> = ({
                       href={intel.officialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7DD3FC] hover:text-[#BAE6FD] bg-[#0c2f3d] hover:bg-[#134254] px-2.5 py-1 rounded-lg border border-[#226885] transition-colors shadow-xs"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-950 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-lg border border-teal-200 transition-colors shadow-2xs"
                     >
                       <span>原厂公告直达</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
 
-                  <h4 className="text-sm font-bold text-[#F4FAF8]">
+                  <h4 className="text-sm font-bold text-[#2D1E24]">
                     {intel.title}
                   </h4>
 
-                  <p className="text-xs text-[#B2D6CD] leading-relaxed bg-[#0b2421]/90 p-2.5 rounded-xl border border-[#1d4e46]">
+                  <p className="text-xs text-[#34262B] leading-relaxed bg-white p-2.5 rounded-xl border border-teal-100">
                     {intel.summary}
                   </p>
 
                   <div className="flex items-center justify-between pt-1">
-                    <span className="text-[11px] text-[#7EA89E] font-mono truncate max-w-md">
+                    <span className="text-[11px] text-[#7A666D] font-mono truncate max-w-md">
                       信源: {intel.officialUrl}
                     </span>
                     <button
                       onClick={() => handleConvertAIIntelToContent(intel)}
-                      className="px-3.5 py-1.5 text-xs font-semibold bg-[#184843] text-[#F7CE74] hover:bg-[#205b54] border border-[#E5B85C]/40 rounded-xl transition-colors shadow-xs"
+                      className="px-3.5 py-1.5 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-colors shadow-xs"
                     >
                       转录为 AI 矩阵图文草稿 →
                     </button>

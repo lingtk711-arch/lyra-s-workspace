@@ -273,9 +273,9 @@ export const DeveloperTools: React.FC = () => {
   }, [jwtToken]);
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto text-[#E1F1EC]">
+    <div className="space-y-6 max-w-6xl mx-auto text-[#2D1E24]">
       {/* Tool Navigation Tabs */}
-      <div className="flex items-center gap-1.5 p-1.5 bg-[#0a2321]/85 border border-[#235850]/70 rounded-2xl overflow-x-auto scrollbar-none shadow-xl backdrop-blur-xl">
+      <div className="flex items-center gap-1.5 p-1.5 bg-white/80 border border-pink-200/80 rounded-2xl overflow-x-auto scrollbar-none shadow-md backdrop-blur-xl">
         {[
           { id: 'json', label: 'JSON 工作室', icon: Braces },
           { id: 'base64', label: 'Base64 & URL 转换', icon: Binary },
@@ -296,8 +296,8 @@ export const DeveloperTools: React.FC = () => {
               }}
               className={`flex items-center gap-2 px-3.5 py-2 text-xs rounded-xl whitespace-nowrap transition-colors ${
                 isActive
-                  ? 'bg-[#184843] text-[#F7CE74] font-semibold border border-[#E5B85C]/50 shadow-xs'
-                  : 'text-[#8DB5AB] hover:text-[#FFFFFF] hover:bg-[#123933]/60'
+                  ? 'bg-pink-100 text-pink-900 font-semibold border border-pink-300 shadow-xs'
+                  : 'text-[#7A666D] hover:text-[#2D1E24] hover:bg-pink-50/60'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />

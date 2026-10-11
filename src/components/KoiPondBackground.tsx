@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export interface AmbientSettings {
   showKoi: boolean;
@@ -34,7 +34,17 @@ interface Petal {
   opacity: number;
 }
 
-interface DustParticle {
+interface LilyPad {
+  x: number;
+  y: number;
+  radius: number;
+  angle: number;
+  driftSpeed: number;
+  color: string;
+  leafAngle: number;
+}
+
+interface SunGleam {
   x: number;
   y: number;
   size: number;
@@ -56,11 +66,10 @@ interface Koi {
   baseSpeed: number;
   wigglePhase: number;
   wiggleFreq: number;
-  colorScheme: 'kohaku' | 'yamabuki' | 'sanke' | 'benigoi';
+  colorScheme: 'kohaku' | 'sakura' | 'yamabuki' | 'asagi';
   scaleColor: string;
   spotColor: string;
   finColor: string;
-  tailHistory: Array<{ x: number; y: number }>;
 }
 
 export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
@@ -93,136 +102,127 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
 
     // Ripples pool
     const ripples: Ripple[] = [];
-    const addRipple = (x: number, y: number, maxRadius = 60, speed = 1.2) => {
+    const addRipple = (x: number, y: number, maxRadius = 65, speed = 1.3) => {
       if (ripples.length > 25) ripples.shift();
       ripples.push({
         x,
         y,
         radius: 4,
         maxRadius,
-        opacity: 0.55,
+        opacity: 0.9,
         speed,
       });
     };
 
-    // Petals pool
+    // Falling petals in pastel blush & peach
     const petalColors = [
-      'rgba(255, 209, 220, 0.75)',
-      'rgba(255, 182, 193, 0.7)',
-      'rgba(255, 230, 235, 0.8)',
-      'rgba(248, 195, 205, 0.65)',
+      'rgba(251, 207, 232, 0.85)', // rose-200
+      'rgba(253, 232, 238, 0.9)',  // soft blush
+      'rgba(254, 205, 211, 0.85)', // rose-100
+      'rgba(244, 167, 185, 0.8)',  // sakura pink
+      'rgba(254, 240, 245, 0.92)', // pearl pink
     ];
-    const petals: Petal[] = Array.from({ length: 30 }, () => ({
+
+    const petals: Petal[] = Array.from({ length: 32 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: 5 + Math.random() * 6,
+      size: 5 + Math.random() * 5.5,
       angle: Math.random() * Math.PI * 2,
       spinSpeed: (Math.random() - 0.5) * 0.02,
-      vx: 0.2 + Math.random() * 0.35,
-      vy: 0.15 + Math.random() * 0.25,
+      vx: 0.25 + Math.random() * 0.35,
+      vy: 0.18 + Math.random() * 0.25,
       color: petalColors[Math.floor(Math.random() * petalColors.length)],
       shape: Math.random() > 0.4 ? 'sakura' : 'petal',
-      opacity: 0.5 + Math.random() * 0.4,
+      opacity: 0.6 + Math.random() * 0.35,
     }));
 
-    // Golden dust particles (floating sunbeams)
-    const dust: DustParticle[] = Array.from({ length: 45 }, () => ({
+    // Floating water lilies in pale green & mint
+    const lilyPads: LilyPad[] = [
+      { x: width * 0.12, y: height * 0.22, radius: 24, angle: 0.4, driftSpeed: 0.003, color: '#A7D9C4', leafAngle: 0.8 },
+      { x: width * 0.16, y: height * 0.26, radius: 16, angle: 1.2, driftSpeed: 0.004, color: '#BFE7D7', leafAngle: 2.1 },
+      { x: width * 0.88, y: height * 0.38, radius: 28, angle: -0.8, driftSpeed: 0.003, color: '#A3D6C1', leafAngle: 1.5 },
+      { x: width * 0.84, y: height * 0.44, radius: 18, angle: 0.9, driftSpeed: 0.0035, color: '#C8EDE0', leafAngle: 0.2 },
+      { x: width * 0.32, y: height * 0.85, radius: 22, angle: 2.1, driftSpeed: 0.0025, color: '#B2E2D0', leafAngle: 2.9 },
+      { x: width * 0.72, y: height * 0.88, radius: 26, angle: -1.4, driftSpeed: 0.003, color: '#A7D9C4', leafAngle: 0.5 },
+    ];
+
+    // Sunlight gleams / golden water sparkles
+    const gleams: SunGleam[] = Array.from({ length: 38 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: 0.8 + Math.random() * 1.8,
-      alpha: 0.2 + Math.random() * 0.5,
-      pulseSpeed: 0.015 + Math.random() * 0.02,
+      size: 1.0 + Math.random() * 2.2,
+      alpha: 0.25 + Math.random() * 0.5,
+      pulseSpeed: 0.015 + Math.random() * 0.025,
       phase: Math.random() * Math.PI * 2,
       vx: (Math.random() - 0.5) * 0.15,
       vy: (Math.random() - 0.5) * 0.15,
     }));
 
-    // Koi fish creation
+    // Gentle Watercolor Koi Fish (Soft Pink, White, Gold, Pale Mint)
     const kois: Koi[] = [
       {
-        x: width * 0.25,
-        y: height * 0.35,
-        length: 68,
+        x: width * 0.26,
+        y: height * 0.38,
+        length: 70,
         width: 17,
-        angle: 0.8,
-        targetAngle: 0.8,
-        speed: 1.1,
-        baseSpeed: 1.1,
+        angle: 0.85,
+        targetAngle: 0.85,
+        speed: 1.05,
+        baseSpeed: 1.05,
         wigglePhase: 0,
         wiggleFreq: 0.08,
         colorScheme: 'kohaku',
-        scaleColor: '#FFFDF5',
-        spotColor: '#FF5A36',
-        finColor: 'rgba(255, 245, 235, 0.55)',
-        tailHistory: [],
+        scaleColor: '#FFFDFE', // Pearlescent White
+        spotColor: '#F4727D',  // Soft Coral Sakura Pink
+        finColor: 'rgba(255, 240, 245, 0.75)',
       },
       {
-        x: width * 0.65,
-        y: height * 0.6,
-        length: 74,
+        x: width * 0.68,
+        y: height * 0.58,
+        length: 76,
         width: 19,
-        angle: 2.2,
-        targetAngle: 2.2,
+        angle: 2.3,
+        targetAngle: 2.3,
         speed: 0.95,
         baseSpeed: 0.95,
-        wigglePhase: 1.5,
+        wigglePhase: 1.6,
         wiggleFreq: 0.07,
+        colorScheme: 'sakura',
+        scaleColor: '#FDF2F4', // Rose Blush Pearl
+        spotColor: '#E15272',  // Camellia Rose Pink
+        finColor: 'rgba(253, 226, 235, 0.75)',
+      },
+      {
+        x: width * 0.48,
+        y: height * 0.78,
+        length: 64,
+        width: 16,
+        angle: -1.1,
+        targetAngle: -1.1,
+        speed: 1.1,
+        baseSpeed: 1.1,
+        wigglePhase: 3.2,
+        wiggleFreq: 0.09,
         colorScheme: 'yamabuki',
-        scaleColor: '#F5B838',
-        spotColor: '#E68A00',
-        finColor: 'rgba(255, 215, 120, 0.55)',
-        tailHistory: [],
+        scaleColor: '#FFFBF0', // Warm Cream
+        spotColor: '#FBBF24',  // Morning Sun Warm Gold
+        finColor: 'rgba(254, 243, 199, 0.75)',
       },
       {
-        x: width * 0.8,
-        y: height * 0.25,
-        length: 56,
-        width: 14,
-        angle: 3.5,
-        targetAngle: 3.5,
-        speed: 1.3,
-        baseSpeed: 1.3,
-        wigglePhase: 2.8,
-        wiggleFreq: 0.1,
-        colorScheme: 'benigoi',
-        scaleColor: '#FF4500',
-        spotColor: '#E02D00',
-        finColor: 'rgba(255, 120, 80, 0.5)',
-        tailHistory: [],
-      },
-      {
-        x: width * 0.45,
-        y: height * 0.8,
-        length: 62,
+        x: width * 0.82,
+        y: height * 0.26,
+        length: 60,
         width: 15,
-        angle: -1.2,
-        targetAngle: -1.2,
-        speed: 1.0,
-        baseSpeed: 1.0,
-        wigglePhase: 3.9,
-        wiggleFreq: 0.08,
-        colorScheme: 'sanke',
-        scaleColor: '#FAF8F0',
-        spotColor: '#E64A19',
-        finColor: 'rgba(255, 250, 240, 0.55)',
-        tailHistory: [],
-      },
-      {
-        x: width * 0.15,
-        y: height * 0.7,
-        length: 78,
-        width: 20,
-        angle: -0.4,
-        targetAngle: -0.4,
-        speed: 0.85,
-        baseSpeed: 0.85,
-        wigglePhase: 5.1,
-        wiggleFreq: 0.065,
-        colorScheme: 'yamabuki',
-        scaleColor: '#F2A900',
-        spotColor: '#C97A00',
-        finColor: 'rgba(255, 200, 90, 0.6)',
-        tailHistory: [],
+        angle: 3.4,
+        targetAngle: 3.4,
+        speed: 1.15,
+        baseSpeed: 1.15,
+        wigglePhase: 2.4,
+        wiggleFreq: 0.095,
+        colorScheme: 'asagi',
+        scaleColor: '#F6FCF9', // Pale Celadon White
+        spotColor: '#6EE7B7',  // Soft Mint Jade
+        finColor: 'rgba(209, 250, 229, 0.75)',
       },
     ];
 
@@ -230,27 +230,26 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
     let lastPointerTime = 0;
     const handlePointerMove = (e: MouseEvent) => {
       const now = performance.now();
-      if (now - lastPointerTime > 120) {
-        addRipple(e.clientX, e.clientY, 45, 1.1);
+      if (now - lastPointerTime > 110) {
+        addRipple(e.clientX, e.clientY, 50, 1.2);
         lastPointerTime = now;
 
-        // Koi gentle reaction to cursor
+        // Koi gentle reaction
         kois.forEach((koi) => {
           const dx = koi.x - e.clientX;
           const dy = koi.y - e.clientY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 180 && dist > 20) {
-            // Softly turn away or curve
+          if (dist < 190 && dist > 20) {
             const awayAngle = Math.atan2(dy, dx);
             koi.targetAngle = awayAngle + (Math.random() - 0.5) * 0.4;
-            koi.speed = koi.baseSpeed * 1.5;
+            koi.speed = koi.baseSpeed * 1.4;
           }
         });
       }
     };
 
     const handleClick = (e: MouseEvent) => {
-      addRipple(e.clientX, e.clientY, 90, 1.8);
+      addRipple(e.clientX, e.clientY, 85, 1.8);
       kois.forEach((koi) => {
         const dx = koi.x - e.clientX;
         const dy = koi.y - e.clientY;
@@ -258,7 +257,7 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
         if (dist < 260) {
           const awayAngle = Math.atan2(dy, dx);
           koi.targetAngle = awayAngle;
-          koi.speed = koi.baseSpeed * 2.2;
+          koi.speed = koi.baseSpeed * 2.0;
         }
       });
     };
@@ -266,253 +265,290 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
     window.addEventListener('mousemove', handlePointerMove);
     window.addEventListener('click', handleClick);
 
+    // Draw single Lily Pad
+    const drawLilyPad = (pad: LilyPad, time: number) => {
+      pad.angle += pad.driftSpeed;
+      const swayX = Math.sin(time * 0.001 + pad.x) * 4;
+      const swayY = Math.cos(time * 0.0012 + pad.y) * 4;
+
+      ctx.save();
+      ctx.translate(pad.x + swayX, pad.y + swayY);
+      ctx.rotate(pad.angle);
+
+      // Translucent shadow under leaf
+      ctx.save();
+      ctx.translate(3, 4);
+      ctx.beginPath();
+      ctx.arc(0, 0, pad.radius, 0.25, Math.PI * 2 - 0.25);
+      ctx.lineTo(0, 0);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(195, 175, 180, 0.15)';
+      ctx.fill();
+      ctx.restore();
+
+      // Leaf body (Pac-man cut-out for authentic water lily)
+      ctx.beginPath();
+      ctx.arc(0, 0, pad.radius, 0.22, Math.PI * 2 - 0.22);
+      ctx.lineTo(0, 0);
+      ctx.closePath();
+
+      const leafGrad = ctx.createRadialGradient(-pad.radius * 0.2, -pad.radius * 0.2, 2, 0, 0, pad.radius);
+      leafGrad.addColorStop(0, '#D4F3E6');
+      leafGrad.addColorStop(0.6, pad.color);
+      leafGrad.addColorStop(1, '#8ACBB2');
+
+      ctx.fillStyle = leafGrad;
+      ctx.fill();
+
+      // Delicate veins
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.lineWidth = 0.75;
+      for (let i = 0; i < 5; i++) {
+        const a = 0.5 + (i * (Math.PI * 1.6)) / 5;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(Math.cos(a) * (pad.radius * 0.85), Math.sin(a) * (pad.radius * 0.85));
+        ctx.stroke();
+      }
+
+      // Rim glow
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      ctx.restore();
+    };
+
     // Draw single Koi
-    const drawKoi = (koi: Koi, time: number) => {
+    const drawKoi = (koi: Koi) => {
       const speedMultiplier = settings.koiSpeed || 1.0;
       koi.speed += (koi.baseSpeed * speedMultiplier - koi.speed) * 0.04;
       koi.wigglePhase += koi.wiggleFreq * (koi.speed / koi.baseSpeed);
 
-      // Angle easing
       let angleDiff = koi.targetAngle - koi.angle;
       while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
       while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
       koi.angle += angleDiff * 0.035;
 
-      // Move
       koi.x += Math.cos(koi.angle) * koi.speed;
       koi.y += Math.sin(koi.angle) * koi.speed;
 
-      // Random turn & wander
       if (Math.random() < 0.012) {
         koi.targetAngle += (Math.random() - 0.5) * 1.3;
       }
 
-      // Edge bounce / soft wrapping
-      const margin = 100;
+      const margin = 80;
       if (koi.x < margin) koi.targetAngle = 0 + (Math.random() - 0.5) * 0.5;
       else if (koi.x > width - margin) koi.targetAngle = Math.PI + (Math.random() - 0.5) * 0.5;
       if (koi.y < margin) koi.targetAngle = Math.PI / 2 + (Math.random() - 0.5) * 0.5;
       else if (koi.y > height - margin) koi.targetAngle = -Math.PI / 2 + (Math.random() - 0.5) * 0.5;
 
-      // Occasional small ripple behind fish
       if (Math.random() < 0.015) {
-        addRipple(koi.x - Math.cos(koi.angle) * 30, koi.y - Math.sin(koi.angle) * 30, 25, 0.7);
+        addRipple(koi.x - Math.cos(koi.angle) * 28, koi.y - Math.sin(koi.angle) * 28, 22, 0.6);
       }
-
-      // Tail spine physics (4 joints)
-      const numJoints = 5;
-      const jointDist = koi.length / numJoints;
-      const wiggleAmp = Math.sin(koi.wigglePhase) * 0.28;
 
       ctx.save();
       ctx.translate(koi.x, koi.y);
       ctx.rotate(koi.angle);
 
-      // 1. Soft underwater drop-shadow for 3D pond depth
+      // 1. Soft Warm Diffused Underwater Shadow
       ctx.save();
-      ctx.translate(8, 14);
-      ctx.filter = 'blur(10px)';
+      ctx.translate(6, 9);
+      ctx.filter = 'blur(8px)';
       ctx.beginPath();
-      ctx.ellipse(0, 0, koi.length * 0.45, koi.width * 0.55, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(4, 15, 14, 0.4)';
+      ctx.ellipse(0, 0, koi.length * 0.44, koi.width * 0.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(190, 160, 170, 0.18)';
       ctx.fill();
       ctx.restore();
 
-      // 2. Pectoral Fins (side fins fluttering)
-      const finFlutter = Math.sin(koi.wigglePhase * 1.2) * 0.15;
+      // 2. Silky Pectoral Side Fins
+      const finFlutter = Math.sin(koi.wigglePhase * 1.2) * 0.14;
       ctx.save();
       ctx.fillStyle = koi.finColor;
 
       // Left fin
       ctx.beginPath();
-      ctx.ellipse(koi.length * 0.1, -koi.width * 0.85, koi.width * 0.8, koi.width * 0.35, -0.6 + finFlutter, 0, Math.PI * 2);
+      ctx.ellipse(koi.length * 0.1, -koi.width * 0.85, koi.width * 0.82, koi.width * 0.36, -0.6 + finFlutter, 0, Math.PI * 2);
       ctx.fill();
 
       // Right fin
       ctx.beginPath();
-      ctx.ellipse(koi.length * 0.1, koi.width * 0.85, koi.width * 0.8, koi.width * 0.35, 0.6 - finFlutter, 0, Math.PI * 2);
+      ctx.ellipse(koi.length * 0.1, koi.width * 0.85, koi.width * 0.82, koi.width * 0.36, 0.6 - finFlutter, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
 
-      // 3. Koi Body Contour & Spine
+      // 3. Body Torso
       const bodyGrad = ctx.createLinearGradient(-koi.length * 0.5, 0, koi.length * 0.5, 0);
       bodyGrad.addColorStop(0, '#FFFFFF');
       bodyGrad.addColorStop(0.2, koi.scaleColor);
-      bodyGrad.addColorStop(0.7, koi.scaleColor);
-      bodyGrad.addColorStop(1, '#FFF5EA');
+      bodyGrad.addColorStop(0.8, koi.scaleColor);
+      bodyGrad.addColorStop(1, '#FFF5F7');
 
-      ctx.beginPath();
       // Head
-      ctx.ellipse(koi.length * 0.32, 0, koi.length * 0.22, koi.width * 0.8, 0, 0, Math.PI * 2);
-      ctx.fillStyle = bodyGrad;
-      ctx.fill();
-
-      // Mid body & Torso
       ctx.beginPath();
-      ctx.ellipse(0, 0, koi.length * 0.4, koi.width, 0, 0, Math.PI * 2);
+      ctx.ellipse(koi.length * 0.32, 0, koi.length * 0.22, koi.width * 0.78, 0, 0, Math.PI * 2);
       ctx.fillStyle = bodyGrad;
       ctx.fill();
 
-      // Distinctive Koi Pattern Spots (Vermilion & Gold patches)
+      // Mid body
+      ctx.beginPath();
+      ctx.moveTo(koi.length * 0.32, -koi.width * 0.78);
+      ctx.quadraticCurveTo(koi.length * 0.05, -koi.width * 0.9, -koi.length * 0.15, -koi.width * 0.5);
+      ctx.lineTo(-koi.length * 0.15, koi.width * 0.5);
+      ctx.quadraticCurveTo(koi.length * 0.05, koi.width * 0.9, koi.length * 0.32, koi.width * 0.78);
+      ctx.closePath();
+      ctx.fillStyle = bodyGrad;
+      ctx.fill();
+
+      // Soft Spot Markings (Watercolor splotches)
       ctx.save();
       ctx.fillStyle = koi.spotColor;
 
-      // Head / Shoulder patch
+      // Forehead spot
       ctx.beginPath();
-      ctx.ellipse(koi.length * 0.18, -koi.width * 0.15, koi.length * 0.16, koi.width * 0.6, 0.2, 0, Math.PI * 2);
+      ctx.ellipse(koi.length * 0.3, -koi.width * 0.1, koi.length * 0.12, koi.width * 0.36, -0.2, 0, Math.PI * 2);
       ctx.fill();
 
       // Back spot
       ctx.beginPath();
-      ctx.ellipse(-koi.length * 0.1, koi.width * 0.2, koi.length * 0.18, koi.width * 0.55, -0.3, 0, Math.PI * 2);
+      ctx.ellipse(koi.length * 0.02, koi.width * 0.05, koi.length * 0.18, koi.width * 0.52, 0.3, 0, Math.PI * 2);
       ctx.fill();
 
-      // Sanke black accent spots if applicable
-      if (koi.colorScheme === 'sanke') {
-        ctx.fillStyle = '#1C1917';
-        ctx.beginPath();
-        ctx.ellipse(-koi.length * 0.05, -koi.width * 0.4, 4, 3, 0.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.ellipse(-koi.length * 0.25, 2, 5, 3.5, -0.2, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      // Flank spot
+      ctx.beginPath();
+      ctx.ellipse(-koi.length * 0.16, -koi.width * 0.12, koi.length * 0.1, koi.width * 0.3, -0.4, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
 
-      // Spine Dorsal Fin Line (delicate golden shimmer)
-      ctx.beginPath();
-      ctx.moveTo(-koi.length * 0.25, 0);
-      ctx.lineTo(koi.length * 0.15, 0);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
-      ctx.lineWidth = 1.8;
-      ctx.lineCap = 'round';
-      ctx.stroke();
+      // Tail spine joints
+      const numJoints = 4;
+      const jointDist = (koi.length * 0.4) / numJoints;
+      let currX = -koi.length * 0.15;
+      let currY = 0;
+      let currAngle = 0;
 
-      // 4. Multi-joint Flexible Tail & Caudal Fin
-      const tailSegments: Array<{ x: number; y: number }> = [];
-      let currentX = -koi.length * 0.35;
-      let currentY = 0;
-      let segAngle = 0;
+      for (let i = 1; i <= numJoints; i++) {
+        const segRatio = i / numJoints;
+        const segWidth = koi.width * (0.5 - segRatio * 0.35);
+        const jointBend = Math.sin(koi.wigglePhase - i * 0.55) * 0.22;
+        currAngle += jointBend;
 
-      for (let i = 0; i < 4; i++) {
-        segAngle += Math.sin(koi.wigglePhase - i * 0.7) * 0.22;
-        currentX -= Math.cos(segAngle) * (jointDist * 0.7);
-        currentY += Math.sin(segAngle) * (jointDist * 0.7);
-        tailSegments.push({ x: currentX, y: currentY });
+        const nextX = currX - Math.cos(currAngle) * jointDist;
+        const nextY = currY - Math.sin(currAngle) * jointDist;
 
-        // Tail taper
-        const segWidth = koi.width * (0.7 - i * 0.14);
         ctx.beginPath();
-        ctx.ellipse(currentX, currentY, segWidth * 1.1, segWidth, segAngle, 0, Math.PI * 2);
+        ctx.moveTo(currX, currY - segWidth);
+        ctx.lineTo(nextX, nextY - segWidth * 0.8);
+        ctx.lineTo(nextX, nextY + segWidth * 0.8);
+        ctx.lineTo(currX, currY + segWidth);
+        ctx.closePath();
         ctx.fillStyle = bodyGrad;
         ctx.fill();
+
+        currX = nextX;
+        currY = nextY;
       }
 
-      // Fan-shaped Translucent Caudal Fin (Tail)
-      const lastSeg = tailSegments[tailSegments.length - 1];
+      // Flowing Caudal Fin (Tail)
+      const tailSwing = Math.sin(koi.wigglePhase - 2.5) * 0.45;
       ctx.save();
-      ctx.translate(lastSeg.x, lastSeg.y);
-      ctx.rotate(segAngle);
+      ctx.translate(currX, currY);
+      ctx.rotate(currAngle + tailSwing);
 
-      const finSpread = Math.sin(koi.wigglePhase - 2.8) * 0.1;
       ctx.fillStyle = koi.finColor;
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(-koi.length * 0.3, -koi.width * 1.1, -koi.length * 0.55, -koi.width * 0.7 + finSpread * 10);
-      ctx.quadraticCurveTo(-koi.length * 0.42, 0, -koi.length * 0.55, koi.width * 0.7 - finSpread * 10);
-      ctx.quadraticCurveTo(-koi.length * 0.3, koi.width * 1.1, 0, 0);
+      ctx.bezierCurveTo(-koi.length * 0.22, -koi.width * 0.85, -koi.length * 0.42, -koi.width * 1.1, -koi.length * 0.48, -koi.width * 0.55);
+      ctx.bezierCurveTo(-koi.length * 0.35, -koi.width * 0.1, -koi.length * 0.35, koi.width * 0.1, -koi.length * 0.48, koi.width * 0.55);
+      ctx.bezierCurveTo(-koi.length * 0.42, koi.width * 1.1, -koi.length * 0.22, koi.width * 0.85, 0, 0);
       ctx.fill();
 
-      // Fin rays delicate texture
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.lineWidth = 0.8;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-koi.length * 0.5, -koi.width * 0.35);
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-koi.length * 0.52, 0);
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-koi.length * 0.5, koi.width * 0.35);
-      ctx.stroke();
+      // Delicate fin ray lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.lineWidth = 0.65;
+      for (let r = -2; r <= 2; r++) {
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(-koi.length * 0.38, r * (koi.width * 0.25));
+        ctx.stroke();
+      }
+      ctx.restore();
 
-      ctx.restore(); // restore tail
-      ctx.restore(); // restore koi transform
+      // Eyes
+      ctx.fillStyle = '#4A373E';
+      ctx.beginPath();
+      ctx.arc(koi.length * 0.38, -koi.width * 0.42, 1.8, 0, Math.PI * 2);
+      ctx.arc(koi.length * 0.38, koi.width * 0.42, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // White eye highlights
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.arc(koi.length * 0.39, -koi.width * 0.44, 0.7, 0, Math.PI * 2);
+      ctx.arc(koi.length * 0.39, koi.width * 0.4, 0.7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
     };
 
-    // Draw single Sakura Petal
+    // Draw single Petal
     const drawPetal = (p: Petal) => {
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.angle);
-      ctx.globalAlpha = p.opacity;
       ctx.fillStyle = p.color;
 
       ctx.beginPath();
       if (p.shape === 'sakura') {
-        // Heart-notched sakura petal
         ctx.moveTo(0, -p.size);
         ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.8, p.size * 0.9, p.size * 0.4, 0, p.size);
         ctx.bezierCurveTo(-p.size * 0.9, p.size * 0.4, -p.size * 0.8, -p.size * 0.8, 0, -p.size);
       } else {
-        // Oval petal
         ctx.ellipse(0, 0, p.size * 1.2, p.size * 0.6, 0, 0, Math.PI * 2);
       }
       ctx.fill();
 
-      // Soft white sheen on petal edge
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 0.5;
       ctx.stroke();
 
       ctx.restore();
     };
 
-    // Animation Loop
-    let lastTime = performance.now();
+    // Main Canvas Render Loop
     const render = (time: number) => {
-      const dt = (time - lastTime) / 1000;
-      lastTime = time;
-
-      // 1. Clear & Background Gradient (Deep Pond Jade to Crystal Teal)
-      const pondGradient = ctx.createRadialGradient(
-        width * 0.45,
-        height * 0.35,
-        width * 0.05,
-        width * 0.5,
-        height * 0.5,
-        Math.max(width, height) * 0.85
-      );
-      // Matching the uploaded image: deep emerald celadon, sunlit jade, and tranquil shadows
-      pondGradient.addColorStop(0, '#194944'); // Sunlit pool core
-      pondGradient.addColorStop(0.35, '#123A36'); // Luminous jade water
-      pondGradient.addColorStop(0.7, '#0C2623'); // Deep calm teal
-      pondGradient.addColorStop(1, '#071A18'); // Abyssal edge
+      // 1. Serene Watercolor Pond Gradient (Pale Pink & Pale Celadon Green)
+      const pondGradient = ctx.createLinearGradient(0, 0, width, height);
+      pondGradient.addColorStop(0, '#FCF6F7');   // Gentle morning peach-blush
+      pondGradient.addColorStop(0.3, '#F5FAF8'); // Translucent pale mint dew
+      pondGradient.addColorStop(0.7, '#EEF7F3'); // Soft celadon spring stream
+      pondGradient.addColorStop(1, '#FCF4F6');   // Rosy water edge
 
       ctx.fillStyle = pondGradient;
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Caustics & Sunbeam shimmer (soft golden caustics)
+      // 2. Sunlight Caustics & Water Ripple Patterns
       if (settings.showCaustics) {
         ctx.save();
-        // Golden caustic light patterns
-        const causticTime = time * 0.0006;
+        const causticTime = time * 0.0005;
         for (let i = 0; i < 4; i++) {
           const cx = width * (0.2 + i * 0.22) + Math.sin(causticTime + i) * 60;
           const cy = height * (0.25 + (i % 2) * 0.35) + Math.cos(causticTime * 0.8 + i) * 45;
-          const cGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, 220);
-          cGrad.addColorStop(0, 'rgba(245, 210, 130, 0.09)');
-          cGrad.addColorStop(0.5, 'rgba(120, 205, 185, 0.05)');
-          cGrad.addColorStop(1, 'rgba(10, 35, 30, 0)');
+          const cGrad = ctx.createRadialGradient(cx, cy, 10, cx, cy, 240);
+          cGrad.addColorStop(0, 'rgba(255, 255, 255, 0.45)');
+          cGrad.addColorStop(0.4, 'rgba(230, 248, 240, 0.3)');
+          cGrad.addColorStop(0.8, 'rgba(253, 235, 240, 0.15)');
+          cGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
           ctx.fillStyle = cGrad;
           ctx.beginPath();
-          ctx.arc(cx, cy, 220, 0, Math.PI * 2);
+          ctx.arc(cx, cy, 240, 0, Math.PI * 2);
           ctx.fill();
         }
         ctx.restore();
       }
 
-      // 3. Water Ripples
+      // 3. Water Ripples (Physics Expansion)
       for (let i = ripples.length - 1; i >= 0; i--) {
         const r = ripples[i];
         r.radius += r.speed;
@@ -524,26 +560,26 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
         }
 
         ctx.save();
-        ctx.strokeStyle = `rgba(215, 245, 240, ${r.opacity * 0.6})`;
+        // Delicate soft pink & celadon edge rings
+        ctx.strokeStyle = `rgba(244, 166, 185, ${r.opacity * 0.65})`;
         ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
         ctx.stroke();
 
-        // Faint outer reflection ring
-        if (r.radius > 15) {
-          ctx.strokeStyle = `rgba(245, 220, 160, ${r.opacity * 0.25})`;
+        if (r.radius > 12) {
+          ctx.strokeStyle = `rgba(167, 243, 208, ${r.opacity * 0.45})`;
           ctx.lineWidth = 0.8;
           ctx.beginPath();
-          ctx.arc(r.x, r.y, r.radius * 0.75, 0, Math.PI * 2);
+          ctx.arc(r.x, r.y, r.radius * 0.72, 0, Math.PI * 2);
           ctx.stroke();
         }
         ctx.restore();
       }
 
-      // 4. Golden Dust / Water Caustic Sparkles
+      // 4. Floating Sun Gleams & Golden Dew
       ctx.save();
-      dust.forEach((d) => {
+      gleams.forEach((d) => {
         d.phase += d.pulseSpeed;
         d.x += d.vx;
         d.y += d.vy;
@@ -553,26 +589,28 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
         if (d.y > height) d.y = 0;
 
         const currentAlpha = d.alpha * (0.6 + 0.4 * Math.sin(d.phase));
-        ctx.fillStyle = `rgba(247, 215, 138, ${currentAlpha})`;
+        ctx.fillStyle = `rgba(251, 191, 36, ${currentAlpha * 0.5})`;
         ctx.beginPath();
         ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
         ctx.fill();
       });
       ctx.restore();
 
-      // 5. Koi Fish Swimming
+      // 5. Water Lily Pads (Floating Green Leaves)
+      lilyPads.forEach((pad) => drawLilyPad(pad, time));
+
+      // 6. Koi Fish Swimming Gracefully
       if (settings.showKoi) {
-        kois.forEach((koi) => drawKoi(koi, time));
+        kois.forEach((koi) => drawKoi(koi));
       }
 
-      // 6. Floating Sakura Petals
+      // 7. Drifting Sakura Petals
       if (settings.showPetals) {
         petals.forEach((p) => {
           p.x += p.vx;
           p.y += p.vy;
           p.angle += p.spinSpeed;
 
-          // Soft drift across current
           if (p.x > width + 20) p.x = -20;
           if (p.y > height + 20) p.y = -20;
 
@@ -596,8 +634,8 @@ export const KoiPondBackground: React.FC<KoiPondBackgroundProps> = ({
   return (
     <div className={`fixed inset-0 pointer-events-none z-0 overflow-hidden ${className}`}>
       <canvas ref={canvasRef} className="w-full h-full block" />
-      {/* Delicate vignette to frame the pond gracefully */}
-      <div className="absolute inset-0 bg-radial-[at_center] from-transparent via-teal-950/20 to-teal-950/65 pointer-events-none" />
+      {/* Light soft pastel vignette */}
+      <div className="absolute inset-0 bg-radial-[at_center] from-transparent via-pink-100/10 to-emerald-100/25 pointer-events-none" />
     </div>
   );
 };

@@ -159,7 +159,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans text-[#E7F6F1] selection:bg-[#FF6B4A]/30 selection:text-[#FFFFFF]">
+    <div className="relative min-h-screen flex flex-col font-sans text-[#34262B] selection:bg-pink-300/40 selection:text-pink-950">
       {/* Dynamic Koi Pond Canvas Background */}
       <KoiPondBackground settings={ambientSettings} />
 
