@@ -93,20 +93,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-pink-950/20 backdrop-blur-md animate-in fade-in duration-150">
       <div 
-        className="w-full max-w-lg rounded-2xl border border-pink-200 bg-white/95 text-[#2D1E24] p-6 shadow-2xl space-y-6 backdrop-blur-xl"
+        className="w-full max-w-lg rounded-2xl border border-pink-200 bg-white/95 text-[#684852] p-6 shadow-2xl space-y-6 backdrop-blur-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between pb-3 border-b border-pink-100">
           <div>
-            <h3 className="text-base font-bold text-[#2D1E24] flex items-center gap-2">
+            <h3 className="text-base font-bold text-[#684852] flex items-center gap-2">
               <span className="text-pink-500">🌸</span>
               <span>数据备份与工作台设置</span>
             </h3>
-            <p className="text-xs text-[#7A666D] mt-0.5">所有数据均保存在本地浏览器中，离线私密安全</p>
+            <p className="text-xs text-[#8F727C] mt-0.5">所有数据均保存在本地浏览器中，离线私密安全</p>
           </div>
-          <button onClick={onClose} className="p-1.5 text-[#8C767E] hover:text-[#2D1E24] rounded-lg hover:bg-pink-50 transition-colors">
+          <button onClick={onClose} className="p-1.5 text-[#8C767E] hover:text-[#684852] rounded-lg hover:bg-pink-50 transition-colors">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -129,8 +129,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Export JSON */}
           <div className="p-4 rounded-xl border border-pink-200/70 bg-pink-50/40 flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-bold text-[#2D1E24]">导出完整数据备份 (JSON)</div>
-              <div className="text-[11px] text-[#7A666D] mt-0.5">
+              <div className="text-xs font-bold text-[#684852]">导出完整数据备份 (JSON)</div>
+              <div className="text-[11px] text-[#8F727C] mt-0.5">
                 包含 4 个账号选题文案、今日待办与外贸口语库
               </div>
             </div>
@@ -146,8 +146,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Import JSON */}
           <div className="p-4 rounded-xl border border-emerald-200/70 bg-emerald-50/40 flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-bold text-[#2D1E24]">导入并恢复备份</div>
-              <div className="text-[11px] text-[#7A666D] mt-0.5">
+              <div className="text-xs font-bold text-[#684852]">导入并恢复备份</div>
+              <div className="text-[11px] text-[#8F727C] mt-0.5">
                 选择之前的 JSON 备份快速还原
               </div>
             </div>
@@ -172,8 +172,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Reset Defaults */}
           <div className="p-4 rounded-xl border border-neutral-200 bg-neutral-50/60 flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-bold text-[#2D1E24]">恢复出厂初始预设</div>
-              <div className="text-[11px] text-[#7A666D] mt-0.5">
+              <div className="text-xs font-bold text-[#684852]">恢复出厂初始预设</div>
+              <div className="text-[11px] text-[#8F727C] mt-0.5">
                 重置为圣多纳释放法与 4 账号初始范例
               </div>
             </div>

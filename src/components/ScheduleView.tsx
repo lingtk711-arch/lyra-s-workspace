@@ -348,7 +348,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
   const dayTotalCount = currentDayTasks.length;
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto text-[#34262B]">
+    <div className="space-y-6 max-w-6xl mx-auto text-[#684852]">
       {/* 1. Planning Tier Navigation Bar (月度 / 每周 / 每日) */}
       <div className="pb-4 border-b border-pink-200/60 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -356,7 +356,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
             <CalendarIcon className="w-3.5 h-3.5 text-pink-500" />
             <span>三级联动规划体系 · 战略日历与四象限推进</span>
           </div>
-          <h1 className="text-xl font-bold text-[#2D1E24] mt-1 flex items-center gap-2 font-serif">
+          <h1 className="text-xl font-bold text-[#684852] mt-1 flex items-center gap-2 font-serif">
             <span>{planningLevel === 'month' ? '月度规划日历' : planningLevel === 'week' ? '每周战役与负载规划' : '每日待办 · 四象限执行看板'}</span>
             <span className="text-xs font-normal text-pink-700 font-mono">
               ({selectedDate === '2026-10-11' ? '今日 10月11日' : selectedDate})
@@ -371,7 +371,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
               planningLevel === 'month'
                 ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
-                : 'text-[#7A666D] hover:text-[#2D1E24]'
+                : 'text-[#7A666D] hover:text-[#684852]'
             }`}
           >
             <CalendarDays className="w-3.5 h-3.5 text-pink-600" />
@@ -383,7 +383,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
               planningLevel === 'week'
                 ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
-                : 'text-[#7A666D] hover:text-[#2D1E24]'
+                : 'text-[#8F727C] hover:text-[#684852]'
             }`}
           >
             <Target className="w-3.5 h-3.5 text-amber-600" />
@@ -395,7 +395,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
               planningLevel === 'day'
                 ? 'bg-pink-100 text-pink-900 border border-pink-300 shadow-xs'
-                : 'text-[#7A666D] hover:text-[#2D1E24]'
+                : 'text-[#8F727C] hover:text-[#684852]'
             }`}
           >
             <Layers className="w-3.5 h-3.5 text-emerald-600" />
@@ -421,12 +421,12 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     }
                     playChime('click');
                   }}
-                  className="p-1.5 rounded-lg text-[#7A666D] hover:text-[#2D1E24] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
+                  className="p-1.5 rounded-lg text-[#8F727C] hover:text-[#684852] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
                   title="上个月"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
-                <span className="text-sm font-bold text-[#2D1E24] px-2 font-mono">
+                <span className="text-sm font-bold text-[#684852] px-2 font-mono">
                   {currentYear} 年 {currentMonth + 1} 月
                 </span>
                 <button
@@ -439,7 +439,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     }
                     playChime('click');
                   }}
-                  className="p-1.5 rounded-lg text-[#7A666D] hover:text-[#2D1E24] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
+                  className="p-1.5 rounded-lg text-[#8F727C] hover:text-[#684852] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
                   title="下个月"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -454,7 +454,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
               </button>
             </div>
 
-            <div className="text-xs text-[#7A666D] flex items-center gap-3 flex-wrap">
+            <div className="text-xs text-[#8F727C] flex items-center gap-3 flex-wrap">
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-pink-500 inline-block" />
                 <span>Q1 核心必须完成</span>
@@ -512,7 +512,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                           : isSelected
                           ? 'bg-pink-200 text-pink-900'
                           : cell.isCurrentMonth
-                          ? 'text-[#2D1E24]'
+                          ? 'text-[#684852]'
                           : 'text-neutral-400'
                       }`}>
                         {cell.dayNumber}
@@ -577,11 +577,11 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
           <div className="border border-pink-200/70 rounded-2xl p-5 bg-white/75 backdrop-blur-xl space-y-4 shadow-md">
             <div className="flex items-center justify-between pb-3 border-b border-pink-100">
               <div>
-                <h2 className="text-sm font-bold text-[#2D1E24] flex items-center gap-1.5">
+                <h2 className="text-sm font-bold text-[#684852] flex items-center gap-1.5">
                   <Target className="w-4 h-4 text-amber-500" />
                   <span>本周核心战役攻坚 (战略 OKR 与关键交付)</span>
                 </h2>
-                <p className="text-xs text-[#7A666D] mt-0.5">
+                <p className="text-xs text-[#8F727C] mt-0.5">
                   以周为单位锁定关键交付，拒绝低水平忙碌，确保自媒体、学习与生活稳步前行
                 </p>
               </div>
@@ -598,7 +598,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   className={`p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 ${
                     goal.completed
                       ? 'bg-neutral-50/70 border-neutral-200 text-neutral-400'
-                      : 'bg-white hover:bg-pink-50/50 border-pink-200/70 text-[#2D1E24] shadow-xs'
+                      : 'bg-white hover:bg-pink-50/50 border-pink-200/70 text-[#684852] shadow-xs'
                   }`}
                 >
                   <button className="mt-0.5">
@@ -609,7 +609,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                     )}
                   </button>
                   <div className="flex-1 min-w-0">
-                    <div className={`text-xs font-semibold ${goal.completed ? 'line-through text-neutral-400' : 'text-[#2D1E24]'}`}>
+                    <div className={`text-xs font-semibold ${goal.completed ? 'line-through text-neutral-400' : 'text-[#684852]'}`}>
                       {goal.title}
                     </div>
                     {goal.targetCount && (
@@ -627,7 +627,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
           <div className="space-y-3">
             <div className="text-xs font-bold text-[#6D424F] flex items-center justify-between">
               <span>本周 7 天时间轴负载与任务分布</span>
-              <span className="text-[11px] text-[#7A666D]">点击任意一天即可展开每日四象限待办</span>
+              <span className="text-[11px] text-[#8F727C]">点击任意一天即可展开每日四象限待办</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2.5">
@@ -659,8 +659,8 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-[#2D1E24]">{item.dayName}</span>
-                        <span className="text-[10px] font-mono text-[#7A666D]">{item.date.slice(5)}</span>
+                        <span className="text-xs font-bold text-[#684852]">{item.dayName}</span>
+                        <span className="text-[10px] font-mono text-[#8F727C]">{item.date.slice(5)}</span>
                       </div>
                       {isToday && (
                         <div className="mt-1">
@@ -704,13 +704,13 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
               <div className="flex items-center gap-2">
                 <button
                   onClick={handlePrevDay}
-                  className="p-1.5 rounded-lg text-[#7A666D] hover:text-[#2D1E24] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
+                  className="p-1.5 rounded-lg text-[#8F727C] hover:text-[#684852] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
                   title="前一天"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-[#2D1E24] font-mono">
+                  <span className="text-sm font-bold text-[#684852] font-mono">
                     {selectedDate}
                   </span>
                   {selectedDate === '2026-10-11' ? (
@@ -728,7 +728,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 </div>
                 <button
                   onClick={handleNextDay}
-                  className="p-1.5 rounded-lg text-[#7A666D] hover:text-[#2D1E24] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
+                  className="p-1.5 rounded-lg text-[#8F727C] hover:text-[#684852] bg-white hover:bg-pink-50 border border-pink-200 transition-colors shadow-2xs"
                   title="后一天"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -737,7 +737,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
 
               {/* Day Progress & Return to Calendar */}
               <div className="flex items-center gap-3">
-                <span className="text-xs text-[#7A666D]">
+                <span className="text-xs text-[#8F727C]">
                   当日完成率：<strong className="font-mono text-pink-700 font-bold">{dayDoneCount} / {dayTotalCount}</strong> ({dayTotalCount > 0 ? Math.round((dayDoneCount / dayTotalCount) * 100) : 0}%)
                 </span>
                 <button
@@ -783,12 +783,12 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 placeholder={`新增 ${selectedDate} 待办事项...`}
-                className="px-3 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#2D1E24] placeholder-[#9E8B92] focus:outline-none focus:border-pink-400 flex-1 min-w-[200px] shadow-2xs"
+                className="px-3 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#684852] placeholder-[#A68F97] focus:outline-none focus:border-pink-400 flex-1 min-w-[200px] shadow-2xs"
               />
               <select
                 value={newQuadrant}
                 onChange={(e) => setNewQuadrant(e.target.value as TaskQuadrant)}
-                className="px-2.5 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#2D1E24] focus:outline-none shadow-2xs"
+                className="px-2.5 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#684852] focus:outline-none shadow-2xs"
               >
                 <option value="q1_urgent_important">🎯 Q1 核心推进 (必须完成)</option>
                 <option value="q2_important_not_urgent">🌱 Q2 稳健推进 (习惯/学习)</option>
@@ -800,7 +800,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                 value={newDueTime}
                 onChange={(e) => setNewDueTime(e.target.value)}
                 placeholder="时间如 18:00"
-                className="px-2.5 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#2D1E24] placeholder-[#9E8B92] w-24 text-center focus:outline-none shadow-2xs"
+                className="px-2.5 py-2 text-xs bg-white border border-pink-200 rounded-xl text-[#684852] placeholder-[#A68F97] w-24 text-center focus:outline-none shadow-2xs"
               />
               <button
                 type="submit"
@@ -831,7 +831,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                         <div className={`text-xs font-bold ${cfg.color}`}>
                           {cfg.label}
                         </div>
-                        <div className="text-[10px] text-[#7A666D]">
+                        <div className="text-[10px] text-[#8F727C]">
                           {cfg.sub}
                         </div>
                       </div>
@@ -859,7 +859,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({
                             ) : (
                               <Circle className="w-4 h-4 text-[#8C767E] group-hover:text-pink-600 shrink-0" />
                             )}
-                            <span className={`text-xs ${task.completed ? 'line-through text-neutral-400' : 'text-[#2D1E24] font-medium'}`}>
+                            <span className={`text-xs ${task.completed ? 'line-through text-neutral-400' : 'text-[#684852] font-medium'}`}>
                               {task.title}
                             </span>
                           </button>

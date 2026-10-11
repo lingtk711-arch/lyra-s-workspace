@@ -135,7 +135,7 @@ export const TEM8Studio: React.FC = () => {
               考纲深度对标
             </span>
           </div>
-          <h2 className="text-xl font-bold text-[#2D2326] mt-1.5">
+          <h2 className="text-xl font-bold text-[#684852] mt-1.5">
             听力讲座 · 外刊精读 · 改错攻坚 · 思辨写作 · 口语辩论
           </h2>
           <p className="text-xs text-neutral-600 mt-1">
@@ -187,7 +187,7 @@ export const TEM8Studio: React.FC = () => {
                     时长: {currentListening.audioDuration} · 讲者: {currentListening.speaker}
                   </span>
                 </div>
-                <h3 className="text-base font-bold text-[#2D2326] mt-1">
+                <h3 className="text-base font-bold text-[#684852] mt-1">
                   {currentListening.title}
                 </h3>
               </div>
@@ -197,7 +197,7 @@ export const TEM8Studio: React.FC = () => {
                 <select
                   value={speechRate}
                   onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
-                  className="px-2 py-1 text-xs bg-[#FDF4F5] border border-[#F2DFE4] rounded-lg text-[#2D2326]"
+                  className="px-2 py-1 text-xs bg-[#FDF4F5] border border-[#F2DFE4] rounded-lg text-[#684852]"
                   title="调整播放语速"
                 >
                   <option value={0.85}>0.85x 较慢</option>
@@ -283,7 +283,7 @@ export const TEM8Studio: React.FC = () => {
                   <div className="text-[11px] font-bold text-indigo-900">
                     {note.heading}
                   </div>
-                  <div className="text-xs text-[#2D2326] leading-relaxed">
+                  <div className="text-xs text-[#684852] leading-relaxed">
                     {note.textWithGap}
                   </div>
 
@@ -299,7 +299,7 @@ export const TEM8Studio: React.FC = () => {
                           [note.gapNumber || idx]: e.target.value
                         })
                       }
-                      className="px-3 py-1.5 text-xs bg-white border border-neutral-300 rounded-lg text-[#2D2326] focus:outline-none focus:border-indigo-500 w-full sm:w-72"
+                      className="px-3 py-1.5 text-xs bg-white border border-neutral-300 rounded-lg text-[#684852] focus:outline-none focus:border-indigo-500 w-full sm:w-72"
                     />
 
                     {showGapSolutions && (
@@ -328,7 +328,7 @@ export const TEM8Studio: React.FC = () => {
               </button>
 
               {showFullTranscript && (
-                <div className="mt-3 p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs font-sans leading-relaxed text-[#2D2326] whitespace-pre-line max-h-96 overflow-y-auto">
+                <div className="mt-3 p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-xs font-sans leading-relaxed text-[#684852] whitespace-pre-line max-h-96 overflow-y-auto">
                   {currentListening.fullTranscript}
                 </div>
               )}
@@ -367,7 +367,7 @@ export const TEM8Studio: React.FC = () => {
               </div>
             </div>
 
-            <h3 className="text-lg font-bold text-[#2D2326]">
+            <h3 className="text-lg font-bold text-[#684852]">
               {currentReading.title}
             </h3>
 
@@ -382,7 +382,7 @@ export const TEM8Studio: React.FC = () => {
               <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
                 Article Passage (真题级学术社论)
               </h4>
-              <div className="text-xs font-sans leading-relaxed text-[#2D2326] whitespace-pre-line space-y-3">
+              <div className="text-xs font-sans leading-relaxed text-[#684852] whitespace-pre-line space-y-3">
                 {currentReading.articlePassage}
               </div>
 
@@ -421,7 +421,7 @@ export const TEM8Studio: React.FC = () => {
                 <div className="space-y-4">
                   {currentReading.questions.map((q, qidx) => (
                     <div key={q.id} className="p-3.5 rounded-xl border border-neutral-200 bg-[#FAFAFA] space-y-2.5">
-                      <p className="text-xs font-bold text-[#2D2326] leading-snug">
+                      <p className="text-xs font-bold text-[#684852] leading-snug">
                         {qidx + 1}. {q.question}
                       </p>
 
@@ -468,7 +468,7 @@ export const TEM8Studio: React.FC = () => {
                   <h4 className="text-xs font-bold text-sky-950">
                     Section B: 简答题 (不超过10个词)
                   </h4>
-                  <p className="text-xs text-[#2D2326]">{currentReading.shortAnswer.prompt}</p>
+                  <p className="text-xs text-[#684852]">{currentReading.shortAnswer.prompt}</p>
                   
                   <button
                     onClick={() => setShowShortAnswerSolution(!showShortAnswerSolution)}
@@ -509,7 +509,7 @@ export const TEM8Studio: React.FC = () => {
               </button>
             </div>
 
-            <h3 className="text-base font-bold text-[#2D2326]">
+            <h3 className="text-base font-bold text-[#684852]">
               {currentProofreading.title}
             </h3>
             <p className="text-xs text-neutral-600 leading-relaxed">
@@ -543,7 +543,7 @@ export const TEM8Studio: React.FC = () => {
                         <span className="font-mono text-neutral-400 font-bold shrink-0 w-6">
                           ({l.lineNo.toString().padStart(2, '0')})
                         </span>
-                        <span className="font-sans leading-relaxed text-[#2D2326]">
+                        <span className="font-sans leading-relaxed text-[#684852]">
                           {l.text}
                         </span>
                       </div>
@@ -591,7 +591,7 @@ export const TEM8Studio: React.FC = () => {
               </span>
             </div>
 
-            <h3 className="text-base font-bold text-[#2D2326]">
+            <h3 className="text-base font-bold text-[#684852]">
               {currentWriting.title}
             </h3>
 
@@ -666,7 +666,7 @@ export const TEM8Studio: React.FC = () => {
                 </button>
               </div>
 
-              <div className="text-xs font-sans leading-relaxed text-[#2D2326] whitespace-pre-line p-4 rounded-xl bg-[#FAF9FC] border border-purple-100 max-h-[520px] overflow-y-auto">
+              <div className="text-xs font-sans leading-relaxed text-[#684852] whitespace-pre-line p-4 rounded-xl bg-[#FAF9FC] border border-purple-100 max-h-[520px] overflow-y-auto">
                 {currentWriting.modelEssay}
               </div>
 
@@ -691,7 +691,7 @@ export const TEM8Studio: React.FC = () => {
                   构思: {currentOral.preparationTime} · 答题: {currentOral.speakingTime}
                 </span>
               </div>
-              <h3 className="text-base font-bold text-[#2D2326] mt-1">
+              <h3 className="text-base font-bold text-[#684852] mt-1">
                 {currentOral.title}
               </h3>
             </div>
@@ -736,7 +736,7 @@ export const TEM8Studio: React.FC = () => {
                 <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
                   Prompt Material (口试背景材料)
                 </h4>
-                <p className="text-xs leading-relaxed text-[#2D2326]">
+                <p className="text-xs leading-relaxed text-[#684852]">
                   {currentOral.backgroundMaterial}
                 </p>
               </div>
@@ -799,7 +799,7 @@ export const TEM8Studio: React.FC = () => {
                 </button>
               </div>
 
-              <div className="text-xs font-sans leading-relaxed text-[#2D2326] whitespace-pre-line p-4 rounded-xl bg-emerald-50/20 border border-emerald-100">
+              <div className="text-xs font-sans leading-relaxed text-[#684852] whitespace-pre-line p-4 rounded-xl bg-emerald-50/20 border border-emerald-100">
                 {currentOral.samplePresentation}
               </div>
             </div>

@@ -596,7 +596,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 font-sans text-[#332226]">
+    <div className="max-w-6xl mx-auto px-4 py-6 font-sans text-[#684852]">
       {/* ===================== 顶部主导航栏 (去卡片化，自然呼吸的顶栏空间) ===================== */}
       <header className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#F2D7DD]/80">
         <div>
@@ -604,7 +604,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             <Sparkle className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
             <span>English Studio · 数字化英语多任务工作台 (V1 第一版)</span>
           </div>
-          <h1 className="text-xl md:text-2xl font-serif font-bold text-[#2A1D21] mt-1">
+          <h1 className="text-xl md:text-2xl font-serif font-bold text-[#684852] mt-1">
             千词情境长篇研读 · 四步循环口语 · 专八学术备战
           </h1>
         </div>
@@ -616,7 +616,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
               activeTab === 'daily_passages'
                 ? 'bg-white text-rose-950 shadow-2xs font-bold'
-                : 'text-[#6C535A] hover:text-[#2A1D21]'
+                : 'text-[#856771] hover:text-[#684852]'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5 text-rose-600" />
@@ -628,7 +628,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
               activeTab === 'echo_loop'
                 ? 'bg-white text-purple-950 shadow-2xs font-bold'
-                : 'text-[#6C535A] hover:text-[#2A1D21]'
+                : 'text-[#856771] hover:text-[#684852]'
             }`}
           >
             <Headphones className="w-3.5 h-3.5 text-purple-600" />
@@ -640,7 +640,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
               activeTab === 'tem8_prep'
                 ? 'bg-white text-indigo-950 shadow-2xs font-bold'
-                : 'text-[#6C535A] hover:text-[#2A1D21]'
+                : 'text-[#6C535A] hover:text-[#684852]'
             }`}
           >
             <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
@@ -652,7 +652,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
               activeTab === 'import_workshop'
                 ? 'bg-white text-rose-950 shadow-2xs font-bold'
-                : 'text-[#6C535A] hover:text-[#2A1D21]'
+                : 'text-[#6C535A] hover:text-[#684852]'
             }`}
           >
             <Upload className="w-3.5 h-3.5 text-rose-600" />
@@ -664,7 +664,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center gap-1.5 ${
               activeTab === 'mastered_library'
                 ? 'bg-white text-emerald-950 shadow-2xs font-bold'
-                : 'text-[#6C535A] hover:text-[#2A1D21]'
+                : 'text-[#6C535A] hover:text-[#684852]'
             }`}
           >
             <FolderCheck className="w-3.5 h-3.5 text-emerald-600" />
@@ -859,7 +859,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     <span>篇幅约 {currentPassage.estimatedWords} 词 · 预计研读 {currentPassage.readTimeMin} 分钟</span>
                   </span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-serif font-bold text-[#2A1D21]">
+                <h2 className="text-xl md:text-2xl font-serif font-bold text-[#684852]">
                   {currentPassage.title}
                 </h2>
               </div>
@@ -943,7 +943,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                   onClick={() => setSelectedPartIndex('all')}
                   className={`px-2.5 py-1 text-xs rounded-lg transition-all ${
                     selectedPartIndex === 'all'
-                      ? 'bg-[#2D2326] text-white font-bold shadow-2xs'
+                      ? 'bg-[#684852] text-white font-bold shadow-2xs'
                       : 'text-neutral-600 hover:bg-neutral-100'
                   }`}
                 >
@@ -955,7 +955,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                     onClick={() => setSelectedPartIndex(idx)}
                     className={`px-2.5 py-1 text-xs rounded-lg transition-all truncate max-w-[200px] ${
                       selectedPartIndex === idx
-                        ? 'bg-[#2D2326] text-white font-bold shadow-2xs'
+                        ? 'bg-[#684852] text-white font-bold shadow-2xs'
                         : 'text-neutral-600 hover:bg-neutral-100'
                     }`}
                   >
@@ -1032,7 +1032,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {/* 核心考点与用法笔记 (去卡片化平铺) */}
             <div className="pt-6 border-t border-[#F2D7DD]/60 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-sm font-bold text-[#2A1D21] flex items-center gap-2 mb-3">
+                <h3 className="text-sm font-bold text-[#684852] flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4 text-rose-600" />
                   <span>千词核心考点与地道搭配解析</span>
                 </h3>
@@ -1047,7 +1047,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               </div>
 
               <div>
-                <h3 className="text-sm font-bold text-[#2A1D21] flex items-center gap-2 mb-3">
+                <h3 className="text-sm font-bold text-[#684852] flex items-center gap-2 mb-3">
                   <Compass className="w-4 h-4 text-purple-600" />
                   <span>延伸实操对话应用</span>
                 </h3>
@@ -1196,7 +1196,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-base font-bold text-[#2A1D21]">第一步：原声精听 (Intensive Listening)</h3>
+                    <h3 className="text-base font-bold text-[#684852]">第一步：原声精听 (Intensive Listening)</h3>
                     <p className="text-xs text-[#7A6168]">请跟随长篇英文原声，反复聆听母语者的重读与呼吸停顿。</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1243,7 +1243,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {echoStep === 'blind_cloze' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-base font-bold text-[#2A1D21]">第二步：盲听遮罩 (Blind Listening)</h3>
+                  <h3 className="text-base font-bold text-[#684852]">第二步：盲听遮罩 (Blind Listening)</h3>
                   <p className="text-xs text-[#7A6168]">
                     原文已被完全虚化遮蔽，强迫大脑彻底摆脱视觉依赖，纯粹依靠听觉辨别语音语调。
                   </p>
@@ -1277,7 +1277,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {echoStep === 'shadowing' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-base font-bold text-[#2A1D21]">第三步：影子跟读 (Shadowing)</h3>
+                  <h3 className="text-base font-bold text-[#684852]">第三步：影子跟读 (Shadowing)</h3>
                   <p className="text-xs text-[#7A6168]">
                     开启断句节奏符号（|），在音频发音滞后 0.5 秒到 1 秒的时间窗内，立刻大声模仿同步朗读。
                   </p>
@@ -1311,7 +1311,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {echoStep === 'retelling' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-base font-bold text-[#2A1D21]">第四步：记忆复述 (Retelling)</h3>
+                  <h3 className="text-base font-bold text-[#684852]">第四步：记忆复述 (Retelling)</h3>
                   <p className="text-xs text-[#7A6168]">
                     英文原文已被彻底隐藏。请仅看中文要点或直接脱稿，用自己的口语将核心意群连贯陈述一遍。
                   </p>
@@ -1354,7 +1354,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
                           setRecordingSeconds(0);
                           setRetellingScore(null);
                         }}
-                        className="p-2 text-xs text-[#7A6168] hover:text-[#2A1D21]"
+                        className="p-2 text-xs text-[#7A6168] hover:text-[#684852]"
                       >
                         重置
                       </button>
@@ -1429,7 +1429,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {importTab === 'url' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-bold text-[#2A1D21] mb-1">🔗 网页文章链接抓取入口 (Web URL Scraper)</h3>
+                  <h3 className="text-sm font-bold text-[#684852] mb-1">🔗 网页文章链接抓取入口 (Web URL Scraper)</h3>
                   <p className="text-xs text-[#7D646B]">
                     输入任意英文报道、博客或外刊链接，系统将自动抽离 HTML 正文并转换为千词篇章。
                   </p>
@@ -1470,7 +1470,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {importTab === 'file' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-bold text-[#2A1D21] mb-1">📁 本地文件上传入口 (File Drag & Drop)</h3>
+                  <h3 className="text-sm font-bold text-[#684852] mb-1">📁 本地文件上传入口 (File Drag & Drop)</h3>
                   <p className="text-xs text-[#7D646B]">
                     支持上传 .txt、.md、.pdf、.docx 或 .epub 格式的本地外语原版文档，即时读取解析。
                   </p>
@@ -1503,7 +1503,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {importTab === 'image' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-bold text-[#2A1D21] mb-1">🖼️ 图片/截图 OCR 识别导入入口 (Image OCR)</h3>
+                  <h3 className="text-sm font-bold text-[#684852] mb-1">🖼️ 图片/截图 OCR 识别导入入口 (Image OCR)</h3>
                   <p className="text-xs text-[#7D646B]">
                     拍照上传纸质书页、英文长文截图或外贸合同照片，OCR 引擎自动提取英文字段。
                   </p>
@@ -1541,7 +1541,7 @@ By welcoming the sensation unconditionally, you dissolve the illusion that you a
             {importTab === 'video' && (
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-sm font-bold text-[#2A1D21] mb-1">🎬 音视频字幕导入入口 (Subtitles & Podcasts)</h3>
+                  <h3 className="text-sm font-bold text-[#684852] mb-1">🎬 音视频字幕导入入口 (Subtitles & Podcasts)</h3>
                   <p className="text-xs text-[#7D646B]">
                     上传 .srt 或 .vtt 字幕文件，系统自动剥离时间戳序列，合并为通畅阅读长篇。
                   </p>
@@ -1739,7 +1739,7 @@ When you enter a high-stakes commercial negotiation, your nervous system natural
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-serif text-base font-bold text-[#2A1D21]">{w.word}</span>
+                          <span className="font-serif text-base font-bold text-[#684852]">{w.word}</span>
                           <span className="text-xs text-[#8C6D75] font-mono">{w.phonetic}</span>
                           {w.tag && (
                             <span className="text-[10px] bg-rose-100 text-rose-900 px-1.5 py-0.2 rounded font-semibold">
@@ -1821,7 +1821,7 @@ When you enter a high-stakes commercial negotiation, your nervous system natural
                         已掌握
                       </span>
                     </div>
-                    <h4 className="font-serif font-bold text-sm text-[#2A1D21]">{p.title}</h4>
+                    <h4 className="font-serif font-bold text-sm text-[#684852]">{p.title}</h4>
                     <p className="text-xs text-[#6A5258] line-clamp-2 leading-relaxed">
                       {p.passageZh}
                     </p>

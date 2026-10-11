@@ -7,16 +7,16 @@
 
 :root {
   font-family: var(--font-sans);
-  --color-bg-dream: #FAF5F6;
-  --color-surface-card: rgba(255, 255, 255, 0.75);
-  --color-text-main: #34262B;
-  --color-text-muted: #7E6B72;
+  --color-bg-dream: #FAF5F7;
+  --color-surface-card: rgba(255, 255, 255, 0.85);
+  --color-text-main: #684852;
+  --color-text-muted: #8F727C;
   --color-border-delicate: rgba(244, 187, 200, 0.45);
 }
 
 body {
-  background-color: #FAF5F6;
-  color: #34262B;
+  background-color: #FAF5F7;
+  color: #684852;
   overflow-x: hidden;
 }
 

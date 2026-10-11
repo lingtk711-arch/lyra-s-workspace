@@ -35,24 +35,24 @@ export const Header: React.FC<HeaderProps> = ({
   const [showAmbientMenu, setShowAmbientMenu] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-pink-200/60 bg-white/75 backdrop-blur-md px-4 lg:px-8 py-2.5 transition-colors duration-200 text-[#34262B] shadow-[0_2px_14px_rgba(244,166,185,0.08)]">
+    <header className="sticky top-0 z-40 border-b border-pink-200/60 bg-white/75 backdrop-blur-md px-4 lg:px-8 py-2.5 transition-colors duration-200 text-[#684852] shadow-[0_2px_14px_rgba(244,166,185,0.08)]">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
         {/* Zone 1: Wordmark with pastel oriental seal badge */}
         <div 
           onClick={() => onSelectView('media')}
-          className="cursor-pointer text-base lg:text-lg font-bold tracking-tight text-[#2D1E24] hover:text-pink-600 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
+          className="cursor-pointer text-base lg:text-lg font-bold tracking-tight text-[#684852] hover:text-pink-600 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2.5 group"
         >
           <div className="w-7 h-7 rounded-lg bg-linear-to-br from-pink-400 to-rose-400 text-white flex items-center justify-center font-bold text-xs shadow-xs border border-pink-200 group-hover:scale-105 transition-transform">
             🌸
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5 leading-none">
-              <span className="font-semibold tracking-wide font-serif">KansoDesk</span>
+              <span className="font-semibold tracking-wide font-serif text-[#684852]">KansoDesk</span>
               <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/70">
                 碧波微澜
               </span>
             </div>
-            <span className="text-[10px] text-[#8C767E] font-normal tracking-widest mt-0.5">
+            <span className="text-[10px] text-[#9A7D87] font-normal tracking-widest mt-0.5">
               CREATOR OS
             </span>
           </div>
@@ -64,8 +64,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onSelectView('media')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeView === 'media'
-                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#2D1E24] font-bold border border-pink-200/80 shadow-xs'
-                : 'text-[#6C5860] hover:text-[#2D1E24] hover:bg-white/80'
+                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#684852] font-bold border border-pink-200/80 shadow-xs'
+                : 'text-[#856771] hover:text-[#684852] hover:bg-white/80'
             }`}
           >
             <LayoutGrid className="w-4 h-4 text-pink-500" />
@@ -76,8 +76,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onSelectView('schedule')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeView === 'schedule'
-                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#2D1E24] font-bold border border-pink-200/80 shadow-xs'
-                : 'text-[#6C5860] hover:text-[#2D1E24] hover:bg-white/80'
+                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#684852] font-bold border border-pink-200/80 shadow-xs'
+                : 'text-[#856771] hover:text-[#684852] hover:bg-white/80'
             }`}
           >
             <Calendar className="w-4 h-4 text-emerald-600" />
@@ -88,8 +88,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onSelectView('english')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeView === 'english'
-                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#2D1E24] font-bold border border-pink-200/80 shadow-xs'
-                : 'text-[#6C5860] hover:text-[#2D1E24] hover:bg-white/80'
+                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#684852] font-bold border border-pink-200/80 shadow-xs'
+                : 'text-[#856771] hover:text-[#684852] hover:bg-white/80'
             }`}
           >
             <BookOpen className="w-4 h-4 text-rose-500" />
@@ -100,8 +100,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onSelectView('tools')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0 ${
               activeView === 'tools'
-                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#2D1E24] font-bold border border-pink-200/80 shadow-xs'
-                : 'text-[#6C5860] hover:text-[#2D1E24] hover:bg-white/80'
+                ? 'bg-linear-to-r from-pink-100/90 to-emerald-100/80 text-[#684852] font-bold border border-pink-200/80 shadow-xs'
+                : 'text-[#856771] hover:text-[#684852] hover:bg-white/80'
             }`}
           >
             <Wrench className="w-4 h-4 text-teal-600" />
@@ -115,7 +115,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative">
             <button
               onClick={() => setShowAmbientMenu((v) => !v)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#4E3941] bg-white/80 hover:bg-white border border-pink-200/70 hover:border-emerald-300 rounded-lg transition-all shadow-xs"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#684852] bg-white/80 hover:bg-white border border-pink-200/70 hover:border-emerald-300 rounded-lg transition-all shadow-xs"
               title="调节动态水池与锦鲤"
             >
               <Waves className="w-3.5 h-3.5 text-emerald-600" />
@@ -126,10 +126,10 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Ambient Control Dropdown */}
             {showAmbientMenu && (
               <div 
-                className="absolute right-0 mt-2 w-56 rounded-xl bg-white/95 border border-pink-200/80 backdrop-blur-xl p-3 shadow-xl z-50 text-xs text-[#34262B]"
+                className="absolute right-0 mt-2 w-56 rounded-xl bg-white/95 border border-pink-200/80 backdrop-blur-xl p-3 shadow-xl z-50 text-xs text-[#684852]"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex items-center justify-between pb-2 mb-2 border-b border-pink-100 text-[11px] font-semibold text-[#8C485A]">
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-pink-100 text-[11px] font-semibold text-pink-700">
                   <span>动态景致调节</span>
                   <button 
                     onClick={() => setShowAmbientMenu(false)}
@@ -180,7 +180,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </label>
 
                   <div className="pt-2 border-t border-pink-100">
-                    <div className="flex items-center justify-between text-[11px] text-[#7E6971] mb-1">
+                    <div className="flex items-center justify-between text-[11px] text-[#8F727C] mb-1">
                       <span>游速节奏</span>
                       <span className="font-mono text-pink-700 font-bold">{ambientSettings.koiSpeed.toFixed(1)}x</span>
                     </div>
@@ -203,7 +203,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenCommandPalette}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs text-[#4E3941] bg-white/80 hover:bg-white border border-pink-200/70 hover:border-emerald-300 rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs text-[#684852] bg-white/80 hover:bg-white border border-pink-200/70 hover:border-emerald-300 rounded-lg transition-all shadow-xs"
             title="快捷搜索与指令 (Cmd+K / Ctrl+K)"
           >
             <Search className="w-3.5 h-3.5 text-emerald-600" />
@@ -215,7 +215,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenSettings}
-            className="p-2 text-[#4E3941] hover:text-[#2D1E24] bg-white/80 hover:bg-white rounded-lg transition-colors border border-pink-200/70 shadow-xs"
+            className="p-2 text-[#684852] hover:text-pink-700 bg-white/80 hover:bg-white rounded-lg transition-colors border border-pink-200/70 shadow-xs"
             title="数据备份与配置"
             aria-label="Settings"
           >

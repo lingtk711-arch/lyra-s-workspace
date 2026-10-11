@@ -65,9 +65,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-pink-950/20 backdrop-blur-md animate-in fade-in duration-150">
       <div 
-        className="relative w-full max-w-xl rounded-2xl border border-pink-200 bg-white/95 text-[#2D1E24] p-2 shadow-2xl overflow-hidden backdrop-blur-xl"
+        className="relative w-full max-w-xl rounded-2xl border border-pink-200 bg-white/95 text-[#684852] p-2 shadow-2xl overflow-hidden backdrop-blur-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
@@ -79,11 +79,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="搜索选题、文案草稿、日程或工具..."
-            className="w-full bg-transparent text-sm text-[#2D1E24] placeholder-[#9E8B92] focus:outline-none"
+            className="w-full bg-transparent text-sm text-[#684852] placeholder-[#A68F97] focus:outline-none"
           />
           <button 
             onClick={onClose}
-            className="p-1 text-[#8C767E] hover:text-[#2D1E24] rounded hover:bg-pink-50 transition-colors"
+            className="p-1 text-[#8C767E] hover:text-[#684852] rounded hover:bg-pink-50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -106,7 +106,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onSelectView(item.view);
                       onClose();
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-[#4A383F] hover:text-[#2D1E24] hover:bg-pink-50 text-left transition-colors"
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-[#856771] hover:text-[#684852] hover:bg-pink-50 text-left transition-colors"
                   >
                     <Icon className="w-4 h-4 text-pink-500" />
                     <span>{item.label}</span>
@@ -130,7 +130,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     onSelectView('media');
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#4A383F] hover:text-[#2D1E24] hover:bg-pink-50 transition-colors text-left"
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs text-[#856771] hover:text-[#684852] hover:bg-pink-50 transition-colors text-left"
                 >
                   <div className="flex items-center gap-2 min-w-0">
                     <FileText className="w-3.5 h-3.5 text-emerald-600 shrink-0" />

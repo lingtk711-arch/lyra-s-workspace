@@ -215,7 +215,7 @@ export const DeveloperTools: React.FC = () => {
   }, [regexPattern, regexFlags, regexTestText]);
 
   // --- 6. COLOR & CONTRAST STUDIO ---
-  const [fgColor, setFgColor] = useState('#2D2326');
+  const [fgColor, setFgColor] = useState('#684852');
   const [bgColor, setBgColor] = useState('#FDF4F5');
 
   const getLuminance = (hex: string) => {
@@ -273,7 +273,7 @@ export const DeveloperTools: React.FC = () => {
   }, [jwtToken]);
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto text-[#2D1E24]">
+    <div className="space-y-6 max-w-6xl mx-auto text-[#684852]">
       {/* Tool Navigation Tabs */}
       <div className="flex items-center gap-1.5 p-1.5 bg-white/80 border border-pink-200/80 rounded-2xl overflow-x-auto scrollbar-none shadow-md backdrop-blur-xl">
         {[
@@ -297,7 +297,7 @@ export const DeveloperTools: React.FC = () => {
               className={`flex items-center gap-2 px-3.5 py-2 text-xs rounded-xl whitespace-nowrap transition-colors ${
                 isActive
                   ? 'bg-pink-100 text-pink-900 font-semibold border border-pink-300 shadow-xs'
-                  : 'text-[#7A666D] hover:text-[#2D1E24] hover:bg-pink-50/60'
+                  : 'text-[#7A666D] hover:text-[#684852] hover:bg-pink-50/60'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -312,26 +312,26 @@ export const DeveloperTools: React.FC = () => {
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h2 className="text-sm font-bold text-[#2D2326]">JSON 校验 · 格式化 · 压缩</h2>
+              <h2 className="text-sm font-bold text-[#684852]">JSON 校验 · 格式化 · 压缩</h2>
               <div className="text-xs text-neutral-400 mt-0.5">纯本地计算，保护自媒体配置与隐私数据安全</div>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleFormatJson(2)}
-                className="px-3 py-1.5 text-xs bg-[#FDF4F5] hover:bg-[#FAF0F3] text-[#2D2326] rounded-lg transition-colors border border-[#F2DFE4]"
+                className="px-3 py-1.5 text-xs bg-[#FDF4F5] hover:bg-[#FAF0F3] text-[#684852] rounded-lg transition-colors border border-[#F2DFE4]"
               >
                 美化 (2 空格)
               </button>
               <button
                 onClick={handleMinifyJson}
-                className="px-3 py-1.5 text-xs bg-[#FDF4F5] hover:bg-[#FAF0F3] text-[#2D2326] rounded-lg transition-colors border border-[#F2DFE4]"
+                className="px-3 py-1.5 text-xs bg-[#FDF4F5] hover:bg-[#FAF0F3] text-[#684852] rounded-lg transition-colors border border-[#F2DFE4]"
               >
                 压缩单行
               </button>
               <button
                 onClick={() => handleCopy('json', jsonInput)}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs bg-[#2D2326] text-white font-medium rounded-lg transition-colors shadow-xs"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs bg-[#684852] text-white font-medium rounded-lg transition-colors shadow-xs"
               >
                 {copiedKey === 'json' ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedKey === 'json' ? '已复制' : '复制 JSON'}</span>
@@ -353,7 +353,7 @@ export const DeveloperTools: React.FC = () => {
               setJsonError(null);
             }}
             rows={12}
-            className="w-full p-4 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white leading-relaxed resize-y"
+            className="w-full p-4 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852] focus:outline-none focus:border-[#D9AAB6] focus:bg-white leading-relaxed resize-y"
           />
         </div>
       )}
@@ -363,7 +363,7 @@ export const DeveloperTools: React.FC = () => {
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h2 className="text-sm font-bold text-[#2D2326]">多进制与编码转换</h2>
+              <h2 className="text-sm font-bold text-[#684852]">多进制与编码转换</h2>
               <div className="text-xs text-neutral-400 mt-0.5">支持 Base64、URL 编码、Hex 十六进制转换</div>
             </div>
 
@@ -374,7 +374,7 @@ export const DeveloperTools: React.FC = () => {
                     key={m}
                     onClick={() => setTransMode(m)}
                     className={`px-2.5 py-1 rounded-md transition-colors ${
-                      transMode === m ? 'bg-white text-[#2D2326] font-bold shadow-xs' : 'text-neutral-500'
+                      transMode === m ? 'bg-white text-[#684852] font-bold shadow-xs' : 'text-neutral-500'
                     }`}
                   >
                     {m.toUpperCase()}
@@ -388,7 +388,7 @@ export const DeveloperTools: React.FC = () => {
                   setTransInput(transOutput || transInput);
                   playChime('click');
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#FDF4F5] border border-[#F2DFE4] text-[#2D2326] rounded-lg transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-[#FDF4F5] border border-[#F2DFE4] text-[#684852] rounded-lg transition-colors"
               >
                 <ArrowLeftRight className="w-3.5 h-3.5" />
                 <span>{transDirection === 'encode' ? '转为解码' : '转为编码'}</span>
@@ -405,7 +405,7 @@ export const DeveloperTools: React.FC = () => {
                 value={transInput}
                 onChange={(e) => setTransInput(e.target.value)}
                 rows={8}
-                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326] focus:outline-none focus:border-[#D9AAB6] focus:bg-white resize-y"
+                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852] focus:outline-none focus:border-[#D9AAB6] focus:bg-white resize-y"
               />
             </div>
 
@@ -424,7 +424,7 @@ export const DeveloperTools: React.FC = () => {
                 value={transOutput}
                 readOnly
                 rows={8}
-                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/70 border border-[#F2DFE4] rounded-xl text-[#2D2326] focus:outline-none resize-y"
+                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/70 border border-[#F2DFE4] rounded-xl text-[#684852] focus:outline-none resize-y"
               />
             </div>
           </div>
@@ -435,12 +435,12 @@ export const DeveloperTools: React.FC = () => {
       {activeTool === 'hash-uuid' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
-            <h2 className="text-sm font-bold text-[#2D2326]">哈希摘要计算</h2>
+            <h2 className="text-sm font-bold text-[#684852]">哈希摘要计算</h2>
             <input
               type="text"
               value={hashInput}
               onChange={(e) => setHashInput(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-mono bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#2D2326] focus:outline-none"
+              className="w-full px-3 py-2 text-xs font-mono bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#684852] focus:outline-none"
             />
             <div className="space-y-3">
               {[
@@ -458,7 +458,7 @@ export const DeveloperTools: React.FC = () => {
                       {copiedKey === item.key ? '已复制' : '复制'}
                     </button>
                   </div>
-                  <div className="p-2 font-mono text-xs bg-[#FDF4F5]/80 border border-[#F5E2E7] rounded-lg text-[#2D2326] break-all select-all">
+                  <div className="p-2 font-mono text-xs bg-[#FDF4F5]/80 border border-[#F5E2E7] rounded-lg text-[#684852] break-all select-all">
                     {item.val}
                   </div>
                 </div>
@@ -469,10 +469,10 @@ export const DeveloperTools: React.FC = () => {
           <div className="space-y-6">
             <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#2D2326]">批量 UUID v4 生成</h3>
+                <h3 className="text-sm font-bold text-[#684852]">批量 UUID v4 生成</h3>
                 <button
                   onClick={() => handleGenerateUUIDs(5)}
-                  className="flex items-center gap-1 px-3 py-1 text-xs bg-[#FDF4F5] border border-[#F2DFE4] rounded-lg text-[#2D2326]"
+                  className="flex items-center gap-1 px-3 py-1 text-xs bg-[#FDF4F5] border border-[#F2DFE4] rounded-lg text-[#684852]"
                 >
                   <RefreshCw className="w-3 h-3" />
                   <span>刷新生成</span>
@@ -484,7 +484,7 @@ export const DeveloperTools: React.FC = () => {
                   <div
                     key={i}
                     onClick={() => handleCopy(`uuid_${i}`, u)}
-                    className="p-1.5 px-2.5 text-xs font-mono bg-[#FDF4F5]/50 border border-[#F5E2E7] rounded-md text-[#2D2326] cursor-pointer hover:bg-white flex justify-between"
+                    className="p-1.5 px-2.5 text-xs font-mono bg-[#FDF4F5]/50 border border-[#F5E2E7] rounded-md text-[#684852] cursor-pointer hover:bg-white flex justify-between"
                   >
                     <span>{u}</span>
                     <span className="text-[10px] text-neutral-400">点击复制</span>
@@ -495,7 +495,7 @@ export const DeveloperTools: React.FC = () => {
 
             <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#2D2326]">Unix 时间戳转换</h3>
+                <h3 className="text-sm font-bold text-[#684852]">Unix 时间戳转换</h3>
                 <span className="text-xs font-mono font-bold text-purple-700">{currentEpoch}</span>
               </div>
               <input
@@ -503,9 +503,9 @@ export const DeveloperTools: React.FC = () => {
                 value={epochInput}
                 onChange={(e) => setEpochInput(e.target.value)}
                 placeholder="输入时间戳..."
-                className="w-full px-3 py-2 text-xs font-mono bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#2D2326]"
+                className="w-full px-3 py-2 text-xs font-mono bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#684852]"
               />
-              <div className="p-2.5 bg-[#FAF0F3] rounded-lg text-xs font-mono text-[#2D2326]">
+              <div className="p-2.5 bg-[#FAF0F3] rounded-lg text-xs font-mono text-[#684852]">
                 {epochParsedDate}
               </div>
             </div>
@@ -516,7 +516,7 @@ export const DeveloperTools: React.FC = () => {
       {/* TOOL 4: TEXT DIFF */}
       {activeTool === 'diff' && (
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
-          <h2 className="text-sm font-bold text-[#2D2326]">文案迭代与代码对比 Diff</h2>
+          <h2 className="text-sm font-bold text-[#684852]">文案迭代与代码对比 Diff</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div>
               <span className="text-xs font-semibold text-neutral-600 block mb-1">初版原稿</span>
@@ -524,7 +524,7 @@ export const DeveloperTools: React.FC = () => {
                 value={diffOriginal}
                 onChange={(e) => setDiffOriginal(e.target.value)}
                 rows={5}
-                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326]"
+                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852]"
               />
             </div>
             <div>
@@ -533,7 +533,7 @@ export const DeveloperTools: React.FC = () => {
                 value={diffModified}
                 onChange={(e) => setDiffModified(e.target.value)}
                 rows={5}
-                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326]"
+                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852]"
               />
             </div>
           </div>
@@ -563,7 +563,7 @@ export const DeveloperTools: React.FC = () => {
       {activeTool === 'regex' && (
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-[#2D2326]">小红书标签与正则表达式实验室</h2>
+            <h2 className="text-sm font-bold text-[#684852]">小红书标签与正则表达式实验室</h2>
             <span className="text-xs text-neutral-500 font-mono">命中: {regexMatches.length} 个</span>
           </div>
 
@@ -572,13 +572,13 @@ export const DeveloperTools: React.FC = () => {
               type="text"
               value={regexPattern}
               onChange={(e) => setRegexPattern(e.target.value)}
-              className="flex-1 px-3 py-2 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#2D2326]"
+              className="flex-1 px-3 py-2 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#684852]"
             />
             <input
               type="text"
               value={regexFlags}
               onChange={(e) => setRegexFlags(e.target.value)}
-              className="w-16 px-3 py-2 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#2D2326] text-center"
+              className="w-16 px-3 py-2 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-lg text-[#684852] text-center"
             />
           </div>
 
@@ -589,14 +589,14 @@ export const DeveloperTools: React.FC = () => {
                 value={regexTestText}
                 onChange={(e) => setRegexTestText(e.target.value)}
                 rows={6}
-                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326]"
+                className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852]"
               />
             </div>
             <div>
               <span className="text-xs font-semibold text-neutral-600 block mb-1">抓取捕获列表</span>
               <div className="p-3 bg-[#FAF0F3] border border-[#F5E2E7] rounded-xl h-40 overflow-y-auto space-y-1 font-mono text-xs">
                 {regexMatches.map((m, i) => (
-                  <div key={i} className="p-1 bg-white rounded border border-[#F2DFE4] text-[#2D2326]">
+                  <div key={i} className="p-1 bg-white rounded border border-[#F2DFE4] text-[#684852]">
                     {m}
                   </div>
                 ))}
@@ -609,19 +609,19 @@ export const DeveloperTools: React.FC = () => {
       {/* TOOL 6: CONTRAST */}
       {activeTool === 'contrast' && (
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
-          <h2 className="text-sm font-bold text-[#2D2326]">小红书封面色彩与对比度评估</h2>
+          <h2 className="text-sm font-bold text-[#684852]">小红书封面色彩与对比度评估</h2>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 rounded-xl border border-[#F2DFE4] bg-[#FDF4F5]/50 flex justify-between items-center">
               <div>
                 <span className="text-xs text-neutral-500 block">文字前景色</span>
-                <span className="font-mono text-sm font-bold text-[#2D2326]">{fgColor}</span>
+                <span className="font-mono text-sm font-bold text-[#684852]">{fgColor}</span>
               </div>
               <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="w-9 h-9" />
             </div>
             <div className="p-4 rounded-xl border border-[#F2DFE4] bg-[#FDF4F5]/50 flex justify-between items-center">
               <div>
                 <span className="text-xs text-neutral-500 block">背景底色</span>
-                <span className="font-mono text-sm font-bold text-[#2D2326]">{bgColor}</span>
+                <span className="font-mono text-sm font-bold text-[#684852]">{bgColor}</span>
               </div>
               <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="w-9 h-9" />
             </div>
@@ -630,7 +630,7 @@ export const DeveloperTools: React.FC = () => {
           <div className="p-6 rounded-xl border border-[#F2DFE4] bg-[#FAF0F3] flex justify-between items-center">
             <div>
               <span className="text-xs text-neutral-500">对比度比值</span>
-              <div className="text-3xl font-bold font-mono text-[#2D2326] mt-1">{contrastRatio} : 1</div>
+              <div className="text-3xl font-bold font-mono text-[#684852] mt-1">{contrastRatio} : 1</div>
             </div>
             <div className="text-right">
               <span className={`text-xs font-bold ${contrastRatio >= 4.5 ? 'text-emerald-700' : 'text-rose-700'}`}>
@@ -652,12 +652,12 @@ export const DeveloperTools: React.FC = () => {
       {/* TOOL 7: JWT */}
       {activeTool === 'jwt' && (
         <div className="p-6 rounded-2xl border border-[#F2DFE4] bg-white shadow-xs space-y-4">
-          <h2 className="text-sm font-bold text-[#2D2326]">JWT 令牌解码查看</h2>
+          <h2 className="text-sm font-bold text-[#684852]">JWT 令牌解码查看</h2>
           <textarea
             value={jwtToken}
             onChange={(e) => setJwtToken(e.target.value)}
             rows={2}
-            className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#2D2326]"
+            className="w-full p-3 font-mono text-xs bg-[#FDF4F5]/40 border border-[#F2DFE4] rounded-xl text-[#684852]"
           />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 font-mono text-xs">
             <div>
